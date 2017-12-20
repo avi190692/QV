@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="buyerSettingsPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="433.0" prefWidth="505.0" style="-fx-background-color: #f2f6ff;" stylesheets="@css/center_table_style.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.quickveggies.controller.SMSTemplateController">
+   <children>
+      <ScrollPane fx:id="paneProducts" layoutY="68.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="286.0" prefWidth="503.0" style="-fx-background-color: #f2f6ff;">
+         <content>
+            <VBox>
+               <children>
+                  <AnchorPane fx:id="ancPaneProducts" style="-fx-background-color: #f2f6ff;">
+                     <children>
+                        <VBox fx:id="vboxParent" prefHeight="269.0" prefWidth="475.0">
+                           <children>
+                              <VBox fx:id="vboxExpenseChild1" prefHeight="187.0" prefWidth="475.0">
+                                 <children>
+                                    <TextArea fx:id="taSMSTemplate" prefHeight="200.0" prefWidth="200.0" />
+                                 </children>
+                              </VBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="475.0" />
+                              <HBox prefHeight="48.0" prefWidth="475.0">
+                                 <children>
+                                    <Label prefHeight="46.0" prefWidth="481.0" text="Note:- Please don't change/remove the values starting with ${ and ending with }" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </VBox>
+         </content>
+      </ScrollPane>
+      <Pane prefHeight="65.0" prefWidth="580.0" style="-fx-background-color: #ecf1f5;">
+         <children>
+            <Label layoutX="32.0" layoutY="9.0" prefHeight="32.0" prefWidth="231.0" text="SMS Template">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Button fx:id="btnSaveTemplate" alignment="CENTER" layoutX="263.0" layoutY="366.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="176.0" style="-fx-background-color: #516cff;" text="Save Template">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnEditTemplate" layoutX="23.0" layoutY="366.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="105.0" style="-fx-background-color: #516cff;" text="Edit">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+   </children>
+</Pane>

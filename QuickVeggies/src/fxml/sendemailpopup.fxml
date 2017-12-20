@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="sendSmsPane" prefHeight="361.0" prefWidth="486.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="216.0" layoutY="14.0" text="Email">
+         <font>
+            <Font name="Arial Bold" size="20.0" />
+         </font>
+      </Label>
+      <AnchorPane fx:id="sendConfirmationPane" layoutX="54.0" layoutY="49.0">
+         <children>
+            <Label layoutX="21.0" style="-fx-text-fill: #777777;;" text="Kindly confirm that you want to send email from">
+               <font>
+                  <Font name="Arial" size="16.0" />
+               </font>
+            </Label>
+            <VBox fx:id="bayersPane" layoutY="51.0" prefHeight="210.0" prefWidth="379.0" />
+            <Button fx:id="sendButton" layoutX="59.0" layoutY="265.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="260.0" style="-fx-border-width: 0; -fx-background-color: rgb(64, 240, 64); -fx-background-radius: 8;" text="Send">
+               <font>
+                  <Font name="Arial" size="18.0" />
+               </font>
+            </Button>
+            <Label layoutX="94.0" layoutY="31.0" prefHeight="20.0" prefWidth="191.0" style="-fx-text-fill: #777777;;" text="'timelime' to these buyers?">
+               <font>
+                  <Font name="Arial" size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="sentPane" layoutX="54.0" layoutY="49.0">
+         <children>
+            <Label style="-fx-text-fill: #777777;;" text="Messages have been forwarded to there respective">
+               <font>
+                  <Font name="Arial" size="16.0" />
+               </font>
+            </Label>
+            <Button fx:id="closeButton" layoutX="59.0" layoutY="265.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="260.0" style="-fx-border-width: 0; -fx-background-color: rgba(255, 255, 255, 0);" text="Close">
+               <font>
+                  <Font name="Arial" size="18.0" />
+               </font>
+            </Button>
+            <Circle fill="DODGERBLUE" layoutX="189.0" layoutY="149.0" radius="50.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-fill: rgb(64, 220, 64); -fx-border-width: 0;" />
+            <Line endX="-70.0" endY="30.0" layoutX="253.0" layoutY="135.0" startX="-90.0" startY="10.0" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="6.0" />
+            <Line endX="-130.0" endY="40.0" layoutX="318.0" layoutY="129.0" startX="-100.0" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="6.0" />
+            <Label layoutX="100.0" layoutY="31.0" prefHeight="20.0" prefWidth="146.0" style="-fx-text-fill: #777777;;" text="emails in the system">
+               <font>
+                  <Font name="Arial" size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

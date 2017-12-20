@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="594.0" prefWidth="400.0" stylesheets="@css/center_table_style.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.quickveggies.controller.UploadAccountActivityController">
+   <children>
+      <Text id="label-header-on-light" layoutX="10.0" layoutY="50.0" text="Upload Account Transactions" />
+      <Label layoutX="50.0" layoutY="289.0" prefHeight="20.0" prefWidth="100.0" text="Select file:">
+<!--        <font> -->
+<!--             <Font size="16.0" /> -->
+<!--        </font> -->
+      </Label>
+      <TextField fx:id="filePathField" layoutX="50.0" layoutY="309.0" prefHeight="20.0" prefWidth="180.0" promptText="No file selected..." />
+      <Button fx:id="browseButton" layoutX="250.0" layoutY="309.0" prefHeight="20.0" prefWidth="70.0" text="Browse" />
+      
+      <Text layoutX="50.0" layoutY="406.0" text="Account to import into:" />
+      <ChoiceBox fx:id="chooseAccount" layoutX="50.0" layoutY="416.0" prefHeight="20.0" prefWidth="150.0" />
+      <Text layoutX="50.0" layoutY="456.0" text="Columns template:" />
+      <!-- <ChoiceBox fx:id="chooseTemplate" layoutX="50.0" layoutY="230.0" prefWidth="150.0" prefHeight="20.0"/>-->
+      <TextField fx:id="templateName" layoutX="50.0" layoutY="466.0" prefHeight="20.0" prefWidth="150.0" promptText="No template for this account" />
+      <Button fx:id="addTemplate" layoutX="50.0" layoutY="506.0" prefHeight="20.0" prefWidth="120.0" text="Add template" />
+      <Button fx:id="removeTemplate" layoutX="50.0" layoutY="506.0" prefHeight="20.0" prefWidth="120.0" text="Remove template" />
+      <Button fx:id="preview" layoutX="180.0" layoutY="506.0" prefHeight="20.0" prefWidth="70.0" text="Preview" />
+      
+      <!-- <Text layoutX="50.0" layoutY="330.0" text="If a transaction already exists then:"/>-->
+      <!-- <CheckBox fx:id="duplicateChkbox" layoutX="50.0" layoutY="345.0" text="Duplicate"/>
+      <CheckBox fx:id="skipChkbox" layoutX="50.0" layoutY="365.0" text="Skip"/>
+      <CheckBox fx:id="replaceChkbox" layoutX="50.0" layoutY="385.0" text="Replace"/>-->
+      
+      
+      <Button fx:id="create" layoutX="279.0" layoutY="544.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="100.0" text="Submit" />
+      <Text layoutX="50.0" layoutY="102.0" text="Transaction Amount Column Type" />
+      <ComboBox fx:id="cboTransColType" layoutX="50.0" layoutY="112.0" prefHeight="20.0" prefWidth="250.0" />
+      <Pane fx:id="paneColSelection" layoutX="49.0" layoutY="149.0" prefHeight="133.0" prefWidth="337.0" style="-fx-border-color: black;">
+         <children>
+            <Text layoutX="14.0" layoutY="23.0" text="Cr/Dr Column" wrappingWidth="91.435546875" />
+            <Text layoutX="14.0" layoutY="48.0" text="Transaction Amount Column" wrappingWidth="123.42773377895355" />
+            <TextField fx:id="txtCrDrColumn" layoutX="153.0" layoutY="6.0" prefHeight="25.0" prefWidth="171.0" promptText="Column having with Cr/Dr Info" text="Cr/Dr" />
+            <TextField fx:id="txtTransactionColumn" layoutX="153.0" layoutY="38.0" prefHeight="25.0" prefWidth="171.0" promptText="Transaction Amount Column" text="Transaction Amount(INR)" />
+            <Text layoutX="14.0" layoutY="91.0" text="Credit Abbreviation" wrappingWidth="107.435546875" />
+            <TextField fx:id="txtCrAbb" layoutX="153.0" layoutY="69.0" prefHeight="25.0" prefWidth="171.0" promptText="Abbreivation for Credit" text="CR" />
+            <Text layoutX="14.0" layoutY="117.0" text="Debit Abbreviation" wrappingWidth="107.435546875" />
+            <TextField fx:id="txtDrAbb" layoutX="153.0" layoutY="101.0" prefHeight="25.0" prefWidth="171.0" promptText="Abbreivation for Debit" text="DR" />
+         </children>
+      </Pane>
+      <Label layoutX="50.0" layoutY="342.0" text="Header row number:" />
+      <TextField fx:id="headerRowNumberText" layoutX="49.0" layoutY="358.0" prefHeight="26.0" prefWidth="150.0" />
+   </children>
+</Pane>

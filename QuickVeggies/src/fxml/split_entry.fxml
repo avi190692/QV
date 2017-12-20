@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane fx:id="splitMainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="588.0" stylesheets="@css/center_table_style.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+   
+         <ComboBox fx:id="cboNewParty" layoutX="393.0" layoutY="51.0" prefHeight="27.5" prefWidth="150.0" promptText="cboNewParty" />
+      <Button fx:id="btnNewParty" defaultButton="true" layoutX="392.0" layoutY="50.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="125.0" text="New Party">
+         <font>
+            <Font name="Verdana Bold" size="12.0" />
+         </font>
+      </Button>
+        
+   
+      <Text id="label-header-on-light" layoutX="10.0" layoutY="50.0" text="Split Transaction" />
+      <Text id="label-text-on-light" layoutX="10.0" layoutY="80.0" text="Sum left:" />
+      <Label id="label-text-on-light" fx:id="sumLeftLabel" layoutX="80.0" layoutY="65.0" />
+
+      
+      <Button fx:id="split" layoutX="229.0" layoutY="400.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="100.0" text="Split" />
+   </children>
+</Pane>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Region layoutY="234.0" prefHeight="98.0" prefWidth="600.0" style="-fx-background-color: #99ccff; -fx-opacity: 0.8;" />
+      <Label layoutX="66.0" layoutY="14.0" text="Title" />
+      <Label layoutX="213.0" layoutY="14.0" text="First Name" />
+      <Label layoutX="376.0" layoutY="14.0" text="Last Name" />
+      <Label layoutX="27.0" layoutY="71.0" prefWidth="140.0" text="Company / Orchard name" />
+      <Label layoutX="379.0" layoutY="71.0" text="Proprietor" />
+      <Label layoutX="64.0" layoutY="123.0" text="Mobile" />
+      <Label layoutX="230.0" layoutY="123.0" text="Mobile2" />
+      <Label layoutX="382.0" layoutY="123.0" text="Email ID" />
+      <Label layoutX="58.0" layoutY="179.0" text="Shop no." />
+      <Label layoutX="219.0" layoutY="179.0" text="City/Town" />
+      <Label layoutX="17.0" layoutY="242.0" text="Preferred Payment method" />
+      <Label layoutX="374.0" layoutY="242.0" text="Credit period" />
+      <TextField fx:id="title" layoutX="15.0" layoutY="31.0" promptText="Title" />
+      <TextField layoutX="179.0" layoutY="31.0" prefHeight="25.0" promptText="First Name" />
+      <TextField layoutX="334.0" layoutY="31.0" promptText="Last Name" />
+      <TextField layoutX="17.0" layoutY="88.0" prefHeight="25.0" prefWidth="298.0" promptText="Company / Orchard name" />
+      <TextField layoutX="334.0" layoutY="88.0" promptText="Proprietor" />
+      <TextField layoutX="17.0" layoutY="138.0" promptText="Mobile" />
+      <TextField layoutX="179.0" layoutY="138.0" prefHeight="25.0" promptText="Mobile" />
+      <TextField layoutX="334.0" layoutY="138.0" promptText="Email address" />
+      <TextField layoutX="17.0" layoutY="196.0" promptText="Shop no." />
+      <TextField layoutX="179.0" layoutY="196.0" promptText="City" />
+      <TextField layoutX="334.0" layoutY="196.0" promptText="Email Address" />
+      <ImageView fitHeight="80.0" fitWidth="101.0" layoutX="492.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+         <effect>
+            <Shadow />
+         </effect></ImageView>
+      <ComboBox layoutX="15.0" layoutY="270.0" prefHeight="54.0" prefWidth="185.0" promptText="Cash" visibleRowCount="2">
+         <effect>
+            <Glow />
+         </effect>
+      </ComboBox>
+      <ChoiceBox layoutX="324.0" layoutY="270.0" prefHeight="54.0" prefWidth="185.0" />
+      <CheckBox layoutX="17.0" layoutY="337.0" mnemonicParsing="false" text="Has a guarantor / parent company" />
+      <TextField disable="true" layoutX="16.0" layoutY="361.0" prefHeight="25.0" prefWidth="203.0" promptText="Enter Parent Company" />
+   </children>
+</Pane>
