@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
@@ -31,14 +32,20 @@
       
       
       
-      <Button id="btn-def" fx:id="loginButton" layoutX="518.0" layoutY="234.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="115.0" style="-fx-border-color: #292929; -fx-background-color: linear-gradient(to top, rgba(0, 0, 0, 0.14) 0%, rgba(255, 255, 255, 0.14) 100%); -fx-border-radius: 2px; -fx-padding: 10; -fx-text-fill: #f5f5f8;" styleClass="btn-def" stylesheets="@css/style.css" text="Login">
+      <Button id="btn-def" fx:id="loginButton" layoutX="518.0" layoutY="295.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="115.0" style="-fx-border-color: #292929; -fx-background-color: linear-gradient(to top, rgba(0, 0, 0, 0.14) 0%, rgba(255, 255, 255, 0.14) 100%); -fx-border-radius: 2px; -fx-padding: 10; -fx-text-fill: #f5f5f8;" styleClass="btn-def" stylesheets="@css/style.css" text="Login">
          <font>
             <Font name="Verdana" size="13.0" />
          </font></Button>
-      <Button id="btn-def" fx:id="register" layoutX="652.0" layoutY="234.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="115.0" style="-fx-border-color: #292929; -fx-background-color: linear-gradient(to top, rgba(0, 0, 0, 0.14) 0%, rgba(255, 255, 255, 0.14) 100%); -fx-border-radius: 2px; -fx-padding: 10; -fx-text-fill: #f5f5f8;" styleClass="btn-def" stylesheets="@css/style.css" text="Register">
+      <Button id="btn-def" fx:id="register" layoutX="652.0" layoutY="295.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="115.0" style="-fx-border-color: #292929; -fx-background-color: linear-gradient(to top, rgba(0, 0, 0, 0.14) 0%, rgba(255, 255, 255, 0.14) 100%); -fx-border-radius: 2px; -fx-padding: 10; -fx-text-fill: #f5f5f8;" styleClass="btn-def" stylesheets="@css/style.css" text="Register">
          <font>
             <Font name="Verdana" size="13.0" />
          </font>
       </Button>
+      <Label layoutX="608.0" layoutY="203.0" text="User Type" textFill="#f5f5f8">
+         <font>
+            <Font name="Verdana" size="15.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="usertype" layoutX="514.0" layoutY="232.0" prefHeight="30.0" prefWidth="250.0" />
    </children>
 </Pane>
