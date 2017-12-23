@@ -31,6 +31,8 @@ import java.util.NoSuchElementException;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
+	
+	ObservableList<String> employeeTypeList = FXCollections.observableArrayList("Accountant","Admin","Analysts");
 
     @FXML
     private PasswordField pass;
@@ -52,72 +54,17 @@ public class LoginController implements Initializable {
     
     @FXML
     private TextField sqlpw;
+    
+  //## added by ss
+    @FXML
+    private ComboBox<String> usertype;
+    
+    
 
     public void initialize(URL location, ResourceBundle resources) {
         CosmeticStyles.addHoverEffect(register,loginButton);
-        
-        
-        
-        
-       /* 
-        sqlserver.setText("localhost");  
-        final DatabaseClient dbclient=DatabaseClient.getInstance();
-        //check if there is already a user logged into the database
-        //if so, let the user to unregister and let another user register the program to his name
-        	if(dbclient.getRowsNum("users")>0){
-        		register.setText("Unregister");
-        		register.setOnAction(new EventHandler<ActionEvent>() {
-                    public void handle(ActionEvent event) {
-                    	
-               	     //prepare the buttons for the unregister dialog
-                    //------------------
-               		Stage dialogStage=new Stage();
-               		final PasswordField pwdField=new PasswordField();
-               		
-               	     final Button ok=new Button("OK");
-               	     ok.setOnMouseClicked(new EventHandler<MouseEvent>() {
-               	         @Override
-               	         public void handle(MouseEvent event) {
-                         	try{
-                                String input=pwdField.getText();
-                                String realPwd=CryptDataHandler.getInstance().decrypt(
-                                		(dbclient.getUserById(1)).getPassword());
-                                if(input.equals(realPwd)){
-                                        dbclient.deleteTableEntries("users", "ALL", "ALL", true);
-                                        register.setText("Register");
-                                        register.setOnAction(new EventHandler<ActionEvent>() {
-                                            public void handle(ActionEvent event) {
-                                                new Main().replaceSceneContent("/fxml/register.fxml");
-                                            }
-                                        });
-                                }else GeneralMethods.errorMsg("incorrect password!");
-                            	ok.getScene().getWindow().hide();
-                         	}catch(Exception e){e.printStackTrace();}
-               	         }
-               	     });
-               	     
-               	     final Button cancel=new Button("Cancel");
-               	     cancel.setOnMouseClicked(new EventHandler<MouseEvent>() {
-               	         @Override
-               	         public void handle(MouseEvent event) {
-                               cancel.getScene().getWindow().hide();
-               	         }
-               	     });    
-               	     ok.setLayoutX(25.0);
-               	     ok.setLayoutY(150.0);
-               	     cancel.setLayoutX(150.0);
-               	     cancel.setLayoutY(150.0);
-               	     pwdField.setLayoutX(50.0);
-               	     pwdField.setLayoutY(100.0);
-               	     
-                    	CustomDialogController controller=new CustomDialogController(new Button[]{ok,cancel},pwdField,"Retype login password:");
-                    	
-                    	GeneralMethods.openNewWindow(LoginController.this, "/fxml/customdialog.fxml", controller, null);
-                    	
-                    }
-                });
-        		
-        	}else */register.setOnAction(new EventHandler<ActionEvent>() {
+    
+        register.setOnAction(new EventHandler<ActionEvent>() {
                 public void handle(ActionEvent event) {
                     new Main().replaceSceneContent("/fxml/register.fxml");
                 }
@@ -130,32 +77,17 @@ public class LoginController implements Initializable {
         loginButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
                 if (!username.getText().equals("") && !pass.getText().equals("")) {
-                	
-                	//UserGlobalParameters.SQLURL=sqlserver.getText();
-                	//UserGlobalParameters.SQLUSER=sqluser.getText();
-                	//UserGlobalParameters.SQLPASS=sqlpw.getText();
-                	
-                	//if(UserGlobalParameters.SQLURL.equals(""))UserGlobalParameters.SQLURL="localhost";
-                	//if(UserGlobalParameters.SQLUSER.equals(""))UserGlobalParameters.SQLUSER="qvuser";
-                	//if(UserGlobalParameters.SQLPASS.equals(""))UserGlobalParameters.SQLPASS="qvdbusr123";
-                	
-                	DatabaseClient dbclient=DatabaseClient.getInstance();
-                	//if(dbclient==null){GeneralMethods.errorMsg("Wrong SQL server address/login parameters"); return;}
+                		
+                	DatabaseClient dbclient=DatabaseClient.getInstance(); 
                 	
                 	 try {
+                		 String userType = usertype.getValue();
                          User user = dbclient.getUserByName(username.getText());
                          String password = pass.getText();
-                         if (password.equals(CryptDataHandler.getInstance().decrypt(user.getPassword()))) {
+                         if (password.equals(CryptDataHandler.getInstance().decrypt(user.getPassword())) && user.getUsertype().equals(userType) && user.isBool_status()==true)
+                         {
                              SessionDataController.getInstance().setCurrentUser(user);
-                             //add a check to prevent closing the dash with unsaved windows still open
-//                             ((Stage)loginButton.getScene().getWindow()).setOnCloseRequest(new EventHandler<WindowEvent>() {
-//                            	    @Override
-//                            	    public void handle(WindowEvent event) {
-//                            	       if(SessionDataController.getInstance().getUnsavedWindows()>0)
-//                            	    	   //TODO add here a ok-cancel confirmation dialog
-//                            	    	   event.consume();
-//                            	    }
-//                            	});
+                             
                              new Main().replaceSceneContent("/fxml/dashboardz.fxml");
                          } else {
                              throw new NoSuchElementException();
