@@ -1,11 +1,14 @@
 package com.quickveggies.controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -63,6 +66,8 @@ public class LoginController implements Initializable {
 
     public void initialize(URL location, ResourceBundle resources) {
         CosmeticStyles.addHoverEffect(register,loginButton);
+        usertype.setValue("Admin");
+        usertype.setItems(employeeTypeList);
     
         register.setOnAction(new EventHandler<ActionEvent>() {
                 public void handle(ActionEvent event) {
