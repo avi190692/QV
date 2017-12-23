@@ -832,6 +832,7 @@ public class DatabaseClient {
         System.out.println("Database: user " + name + " successfully created.");
     }
 
+    //## changed by ss on 21-Dec-2017
     public User getUserByName(String name) throws SQLException, NoSuchElementException {
         ResultSet user = getResult("select * from users where name='" + name + "';");
         if (user.next()) {
@@ -839,7 +840,9 @@ public class DatabaseClient {
             int role = user.getInt("role");
             String password = user.getString("pass");
             String email = user.getString("email");
-            User receivedUser = new User(id, name, password, email, role);
+            boolean usrStatus = user.getBoolean("bool_activestatus");
+            String usrType = user.getString("usertype");
+            User receivedUser = new User(name, password, email, role,usrStatus,usrType);
             return receivedUser;
         } else {
             throw new NoSuchElementException("No such user in database");
