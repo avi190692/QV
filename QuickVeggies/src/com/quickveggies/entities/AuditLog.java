@@ -6,7 +6,7 @@ public class AuditLog {
 
     private Integer id;
     private String userId;
-    private String eventTime;
+    private Date eventTime;
     private String eventDetail;
 
     private String eventObject;
@@ -20,9 +20,19 @@ public class AuditLog {
     private Double amount;
     //For internal purpose
     private Object entryObject;
+    
+    public AuditLog(String userId, Date eventTime,String eventDetail, String eventObject, Integer eventObjectId) 
+    {
+        super();
+        this.userId = userId;
+        this.eventTime = eventTime;
+        this.eventDetail = eventDetail;
+        this.eventObject = eventObject;
+        this.eventObjectId = eventObjectId;
+    }
 
-    public AuditLog(Integer id, String userId, String eventTime,
-            String eventDetail, String eventObject, Integer eventObjectId) {
+    public AuditLog(Integer id, String userId, Date eventTime,String eventDetail, String eventObject, Integer eventObjectId) 
+    {
         super();
         this.id = id;
         this.userId = userId;
@@ -46,14 +56,6 @@ public class AuditLog {
 
     public void setUserId(String userId) {
         this.userId = userId;
-    }
-
-    public String getEventTime() {
-        return eventTime;
-    }
-
-    public void setEventTime(String eventTime) {
-        this.eventTime = eventTime;
     }
 
     public String getEventDetail() {
@@ -127,4 +129,14 @@ public class AuditLog {
     public void setEntryObject(Object entryObject) {
         this.entryObject = entryObject;
     }
+
+	public Date getEventTime() {
+		return eventTime;
+	}
+
+	public void setEventTime(Date eventTime) {
+		this.eventTime = eventTime;
+	}
+    
+    
 }
