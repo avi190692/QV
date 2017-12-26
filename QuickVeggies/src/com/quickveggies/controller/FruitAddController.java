@@ -136,17 +136,22 @@ public class FruitAddController implements Initializable {
 		btnSave.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
-			public void handle(ActionEvent event) {
+			public void handle(ActionEvent event) 
+			{
 				DatabaseClient dc = DatabaseClient.getInstance();
 				String fruitName = txtFruitType.getText();
 				List<String> listQualities = new ArrayList<>();
 				List<String> listBoxes = new ArrayList<>();
-				for (BoxSize bs : boxTypes) {
+				for (BoxSize bs : boxTypes) 
+				{
 					listBoxes.add(bs.getName());
 				}
-				for (QualityType qt : qualTypes) {
+				
+				for (QualityType qt : qualTypes) 
+				{
 					listQualities.add(qt.getName());
 				}
+				
 				dc.addFruitBoxSizes(fruitName, listBoxes);
 				dc.addFruitQualities(fruitName, listQualities);
 				SessionDataController session = SessionDataController.getInstance();

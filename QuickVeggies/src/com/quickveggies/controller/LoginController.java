@@ -94,7 +94,9 @@ public class LoginController implements Initializable {
                              SessionDataController.getInstance().setCurrentUser(user);
                              
                              new Main().replaceSceneContent("/fxml/dashboardz.fxml");
-                         } else {
+                         } 
+                         else 
+                         {
                              throw new NoSuchElementException();
                          }
 
@@ -104,7 +106,7 @@ public class LoginController implements Initializable {
                      Alert alert = new Alert(Alert.AlertType.WARNING);
                      alert.setTitle("Error!");
                      alert.setHeaderText(null);
-                     alert.setContentText("Wrong login \\ password!");
+                     alert.setContentText("Error!Wrong username or password or the user is blocked!");
                      alert.showAndWait();
                  }
                 }else GeneralMethods.errorMsg("Not all fields were properly filled!");

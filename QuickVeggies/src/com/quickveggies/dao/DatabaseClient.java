@@ -88,7 +88,7 @@ public class DatabaseClient {
                
             try 
             {
-                connection = DriverManager.getConnection("");
+                connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/qvdb?user=postgres&password=postgres");
             } 
             catch (SQLException ex) 
             {
@@ -1279,15 +1279,17 @@ public class DatabaseClient {
             PreparedStatement ps = connection.prepareStatement(INSERT_FRUIT_QRY);
             autoCommit = connection.getAutoCommit();
             connection.setAutoCommit(true);
-            if (fruit == null || fruit.trim().isEmpty()) {
+            if (fruit == null || fruit.trim().isEmpty()) 
+            {
                 throw new IllegalArgumentException("Fruit name cannot be empty");
             }
             ps.setString(1, fruit);
             ps.setString(2, fruit);
-            ps.executeUpdate();
-            insertAuditRecord(new AuditLog(0, getCurrentUser(), null, "ADDED Entry for fruit:".concat(fruit), null, 0));
+            //ps.executeUpdate();
+            ps.execute();
+            insertAuditRecord(new AuditLog(getCurrentUser(), new Date(), "ADDED Entry for fruit:".concat(fruit), null, 0));
 
-            ps.close();
+            ps.close();                                                                   
             ps = connection.prepareStatement("Select id from fruits where name=?");
             ps.setString(1, fruit);
             ResultSet rs = ps.executeQuery();
@@ -1313,6 +1315,7 @@ public class DatabaseClient {
      * @param qualities
      * @author Shoeb
      */
+    //## chnaged by ss
     private void addFruitQualities(List<String> qualities) {
         try (PreparedStatement ps = connection.prepareStatement(INSERT_QUALITY_QRY)) {
             for (String quality : qualities) {
@@ -1324,7 +1327,8 @@ public class DatabaseClient {
                 ps.addBatch();
             }
 
-            ps.executeBatch();
+           // ps.executeBatch();
+            ps.execute();
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -1345,12 +1349,16 @@ public class DatabaseClient {
         return fNames;
     }
 
-    public void addFruitQualities(String fruitName, List<String> qualityStrings) {
+    //## changed by ss
+    public void addFruitQualities(String fruitName, List<String> qualityStrings) 
+    {
         int fruitId = addFruit(fruitName);
         Map<String, QualityType> existingQualitiesMap = getDetailForQuality(qualityStrings);
         List<String> newQualityToInsertList = new ArrayList<>();
-        for (String qualName : qualityStrings) {
-            if (!existingQualitiesMap.containsKey(qualName)) {
+        for (String qualName : qualityStrings) 
+        {
+            if (!existingQualitiesMap.containsKey(qualName)) 
+            {
                 newQualityToInsertList.add(qualName);
             }
         }
@@ -1373,7 +1381,8 @@ public class DatabaseClient {
                 sb.append(qt.getName() + " , ");
 
             }
-            ps.executeBatch();
+            //ps.executeBatch();
+            ps.execute();
             insertAuditRecord(new AuditLog(0, getCurrentUser(), null, "ADDED Fruit Qualities :".concat(sb.toString()), null, 0));
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -1412,7 +1421,8 @@ public class DatabaseClient {
                 ps.setInt(2, bs.getId());
                 ps.setInt(3, fruitId);
                 ps.setInt(4, bs.getId());
-                ps.addBatch();
+                //ps.addBatch();
+                ps.execute();
             }
             ps.executeBatch();
         } catch (Exception ex) {
@@ -1426,10 +1436,13 @@ public class DatabaseClient {
                 if (boxSize == null || boxSize.trim().isEmpty()) {
                     continue;
                 }
+                //System.out.println(boxSize.s);
                 boxSize = boxSize.toLowerCase();
+               
                 ps.setString(1, boxSize);
                 ps.setString(2, boxSize);
-                ps.addBatch();
+                //ps.addBatch();
+                ps.execute();
             }
             ps.executeBatch();
         } catch (Exception ex) {
@@ -2230,8 +2243,9 @@ public class DatabaseClient {
     private String getCurrentUser() {
         SessionDataController session = SessionDataController.getInstance();
         User user = session.getCurrentUser();
-        String userName = "test";
-        if (user != null) {
+        String userName = "tzt";
+        if (user != null) 
+        {
             userName = session.getCurrentUser().getName();
         }
         return userName;
@@ -2429,6 +2443,7 @@ public class DatabaseClient {
         return false;
     }
 
+   
     public int getStorageDealsCount(String storeType) {
         String sql = "select sum(CAST (boxes AS bigint)) from buyerDeals group by buyerTitle having buyerTitle=?;";
         int result = 0;
@@ -2444,6 +2459,8 @@ public class DatabaseClient {
         return result;
     }
 
+    //## for audit log insert
+    //## changed by ss
     public void insertAuditRecord(AuditLog log) {
         String sql = "INSERT INTO auditLog (userId, eventDetail, eventObject, "
                 + " eventObjectId, oldValues, newValues, name, date, amount) "
@@ -2459,7 +2476,8 @@ public class DatabaseClient {
             ps.setTimestamp(8, log.getDate() == null ? null : new java.sql.Timestamp(log.getDate().getTime()));
 //            Date(8, log.getDate() == null ? null : new java.sql.Date(log.getDate().getTime()));
             ps.setDouble(9, log.getAmount() == null ? 0.0 : log.getAmount());
-            ps.executeUpdate();
+            //ps.executeUpdate();
+            ps.execute();
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -2467,14 +2485,13 @@ public class DatabaseClient {
     }
 
     public List<AuditLog> getAuditRecords() {
-        String sql = "SELECT *, convert(varchar(50), eventTime, 121) As eventTimeConverted "
-                + " FROM auditLog";
+        String sql = "SELECT * FROM auditLog";
         List<AuditLog> list = new ArrayList<>();
         try {
             ResultSet rs = getResult(sql);
             while (rs.next()) {
                 AuditLog log = new AuditLog(rs.getInt(1), rs.getString("userId"),
-                        rs.getString("eventTimeConverted"),
+                        rs.getDate("eventtime"),
                         rs.getString("eventDetail"), rs.getString("eventObject"),
                         rs.getInt("eventObjectId")) {{
                             setOldValues(rs.getString("oldValues"));
@@ -2505,14 +2522,15 @@ public class DatabaseClient {
     private static final String INSERT_EXPENDITURE_TYPE_QRY = "IF NOT EXISTS (SELECT * FROM expenditureType WHERE name = ?)  INSERT INTO expenditureType (name)  VALUES (?)";
 
     private static final String QRY_PAID_RECD_MONEY_FOR_PARTY_ = "Select * from partyMoney where RTRIM(LTRIM(LOWER(partyType))) = ? ";
+    
     private static final String QRY_PAID_RECD_MONEY_FOR_TITLE = " AND RTRIM(LTRIM(LOWER(title))) = ? ";
 
     private static final String QRY_PAID_RECD_MONEY_FOR_PARTY = "Select * from partyMoney where RTRIM(LTRIM(LOWER(partyType))) = ?";
 
     private static final String QRY_DEALS_FOR_LADAAN_BUYER = "select dealID from buyerDeals where buyerTitle in (select title from buyers1 where RTRIM(LTRIM(LOWER(buyerType))) IN ('ladaan', 'bijak'))";
 
-    private static final String INSERT_QUALITY_QRY = "IF NOT EXISTS (SELECT * FROM qualities WHERE name = ? COLLATE SQL_Latin1_General_CP1_CI_AS)  INSERT INTO qualities (name) VALUES (?)";
-
+    //private static final String INSERT_QUALITY_QRY = "IF NOT EXISTS (SELECT * FROM qualities WHERE name = ? COLLATE SQL_Latin1_General_CP1_CI_AS)  INSERT INTO qualities (name) VALUES (?)";
+    private static final String INSERT_QUALITY_QRY = "select case when (count(name)=0) then (select qualities_enter(?)) end from qualities where name =?";
     private static final String INSERT_COMPANY_QRY = "INSERT INTO companyInfo ("
             + "name ,   address ,   website ,   phone ,  email ,  industryType ,  password ,  logo )  VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
@@ -2521,14 +2539,19 @@ public class DatabaseClient {
 
     private static final String UPDATE_NOLOGO_COMPANY_QRY = "UPDATE companyInfo SET "
             + "name=? ,   address =? ,   website = ?,   phone = ?,  email = ?,  industryType = ?,  password = ?   WHERE  name = ?";
+    
+    //## changed by ss on 23-Dec-2017(all queries below are not supported by postgres so changed.)
+    
+   //private static final String INSERT_BOX_SIZE_QRY = "IF NOT TRUE (SELECT * FROM boxSizes WHERE name = ?)  INSERT INTO boxSizes (name)  VALUES (?)";
+    private static final String INSERT_BOX_SIZE_QRY = "select case when (count(name) = 0) then (select boxsize_entry(?)) end from boxsizes where name = ?";
 
-    private static final String INSERT_BOX_SIZE_QRY = "IF NOT EXISTS (SELECT * FROM boxSizes WHERE name = ?)  INSERT INTO boxSizes (name)  VALUES (?)";
-
-    private static final String INSERT_FRUIT_BOX_QRY = "IF NOT EXISTS (SELECT * FROM fruitBoxSizes WHERE fruit_id = ? AND boxSize_id = ?) Insert into fruitBoxSizes (fruit_id, boxSize_id) values (?,?)";
-
-    private static final String INSERT_FRUIT_QUALITY_QRY = "IF NOT EXISTS (SELECT * FROM fruitQuality  WHERE fruit_id = ? AND quality_id = ?) Insert into fruitQuality (fruit_id,quality_id) values (?,?)";
-
-    private static final String INSERT_FRUIT_QRY = "IF NOT EXISTS (SELECT * FROM fruits WHERE name = ? COLLATE SQL_Latin1_General_CP1_CI_AS)  INSERT INTO fruits (name)  VALUES (?)";
+    //private static final String INSERT_FRUIT_BOX_QRY = "IF NOT EXISTS (SELECT * FROM fruitBoxSizes WHERE fruit_id = ? AND boxSize_id = ?) Insert into fruitBoxSizes (fruit_id, boxSize_id) values (?,?)";
+    private static final String INSERT_FRUIT_BOX_QRY = "select case when  (count(boxsize_id) = 0) then (select fruitboxsize_entry(?,?)) end from fruitboxsizes where fruit_id = ? AND boxSize_id = ?";
+    
+    //private static final String INSERT_FRUIT_QUALITY_QRY = "IF NOT EXISTS (SELECT * FROM fruitQuality  WHERE fruit_id = ? AND quality_id = ?) Insert into fruitQuality (fruit_id,quality_id) values (?,?)";
+    private static final String INSERT_FRUIT_QUALITY_QRY = "select case when (count(*)=0) then (fruitquality(?,?)) end from fruitquality where fruit_id = ? and quality_id = ?";
+    //private static final String INSERT_FRUIT_QRY = "IF NOT EXISTS (SELECT * FROM fruits WHERE name = ? COLLATE SQL_Latin1_General_CP1_CI_AS)  INSERT INTO fruits (name)  VALUES (?)";
+    private static final String INSERT_FRUIT_QRY = "select case when (count(name)=0) then (select fruit_entry(?)) end from fruits where name=?";
 
     private static final String SELECT_FRUIT_QUALITY_QRY = "select * from qualities qt where qt.id in (select quality_id from fruitQuality where fruit_id in(select id from fruits where name=?) )";
 

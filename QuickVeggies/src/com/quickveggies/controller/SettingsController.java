@@ -40,14 +40,17 @@ public class SettingsController implements Initializable {
     		content.setPrefHeight(paneProducts.getHeight());
     		content.setPrefWidth(paneProducts.getWidth());
     		content.getChildren().add((Node) FXMLLoader.load(getClass().getResource("/fxml/fruitviewer.fxml")));
-    		content.getChildren().add((Node) FXMLLoader.load(getClass().getResource("/fxml/growerexpensesviewer.fxml")));
+    		//## blocked by ss(some error in .fxml)
+    		//content.getChildren().add((Node) FXMLLoader.load(getClass().getResource("/fxml/growerexpensesviewer.fxml")));
     		content.getChildren().add((Node) FXMLLoader.load(getClass().getResource("/fxml/buyerexpensesviewer.fxml")));
     		content.getChildren().add((Node) FXMLLoader.load(getClass().getResource("/fxml/companyviewer.fxml")));
     		content.getChildren().add((Node) FXMLLoader.load(getClass().getResource("/fxml/expendituretypesviewer.fxml")));
     		content.getChildren().add((Node) FXMLLoader.load(getClass().getResource("/fxml/smsTemplate.fxml")));
     		
     		paneProducts.setContent(content);
-		} catch (IOException e1) {
+		} 
+    	catch (IOException e1) 
+    	{
 			e1.printStackTrace();
 		}
     	SessionDataController.getInstance().setSettingPagePane(fruitSettingsPane);
