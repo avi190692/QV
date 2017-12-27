@@ -2,29 +2,29 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="D:/JAR files/Project_QuickVeggie_Lib/ai-custom-dates.jar"/>
-	<classpathentry kind="lib" path="D:/JAR files/Project_QuickVeggie_Lib/barcodes-7.0.2.jar"/>
-	<classpathentry kind="lib" path="D:/JAR files/Project_QuickVeggie_Lib/commons-lang-2.5.jar"/>
-	<classpathentry kind="lib" path="D:/JAR files/Project_QuickVeggie_Lib/font-asian-7.0.2.jar"/>
-	<classpathentry kind="lib" path="D:/JAR files/Project_QuickVeggie_Lib/forms-7.0.2.jar"/>
-	<classpathentry kind="lib" path="D:/JAR files/Project_QuickVeggie_Lib/hamcrest-core-1.3.jar"/>
-	<classpathentry kind="lib" path="D:/JAR files/Project_QuickVeggie_Lib/io-7.0.2.jar"/>
-	<classpathentry kind="lib" path="D:/JAR files/Project_QuickVeggie_Lib/itextg-5.5.10.jar"/>
-	<classpathentry kind="lib" path="D:/JAR files/Project_QuickVeggie_Lib/junit-4.12.jar"/>
-	<classpathentry kind="lib" path="D:/JAR files/Project_QuickVeggie_Lib/kernel-7.0.2.jar"/>
-	<classpathentry kind="lib" path="D:/JAR files/Project_QuickVeggie_Lib/layout-7.0.2.jar"/>
-	<classpathentry kind="lib" path="D:/JAR files/Project_QuickVeggie_Lib/mail.jar"/>
-	<classpathentry kind="lib" path="D:/JAR files/Project_QuickVeggie_Lib/pdfa-7.0.2.jar"/>
-	<classpathentry kind="lib" path="D:/JAR files/Project_QuickVeggie_Lib/pdf-renderer-1.0.5.jar"/>
-	<classpathentry kind="lib" path="D:/JAR files/Project_QuickVeggie_Lib/poi-3.14-20160307.jar"/>
-	<classpathentry kind="lib" path="D:/JAR files/Project_QuickVeggie_Lib/poi-ooxml-3.14-20160307.jar"/>
-	<classpathentry kind="lib" path="D:/JAR files/Project_QuickVeggie_Lib/poi-ooxml-schemas-3.14-20160307.jar"/>
-	<classpathentry kind="lib" path="D:/JAR files/Project_QuickVeggie_Lib/postgresql-9.0-801.jdbc3.jar"/>
-	<classpathentry kind="lib" path="D:/JAR files/Project_QuickVeggie_Lib/sign-7.0.2.jar"/>
-	<classpathentry kind="lib" path="D:/JAR files/Project_QuickVeggie_Lib/slf4j-api-1.7.25.jar"/>
-	<classpathentry kind="lib" path="D:/JAR files/Project_QuickVeggie_Lib/slf4j-simple-1.7.25.jar"/>
-	<classpathentry kind="lib" path="D:/JAR files/Project_QuickVeggie_Lib/sqljdbc4.jar"/>
-	<classpathentry kind="lib" path="D:/JAR files/Project_QuickVeggie_Lib/xmlbeans-2.6.0.jar"/>
-	<classpathentry kind="lib" path="D:/JAR files/Project_QuickVeggie_Lib/junit_4/junit-4.12.jar"/>
+	<classpathentry kind="lib" path="D:/SOFTWARES/jars/QuickVeggieLibrary/junit_4/junit-4.12.jar"/>
+	<classpathentry kind="lib" path="D:/SOFTWARES/jars/QuickVeggieLibrary/ai-custom-dates.jar"/>
+	<classpathentry kind="lib" path="D:/SOFTWARES/jars/QuickVeggieLibrary/barcodes-7.0.2.jar"/>
+	<classpathentry kind="lib" path="D:/SOFTWARES/jars/QuickVeggieLibrary/commons-lang-2.5.jar"/>
+	<classpathentry kind="lib" path="D:/SOFTWARES/jars/QuickVeggieLibrary/font-asian-7.0.2.jar"/>
+	<classpathentry kind="lib" path="D:/SOFTWARES/jars/QuickVeggieLibrary/forms-7.0.2.jar"/>
+	<classpathentry kind="lib" path="D:/SOFTWARES/jars/QuickVeggieLibrary/hamcrest-core-1.3.jar"/>
+	<classpathentry kind="lib" path="D:/SOFTWARES/jars/QuickVeggieLibrary/io-7.0.2.jar"/>
+	<classpathentry kind="lib" path="D:/SOFTWARES/jars/QuickVeggieLibrary/itextg-5.5.10.jar"/>
+	<classpathentry kind="lib" path="D:/SOFTWARES/jars/QuickVeggieLibrary/junit-4.12.jar"/>
+	<classpathentry kind="lib" path="D:/SOFTWARES/jars/QuickVeggieLibrary/kernel-7.0.2.jar"/>
+	<classpathentry kind="lib" path="D:/SOFTWARES/jars/QuickVeggieLibrary/layout-7.0.2.jar"/>
+	<classpathentry kind="lib" path="D:/SOFTWARES/jars/QuickVeggieLibrary/mail.jar"/>
+	<classpathentry kind="lib" path="D:/SOFTWARES/jars/QuickVeggieLibrary/pdfa-7.0.2.jar"/>
+	<classpathentry kind="lib" path="D:/SOFTWARES/jars/QuickVeggieLibrary/pdf-renderer-1.0.5.jar"/>
+	<classpathentry kind="lib" path="D:/SOFTWARES/jars/QuickVeggieLibrary/poi-3.14-20160307.jar"/>
+	<classpathentry kind="lib" path="D:/SOFTWARES/jars/QuickVeggieLibrary/poi-ooxml-3.14-20160307.jar"/>
+	<classpathentry kind="lib" path="D:/SOFTWARES/jars/QuickVeggieLibrary/poi-ooxml-schemas-3.14-20160307.jar"/>
+	<classpathentry kind="lib" path="D:/SOFTWARES/jars/QuickVeggieLibrary/postgresql-9.1-901-1.jdbc4.jar"/>
+	<classpathentry kind="lib" path="D:/SOFTWARES/jars/QuickVeggieLibrary/sign-7.0.2.jar"/>
+	<classpathentry kind="lib" path="D:/SOFTWARES/jars/QuickVeggieLibrary/slf4j-api-1.7.25.jar"/>
+	<classpathentry kind="lib" path="D:/SOFTWARES/jars/QuickVeggieLibrary/slf4j-simple-1.7.25.jar"/>
+	<classpathentry kind="lib" path="D:/SOFTWARES/jars/QuickVeggieLibrary/sqljdbc4.jar"/>
+	<classpathentry kind="lib" path="D:/SOFTWARES/jars/QuickVeggieLibrary/xmlbeans-2.6.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
