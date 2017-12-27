@@ -189,15 +189,39 @@ public class DashboardController extends AbstractFreshEntryController implements
         btnAuditLog.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                showPopup("/fxml/auditlogviewer.fxml", "Audit Log", new AuditLogController(DashboardController.this));
+            	String currentUserType = SessionDataController.getInstance().getCurrentUser().getUsertype();
+            	if(currentUserType.equals("Admin"))
+            	{
+            		showPopup("/fxml/auditlogviewer.fxml", "Audit Log", new AuditLogController(DashboardController.this));
+            	}
+            	else
+            	{
+            		 Alert alert = new Alert(Alert.AlertType.WARNING);
+                     alert.setTitle("User Restricted!");
+                     alert.setHeaderText(null);
+                     alert.setContentText("You are not authorized to view this page.Contact Admin or logged in as Admin.Thank You!");
+                     alert.showAndWait();
+            	}
             }
         });
 
         settings.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
                 try {
+                String currentUserType = SessionDataController.getInstance().getCurrentUser().getUsertype();
+                if(currentUserType.equals("Admin"))
+                {
                     mainView.getChildren().setAll((Node) FXMLLoader.load(getClass().getResource("/fxml/settings_dash.fxml")));
                     setupDashboardAnchors();
+                }
+            	else
+            	{
+            		 Alert alert = new Alert(Alert.AlertType.WARNING);
+                     alert.setTitle("User Restricted!");
+                     alert.setHeaderText(null);
+                     alert.setContentText("You are not authorized to view this page.Contact Admin or logged in as Admin.Thank You!");
+                     alert.showAndWait();
+            	}
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
