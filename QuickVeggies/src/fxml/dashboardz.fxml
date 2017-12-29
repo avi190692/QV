@@ -12,13 +12,14 @@
 
 <?import com.quickveggies.misc.SearchPartyButton?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="610.0" minWidth="788.0" prefHeight="610.0" prefWidth="788.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.quickveggies.controller.dashboard.DashboardController">
+
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="610.0" minWidth="788.0" prefHeight="610.0" prefWidth="788.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.quickveggies.controller.dashboard.DashboardController">
     <children>
         <SplitPane fx:id="splitView" dividerPositions="0.21018276762402088" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="610.0" prefWidth="788.0" stylesheets="@css/splitpane.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
                 <AnchorPane fx:id="leftAnchor" maxHeight="1.7976931348623157E308" minHeight="0.0" minWidth="161.0" prefHeight="610.0" prefWidth="342.0" style="-fx-background-color: #3d3d41;" SplitPane.resizableWithParent="false">
                     <children>
-                        <Button fx:id="dashboard" alignment="BASELINE_LEFT" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="1.0" layoutY="95.0" minHeight="50.0" minWidth="158.0" mnemonicParsing="false" style="-fx-background-color: linear-gradient(to top, rgba(0,0,0,.27), rgba(255,255,255,.37)); -fx-text-fill: #f5f5f8; -fx-border-radius: 3px;" text="Dashboard">
+                        <Button fx:id="dashboard" alignment="BASELINE_LEFT" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="1.0" layoutY="94.0" minHeight="50.0" minWidth="158.0" mnemonicParsing="false" style="-fx-background-color: linear-gradient(to top, rgba(0,0,0,.27), rgba(255,255,255,.37)); -fx-text-fill: #f5f5f8; -fx-border-radius: 3px;" text="Dashboard">
                             <font>
                                 <Font name="Verdana Bold" size="13.0" />
                             </font>
@@ -29,7 +30,7 @@
                                 <Insets />
                             </opaqueInsets>
                         </Button>
-                        <Button fx:id="buyer" alignment="BASELINE_LEFT" contentDisplay="CENTER" layoutX="1.0" layoutY="145.0" minHeight="50.0" minWidth="158.0" mnemonicParsing="false" style="-fx-background-color: linear-gradient(to top, rgba(0,0,0,.27), rgba(255,255,255,.37)); -fx-text-fill: #f5f5f8; -fx-border-radius: 3px;" text="Buyer / Kharedar" textAlignment="RIGHT">
+                        <Button fx:id="buyer" alignment="BASELINE_LEFT" contentDisplay="CENTER" layoutX="1.0" layoutY="147.0" minHeight="50.0" minWidth="158.0" mnemonicParsing="false" style="-fx-background-color: linear-gradient(to top, rgba(0,0,0,.27), rgba(255,255,255,.37)); -fx-text-fill: #f5f5f8; -fx-border-radius: 3px;" text="Buyer / Kharedar" textAlignment="RIGHT">
                             <font>
                                 <Font name="Verdana Bold" size="13.0" />
                             </font>
@@ -37,7 +38,7 @@
                                 <Insets left="10.0" />
                             </padding>
                         </Button>
-                        <Button fx:id="suppliers" alignment="BASELINE_LEFT" contentDisplay="CENTER" layoutX="1.0" layoutY="195.0" minHeight="50.0" minWidth="158.0" mnemonicParsing="false" style="-fx-background-color: linear-gradient(to top, rgba(0,0,0,.27), rgba(255,255,255,.37)); -fx-text-fill: #f5f5f8; -fx-border-radius: 3px;" text="Suppliers " textAlignment="RIGHT">
+                        <Button fx:id="suppliers" alignment="BASELINE_LEFT" contentDisplay="CENTER" layoutX="1.0" layoutY="200.0" minHeight="50.0" minWidth="158.0" mnemonicParsing="false" style="-fx-background-color: linear-gradient(to top, rgba(0,0,0,.27), rgba(255,255,255,.37)); -fx-text-fill: #f5f5f8; -fx-border-radius: 3px;" text="Suppliers " textAlignment="RIGHT">
                             <font>
                                 <Font name="Verdana Bold" size="13.0" />
                             </font>
@@ -45,7 +46,7 @@
                                 <Insets left="10.0" />
                             </padding>
                         </Button>
-                        <Button fx:id="accounts" alignment="BASELINE_LEFT" contentDisplay="CENTER" layoutX="1.0" layoutY="395.0" minHeight="50.0" minWidth="158.0" mnemonicParsing="false" style="-fx-background-color: linear-gradient(to top, rgba(0,0,0,.27), rgba(255,255,255,.37)); -fx-text-fill: #f5f5f8; -fx-border-radius: 3px;" text="Bank Accounts" textAlignment="RIGHT">
+                        <Button fx:id="accounts" alignment="BASELINE_LEFT" contentDisplay="CENTER" layoutX="1.0" layoutY="411.0" minHeight="50.0" minWidth="158.0" mnemonicParsing="false" style="-fx-background-color: linear-gradient(to top, rgba(0,0,0,.27), rgba(255,255,255,.37)); -fx-text-fill: #f5f5f8; -fx-border-radius: 3px;" text="Bank Accounts" textAlignment="RIGHT">
                             <font>
                                 <Font name="Verdana Bold" size="13.0" />
                             </font>
@@ -53,7 +54,7 @@
                                 <Insets left="10.0" />
                             </padding>
                         </Button>
-                        <Button fx:id="reports" alignment="BASELINE_LEFT" contentDisplay="CENTER" layoutX="1.0" layoutY="345.0" minHeight="50.0" minWidth="158.0" mnemonicParsing="false" style="-fx-background-color: linear-gradient(to top, rgba(0,0,0,.27), rgba(255,255,255,.37)); -fx-text-fill: #f5f5f8; -fx-border-radius: 3px;" text="Reports" textAlignment="RIGHT">
+                        <Button fx:id="reports" alignment="BASELINE_LEFT" contentDisplay="CENTER" layoutX="1.0" layoutY="359.0" minHeight="50.0" minWidth="158.0" mnemonicParsing="false" style="-fx-background-color: linear-gradient(to top, rgba(0,0,0,.27), rgba(255,255,255,.37)); -fx-text-fill: #f5f5f8; -fx-border-radius: 3px;" text="Reports" textAlignment="RIGHT">
                             <font>
                                 <Font name="Verdana Bold" size="13.0" />
                             </font>
@@ -61,7 +62,7 @@
                                 <Insets left="10.0" />
                             </padding>
                         </Button>
-                        <Button fx:id="transactions" alignment="BASELINE_LEFT" contentDisplay="CENTER" layoutX="1.0" layoutY="295.0" minHeight="50.0" minWidth="158.0" mnemonicParsing="false" style="-fx-background-color: linear-gradient(to top, rgba(0,0,0,.27), rgba(255,255,255,.37)); -fx-text-fill: #f5f5f8; -fx-border-radius: 3px;" text="Transactions        &gt;" textAlignment="RIGHT">
+                        <Button fx:id="transactions" alignment="BASELINE_LEFT" contentDisplay="CENTER" layoutX="1.0" layoutY="306.0" minHeight="50.0" minWidth="158.0" mnemonicParsing="false" style="-fx-background-color: linear-gradient(to top, rgba(0,0,0,.27), rgba(255,255,255,.37)); -fx-text-fill: #f5f5f8; -fx-border-radius: 3px;" text="Transactions        &gt;" textAlignment="RIGHT">
                             <font>
                                 <Font name="Verdana Bold" size="13.0" />
                             </font>
@@ -69,7 +70,7 @@
                                 <Insets left="10.0" />
                             </padding>
                         </Button>
-                        <Button fx:id="ladaan" alignment="BASELINE_LEFT" contentDisplay="CENTER" layoutX="1.0" layoutY="245.0" minHeight="50.0" minWidth="158.0" mnemonicParsing="false" style="-fx-background-color: linear-gradient(to top, rgba(0,0,0,.27), rgba(255,255,255,.37)); -fx-text-fill: #f5f5f8; -fx-border-radius: 3px;" text="Ladaan Bijak" textAlignment="RIGHT">
+                        <Button fx:id="ladaan" alignment="BASELINE_LEFT" contentDisplay="CENTER" layoutX="1.0" layoutY="253.0" minHeight="50.0" minWidth="158.0" mnemonicParsing="false" style="-fx-background-color: linear-gradient(to top, rgba(0,0,0,.27), rgba(255,255,255,.37)); -fx-text-fill: #f5f5f8; -fx-border-radius: 3px;" text="Ladaan Bijak" textAlignment="RIGHT">
                             <font>
                                 <Font name="Verdana Bold" size="13.0" />
                             </font>
@@ -77,7 +78,7 @@
                                 <Insets left="10.0" />
                             </padding>
                         </Button>
-                         <Button fx:id="adminpanel" alignment="BASELINE_LEFT" contentDisplay="CENTER" layoutX="1.0" layoutY="450.0" minHeight="50.0" minWidth="158.0" mnemonicParsing="false" style="-fx-background-color: linear-gradient(to top, rgba(0,0,0,.27), rgba(255,255,255,.37)); -fx-text-fill: #f5f5f8; -fx-border-radius: 3px;" text="Admin Menu" textAlignment="RIGHT">
+                         <Button fx:id="adminpanel" alignment="BASELINE_LEFT" contentDisplay="CENTER" layoutX="1.0" layoutY="464.0" minHeight="50.0" minWidth="158.0" mnemonicParsing="false" style="-fx-background-color: linear-gradient(to top, rgba(0,0,0,.27), rgba(255,255,255,.37)); -fx-text-fill: #f5f5f8; -fx-border-radius: 3px;" text="Admin Menu" textAlignment="RIGHT">
                             <font>
                                 <Font name="Verdana Bold" size="13.0" />
                             </font>
@@ -111,6 +112,14 @@
                                 <Button fx:id="banking" graphicTextGap="1.0" layoutY="130.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="115.0" style="-fx-background-color: linear-gradient(to top, rgba(0,0,0,.27), rgba(255,255,255,.47)); -fx-border-radius: 3px; -fx-text-fill: White;" text="Banking" />
                             </children>
                         </Pane>
+                  <Button fx:id="budgetSelector" alignment="BASELINE_LEFT" contentDisplay="CENTER" layoutX="2.0" layoutY="517.0" minHeight="50.0" minWidth="158.0" mnemonicParsing="false" style="-fx-background-color: linear-gradient(to top, rgba(0,0,0,.27), rgba(255,255,255,.37)); -fx-text-fill: #f5f5f8; -fx-border-radius: 3px;" text=" Budget Selector " textAlignment="RIGHT">
+                     <font>
+                        <Font name="Verdana Bold" size="13.0" />
+                     </font>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </Button>
                     </children>
                 </AnchorPane>
                 <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="607.0" prefWidth="610.0">

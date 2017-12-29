@@ -60,6 +60,9 @@ public class DashboardController extends AbstractFreshEntryController implements
     private Button adminpanel;
     
     @FXML
+    private Button budgetSelector;
+    
+    @FXML
     private Button buyer;
 
     @FXML
@@ -140,12 +143,12 @@ public class DashboardController extends AbstractFreshEntryController implements
 
     @FXML
     private Label lblPendingLadaan;
-
+    
     private SessionDataController sessionController;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        CosmeticStyles.addHoverEffect(dashboard, buyer, suppliers, ladaan, transactions, reports, accounts,adminpanel);
+        CosmeticStyles.addHoverEffect(dashboard, buyer, suppliers, ladaan, transactions, reports, accounts,adminpanel,budgetSelector);
         CosmeticStyles.addHoverEffect(banking, sales, godown, coldstore, expenses, teeps);
         // CosmeticStyles.addHoverEffect(freshEntry,expensesAdd);
         //Todo: Disable unused button
