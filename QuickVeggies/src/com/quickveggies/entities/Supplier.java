@@ -1,7 +1,5 @@
 package com.quickveggies.entities;
 
-import java.io.InputStream;
-
 public class Supplier{
     
 	private int id;
@@ -20,7 +18,7 @@ public class Supplier{
     private String bank;
     private String ifsc;
 	private String type="Supplier";
-	private InputStream imageStream;
+	private String imagePath;
     
     public String getType() {
 		return type;
@@ -177,12 +175,12 @@ public class Supplier{
 		this.id = id;
 	}
 
-	public InputStream getImageStream() {
-		return imageStream;
+	public String getImagePath() {
+		return imagePath;
 	}
 
-	public void setImageStream(InputStream imageStream) {
-		this.imageStream = imageStream;
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
 	}
 
 

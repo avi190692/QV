@@ -1,5 +1,7 @@
 package com.quickveggies.controller;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -18,6 +20,8 @@ import java.util.NoSuchElementException;
 import java.util.ResourceBundle;
 import java.util.Set;
 
+import javax.imageio.ImageIO;
+
 import com.ai.util.dates.DateUtil;
 import com.quickveggies.GeneralMethods;
 import com.quickveggies.Main;
@@ -25,12 +29,12 @@ import com.quickveggies.UserGlobalParameters;
 import com.quickveggies.dao.DatabaseClient;
 import com.quickveggies.entities.Buyer;
 import com.quickveggies.entities.DBuyerTableLine;
-import com.quickveggies.entities.PartyProfileList;
 import com.quickveggies.entities.DSupplierTableLine;
 import com.quickveggies.entities.Expenditure;
 import com.quickveggies.entities.LadaanBijakSaleDeal;
 import com.quickveggies.entities.MoneyPaidRecd;
 import com.quickveggies.entities.PartyProfile;
+import com.quickveggies.entities.PartyProfileList;
 import com.quickveggies.entities.Supplier;
 import com.quickveggies.misc.MailButton;
 import com.quickveggies.misc.Utils;
@@ -41,6 +45,7 @@ import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -213,6 +218,7 @@ public class ProfileViewController implements Initializable {
         dealAndPaysTable.getColumns().clear();
         balanceAmt.textProperty().bindBidirectional(allDealsAmt);
 
+        try{
         // initialize buttons
         if (partyType == EntityType.EXPENDITURE) {
             paneParty.setVisible(false);
@@ -258,14 +264,17 @@ public class ProfileViewController implements Initializable {
                 titleLabel.setText(supplier.getTitle());
                 lblPaymentType.setVisible(false);
                 lblCreditLimit.setVisible(false);
-                if (supplier.getImageStream() != null) {
-                    image = new Image(supplier.getImageStream());
+                if (supplier.getImagePath() != null) {
+                	BufferedImage imageBuffer = ImageIO.read(new File(supplier.getImagePath()));
+                    image = SwingFXUtils.toFXImage(imageBuffer, null);
                 }
             }
             if (image != null) {
                 imvParty.setImage(image);
             }
 
+        }} catch(Exception e){
+        	
         }
         cancel.setOnAction((ActionEvent event) -> {
             cancel.getScene().getWindow().hide();

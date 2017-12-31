@@ -1,8 +1,22 @@
 package com.quickveggies.controller;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.ResourceBundle;
+
 import com.quickveggies.GeneralMethods;
+import com.quickveggies.UserGlobalParameters;
 import com.quickveggies.dao.DatabaseClient;
 import com.quickveggies.entities.Supplier;
+
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -15,19 +29,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
-import javafx.stage.Window;
 import javafx.stage.FileChooser.ExtensionFilter;
-
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.sql.SQLException;
-import java.util.ResourceBundle;
+import javafx.stage.Window;
 
 public class AddSupplierController implements Initializable {
 
@@ -121,11 +124,22 @@ public class AddSupplierController implements Initializable {
                 Supplier supplier = new Supplier(0,"",firstName.getText(),lastName.getText(),
                         company.getText(),proprietor.getText(),mobile.getText(),mobile2.getText(),
                         email.getText(),village.getText(),po.getText(),tehsil.getText(), ac.getText(), bank.getText(), ifsc.getText());
+                
                 if (imgFile  != null) {
                 	try {
-						supplier.setImageStream(new BufferedInputStream(new FileInputStream(imgFile)));
-					} catch (FileNotFoundException e) {
-						e.printStackTrace();
+
+                		  String imagePath =  UserGlobalParameters.qvprofileImagePath + email.getText() + ".jpeg";
+                		  OutputStream out = new FileOutputStream(new File(imagePath));
+               		      int read = 0;
+                		  final byte[] bytes = new byte[1024];
+                		  FileInputStream filecontent = new FileInputStream(imgFile);
+                		  while ((read = filecontent.read(bytes)) != -1) {
+                		     out.write(bytes, 0, read);
+                		  }
+                		  supplier.setImagePath(imagePath);
+
+                 	} catch(IOException e){
+						
 					}
                 }
                 try {

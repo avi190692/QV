@@ -88,7 +88,7 @@ public class DatabaseClient {
                
             try 
             {
-                connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/qvdb?user=postgres&password=postgres");
+                connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/qvdb?user=postgres&password=root");
             } 
             catch (SQLException ex) 
             {
@@ -1144,9 +1144,9 @@ public class DatabaseClient {
 
             Supplier receivedSupplier = new Supplier(id, title, firstName, lastName, company, proprietor, mobile,
                     mobile2, email, village, po, tehsil, ac, bank, ifsc);
-            Blob photo = rs.getBlob("photo");
+            String photo = rs.getString("photo");
             if (photo != null) {
-                receivedSupplier.setImageStream(photo.getBinaryStream());
+               receivedSupplier.setImagePath(photo);
             }
             return receivedSupplier;
         }
@@ -1172,12 +1172,13 @@ public class DatabaseClient {
             String ac = rs.getString("ac");
             String bank = rs.getString("bank");
             String ifsc = rs.getString("ifsc");
-
+            String photo = rs.getString("photo");
+            
             Supplier receivedSupplier = new Supplier(id, title, firstName, lastName, company, proprietor, mobile,
                     mobile2, email, village, po, tehsil, ac, bank, ifsc);
-            Blob photo = rs.getBlob("photo");
+            
             if (photo != null) {
-                receivedSupplier.setImageStream(photo.getBinaryStream());
+                 receivedSupplier.setImagePath(photo);
             }
             return receivedSupplier;
         }
@@ -1202,6 +1203,7 @@ public class DatabaseClient {
             return;
         } catch (NoSuchElementException e) {
         }
+
         String lastName = supplier.getLastName();
         String company = supplier.getCompany();
         String proprietor = supplier.getProprietor();
@@ -1232,7 +1234,7 @@ public class DatabaseClient {
         statement.setString(12, ac);
         statement.setString(13, bank);
         statement.setString(14, ifsc);
-        statement.setBlob(15, supplier.getImageStream());
+        statement.setString(15, supplier.getImagePath());
 
         statement.executeUpdate();
         insertAuditRecord(

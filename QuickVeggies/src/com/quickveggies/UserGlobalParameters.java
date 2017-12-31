@@ -12,7 +12,8 @@ public class UserGlobalParameters {
 	public final static String userPwd = "demo1234";// "102938475";
 	
 	private static final String qvPath = System.getProperty("user.home") + File.separator + "QVSMSTemplate.txt";
-
+	public static final String qvprofileImagePath = System.getProperty("user.dir") + File.separator + "resources" + File.separator + "images" + File.separator + "profileImage" + File.separator;
+	
 	// PARAMETERS FOR LOGIN INTO SQL SERVER FROM JAVA LIBRARY JDBC
 	// jdbc:sqlserver://[serverName[\instanceName][:portNumber]][;property=value[;property=value]]
 	//public static String SQLURL = "127.0.0.1";
@@ -22,7 +23,7 @@ public class UserGlobalParameters {
 	// public static String SQLPASS = "qvdbusr123";
 
 	public static String SQLUSER = "postgres";
-	public static String SQLPASS = "postgres";
+	public static String SQLPASS = "root";
 	//SMS sender ID 
 	public static final String SMS_SENDER_ID = "QIKVEG"; // 777777 ,  QIKVEG -- 333000 NA
 	//SMS Authentication Key
