@@ -992,6 +992,25 @@ public class DatabaseClient {
         }
     }
     
+    //## added by ss
+    public void bankAccountUpdate(String number,String accountName,int accountType,double balance,double initBalance,
+    		                      String bankName,String phone,String description,int lastupdated,int id)
+    {
+    	String sql ="update accounts set acc_number='"+number+"',acc_name='"+accountName+"',acc_type='"+accountType+"',balance='"+balance+"',initbalance='"+initBalance+"', bank_name='"+bankName+"',phone='"+phone+"',description='"+description+"',lastupdated='"+lastupdated+"'where id='"+id+"'";
+    	try 
+    	{
+			Statement smt = connection.createStatement();
+				      smt.executeUpdate(sql);
+				      
+		} 
+    	catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    }
+    
+    
     public void updateTableEntry(String tableName, int lineId, String[] cols,
             String[] values, boolean skipFirst) {
         updateTableEntry(tableName, lineId, cols, values, skipFirst, null);

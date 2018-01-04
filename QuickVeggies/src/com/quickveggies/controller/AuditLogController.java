@@ -6,6 +6,8 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.NoSuchElementException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -188,10 +190,11 @@ public class AuditLogController implements Initializable {
             if (entryObject != null) {
                 log.setName(name);
                 try {
-                    String format = DateUtil.determineDateFormat(date);
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
-                    log.setDate(Date.from(LocalDate.parse(date, formatter)
-                            .atStartOfDay(ZoneId.systemDefault()).toInstant()));
+                	//## added by ss
+                	Date currDt = new Date();
+                	DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+                	String currDt_str = df.format(currDt);
+                    log.setDate(df.parse(currDt_str));
                 }
                 catch (Exception x) {
                     log.setDate(null);

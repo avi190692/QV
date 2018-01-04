@@ -119,11 +119,16 @@ public class AddAccountController implements Initializable {
                     dbclient.saveAccount(account);
                 }
                 else {
-                    dbclient.updateTableEntry("accounts", oldAccount.getId(),
+                	
+                 /*   dbclient.updateTableEntry("accounts", oldAccount.getId(),
                             new String[]{"acc_name", "acc_type", "acc_number", "bank_name", "balance", "initBalance", "phone", "description", "lastupdated"},
                             new String[]{accName.getText(), accountType + "", acNo.getText(), bankName.getText(), balance.getText(), balance.getText(), phone.getText(), description.getText(),
                                 (int) (System.currentTimeMillis() / (1000 * 3600 * 24)) + ""},
-                            false);
+                            false);*/
+                    
+                    
+                   
+                    dbclient.bankAccountUpdate(acNo.getText(),accName.getText(), accountType, Double.parseDouble(balance.getText()),Double.parseDouble(balance.getText()),bankName.getText(), phone.getText(), description.getText(),(int) (System.currentTimeMillis() / (1000 * 3600 * 24)),oldAccount.getId());
                 }
                 save.getScene().getWindow().hide();
             }

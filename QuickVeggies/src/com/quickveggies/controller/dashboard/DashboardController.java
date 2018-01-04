@@ -534,14 +534,14 @@ public class DashboardController extends AbstractFreshEntryController implements
                 amountType = AmountType.PAID;
                 if (amountType != null) {
                     MoneyPaidRecdController controller = new MoneyPaidRecdController(partyType, amountType, true);
-                    showPopup("/moneypaid.fxml", title, controller);
+                    showPopup("/fxml/moneypaid.fxml", title, controller);
                 }
             }
         });
         supplierCredit.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
                 SupplierCreditController controller = new SupplierCreditController();
-                showPopup("/suppliercredits.fxml", "Supplier Credit List", controller);
+                showPopup("/fxml/suppliercredits.fxml", "Supplier Credit List", controller);
             }
         });
     }
