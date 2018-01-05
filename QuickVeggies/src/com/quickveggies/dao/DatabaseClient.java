@@ -1134,11 +1134,8 @@ public class DatabaseClient {
 
             Buyer receivedBuyer = new Buyer(id, title, firstName, lastName, company, proprietor,
                     mobile, mobile2, email, shopno, city, email2, parentCompany,paymentMethod,
-<<<<<<< HEAD
-                    creditPeriod, buyerType);
-=======
-                    creditPeriod, buyerType, 0.0);
->>>>>>> branch 'QV_WorkingBranch' of https://github.com/avi190692/QV.git
+                    creditPeriod, buyerType,0.0);
+
             String photo = rs.getString("photo");
             if (photo != null) {
                 receivedBuyer.setImagePath(photo);
