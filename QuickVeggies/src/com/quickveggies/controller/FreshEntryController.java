@@ -4,6 +4,7 @@ import static java.awt.event.KeyEvent.VK_CAPS_LOCK;
 
 import java.awt.Robot;
 import java.awt.Toolkit;
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -762,6 +763,11 @@ public class FreshEntryController implements Initializable {
                 }
             }
         });
+        try {
+			parent = FXMLLoader.load(getClass().getResource("/fxml/freshentry.fxml"));
+		} catch (IOException e1) {
+			GeneralMethods.errorMsg(e1.getMessage());
+		}
         setFocusListenerForTableColumn(buyersEntry, tcBuyerSelect);
         // CHARGES SECTION
         chargesView = new Stage();
