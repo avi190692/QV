@@ -895,7 +895,7 @@ public class DatabaseClient {
             String creditPeriod = rs.getString("creditPeriod");
             String buyerType = rs.getString("buyerType");
 
-            Buyer receivedBuyer = new Buyer(id, title, firstName, lastName, company, proprietor, mobile, mobile2, email,shopno, city, email2, parentCompany,paymentMethod, creditPeriod, buyerType);
+            Buyer receivedBuyer = new Buyer(id, title, firstName, lastName, company, proprietor, mobile, mobile2, email,shopno, city, email2, parentCompany,paymentMethod, creditPeriod, buyerType,0.0);
             //Blob photo = rs.getBlob("photo");
            // if (photo != null) 
            // {
@@ -930,7 +930,7 @@ public class DatabaseClient {
             String buyerType = rs.getString("buyerType");
 
             Buyer receivedBuyer = new Buyer(id, title, firstName, lastName, company, proprietor, mobile, mobile2, email,
-                    shopno, city, email2, parentCompany,paymentMethod, creditPeriod, buyerType);
+                    shopno, city, email2, parentCompany,paymentMethod, creditPeriod, buyerType,0.0);
             
             String photo = rs.getString("photo");
             if (photo != null) {
@@ -1134,7 +1134,11 @@ public class DatabaseClient {
 
             Buyer receivedBuyer = new Buyer(id, title, firstName, lastName, company, proprietor,
                     mobile, mobile2, email, shopno, city, email2, parentCompany,paymentMethod,
+<<<<<<< HEAD
                     creditPeriod, buyerType);
+=======
+                    creditPeriod, buyerType, 0.0);
+>>>>>>> branch 'QV_WorkingBranch' of https://github.com/avi190692/QV.git
             String photo = rs.getString("photo");
             if (photo != null) {
                 receivedBuyer.setImagePath(photo);
