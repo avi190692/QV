@@ -57,15 +57,21 @@ public class AutoCompleteTextField extends TextField {
     public void setEntries(SortedSet<String> entries) {
         this.entries = entries;
         this.lowerCaseEntries = new TreeSet<String>();
-        for (String str : entries) {
+        for (String str : entries) 
+        {
             str = str.toLowerCase();
+            System.out.println("str:::"+str);
             this.lowerCaseEntries.add(str);
             String[] searchTxtArr = str.split(" ");
-            if (searchTxtArr.length > 1) {
+            if (searchTxtArr.length > 1) 
+            {
                 char[] chars = searchTxtArr[0].trim().toCharArray();
-                if (Character.isDigit(chars[0])) {
-                    if (str.length() > chars.length) {
+                if (Character.isDigit(chars[0])) 
+                {
+                    if (str.length() > chars.length) 
+                    {
                         String nonNumStr = str.substring(chars.length, str.length()).trim();
+                        System.out.println("nonNumStr:::"+nonNumStr);
                         this.lcNonNumericEntries.add(nonNumStr);
                     }
                 }

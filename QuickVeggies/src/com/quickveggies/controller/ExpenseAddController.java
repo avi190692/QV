@@ -5,8 +5,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.TreeSet;
 
@@ -134,8 +137,15 @@ public class ExpenseAddController implements Initializable, DaoGeneratedKey {
         }
         DateTimeFormatter formatter = null;
 
-        try {
-            String format = DateUtil.determineDateFormat(defDate);
+        try 
+        {
+        	//added by ss
+        	System.out.println("defDate:::"+defDate);
+        	DateFormat df =new SimpleDateFormat("dd-MM-yyyy");
+        	String currDate_str=df.format(new Date());
+        	
+            String format = DateUtil.determineDateFormat(currDate_str);
+            defDate = format;
             formatter = DateTimeFormatter.ofPattern(format);
         }
         catch (Exception x) {
@@ -143,14 +153,17 @@ public class ExpenseAddController implements Initializable, DaoGeneratedKey {
         }
         LocalDate date = null;
         if (defDate != null && formatter != null) {
-            try {
+        try 
+         {
                 date = LocalDate.parse(defDate, formatter);
                 dateField.setValue(date);
                 dateField.setDisable(true);
-            } catch (Exception x) {
+         } 
+        catch (Exception x) 
+        {
                 dateField.setValue(LocalDate.now());
                 System.err.println("Incorrect date format " + x.getMessage());
-            }
+        }
 
         }
         if (!Utils.isEmptyString(defComment)) {

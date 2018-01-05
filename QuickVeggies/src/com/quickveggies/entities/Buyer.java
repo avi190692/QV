@@ -16,7 +16,7 @@ public class Buyer{
     private String city;
     private String email2;
     private String parentCompany;
-    private int paymentMethod;
+    private String paymentMethod;
     private String creditPeriod;
     private String buyerType="Regular";
 	private InputStream imageStream;
@@ -65,9 +65,10 @@ public class Buyer{
                  String lastName, String company, String proprietor,
                  String mobile, String mobile2, String email,
                  String shopno, String city, String email2,
-                 String parentCompany, int paymentMethod,
-                 String creditPeriod,String buyerType) {
-
+                 String parentCompany, String paymentMethod,
+                 String creditPeriod,String buyerType) 
+    {
+    	System.out.println("m here...");
         this.id = id;
         this.title = title;
         this.firstName = firstName;
@@ -190,13 +191,6 @@ public class Buyer{
         this.parentCompany = parentCompany;
     }
 
-    public int getPaymentMethod() {
-        return paymentMethod;
-    }
-
-    public void setPaymentMethod(int paymentMethod) {
-        this.paymentMethod = paymentMethod;
-    }
 
     public String getCreditPeriod() {
         return creditPeriod;
@@ -229,5 +223,15 @@ public class Buyer{
 	public void setImageStream(InputStream imageStream) {
 		this.imageStream = imageStream;
 	}
+
+	public String getPaymentMethod() {
+		return paymentMethod;
+	}
+
+	public void setPaymentMethod(String paymentMethod) {
+		this.paymentMethod = paymentMethod;
+	}
+	
+	
 
 }

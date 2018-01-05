@@ -50,7 +50,7 @@ public class SearchPartyButton extends Button {
             stage.initModality(Modality.APPLICATION_MODAL);
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/searchparty.fxml"));
-                final SearchPartyController controller = new SearchPartyController(partyType, linkedObject);
+                final SearchPartyController controller = new SearchPartyController(partyType,linkedObject);
                 loader.setController(controller);
                 Parent parent1 = loader.load();
                 Scene scene1 = new Scene(parent1);

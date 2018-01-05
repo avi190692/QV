@@ -59,7 +59,8 @@ public class DBuyerTableLine {
         if (buyerTitle.length() == 0) {
             return;
         }
-        try {
+        try 
+        {
             setBuyerType(DatabaseClient.getInstance().getBuyerByName(buyerTitle).getBuyerType());
         } catch (SQLException | NoSuchElementException e) {
             System.out.println("sqlexception when fetching buyer type: " + e.getMessage());

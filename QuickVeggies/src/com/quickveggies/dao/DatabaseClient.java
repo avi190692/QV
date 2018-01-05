@@ -88,7 +88,7 @@ public class DatabaseClient {
                
             try 
             {
-                connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/qvdb?user=postgres&password=root");
+                connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/qvdb?user=postgres&password=postgres");
             } 
             catch (SQLException ex) 
             {
@@ -584,7 +584,7 @@ public class DatabaseClient {
         String city = buyer.getCity();
         String email2 = buyer.getEmail2();
         String parentCompany = buyer.getParentCompany();
-        int paymentMethod = buyer.getPaymentMethod();
+        String paymentMethod = buyer.getPaymentMethod();
         String creditPeriod = buyer.getCreditPeriod();
         String buyerType = buyer.getBuyerType();
         // Statement execStmt = connection.createStatement();
@@ -605,7 +605,7 @@ public class DatabaseClient {
         statement.setString(11, email2);
         statement.setString(12, parentCompany);
         statement.setString(13, creditPeriod);
-        statement.setInt(14, paymentMethod);
+        statement.setString(14, paymentMethod);
         statement.setString(15, buyerType);
         statement.setBlob(16, buyer.getImageStream());
         statement.executeUpdate();
@@ -874,7 +874,8 @@ public class DatabaseClient {
     
     public Buyer getBuyerById(int id) throws SQLException, NoSuchElementException {
         ResultSet rs = getResult("select * from buyers1 where id='" + id + "';");
-        if (rs.next()) {
+        if (rs.next()) 
+        {
             String title = rs.getString("title");
             String firstName = rs.getString("firstName");
             String lastName = rs.getString("lastName");
@@ -888,15 +889,16 @@ public class DatabaseClient {
             String email2 = rs.getString("email2");
             String parentCompany = rs.getString("parentCompany");
             String paymentMethod = rs.getString("paymentMethod");
+            System.out.println("paymentMethod:::"+paymentMethod);
             String creditPeriod = rs.getString("creditPeriod");
             String buyerType = rs.getString("buyerType");
 
-            Buyer receivedBuyer = new Buyer(id, title, firstName, lastName, company, proprietor, mobile, mobile2, email,
-                    shopno, city, email2, parentCompany, Integer.parseInt(paymentMethod), creditPeriod, buyerType);
-            Blob photo = rs.getBlob("photo");
-            if (photo != null) {
-                receivedBuyer.setImageStream(photo.getBinaryStream());
-            }
+            Buyer receivedBuyer = new Buyer(id, title, firstName, lastName, company, proprietor, mobile, mobile2, email,shopno, city, email2, parentCompany,paymentMethod, creditPeriod, buyerType);
+            //Blob photo = rs.getBlob("photo");
+           // if (photo != null) 
+           // {
+             //   receivedBuyer.setImageStream(photo.getBinaryStream());
+           // }
 
             return receivedBuyer;
         } else {
@@ -926,7 +928,7 @@ public class DatabaseClient {
             String buyerType = rs.getString("buyerType");
 
             Buyer receivedBuyer = new Buyer(id, title, firstName, lastName, company, proprietor, mobile, mobile2, email,
-                    shopno, city, email2, parentCompany, Integer.parseInt(paymentMethod), creditPeriod, buyerType);
+                    shopno, city, email2, parentCompany,paymentMethod, creditPeriod, buyerType);
             
             Blob photo = rs.getBlob("photo");
             if (photo != null) {
@@ -1129,7 +1131,7 @@ public class DatabaseClient {
             String buyerType = rs.getString("buyerType");
 
             Buyer receivedBuyer = new Buyer(id, title, firstName, lastName, company, proprietor,
-                    mobile, mobile2, email, shopno, city, email2, parentCompany, Integer.parseInt(paymentMethod),
+                    mobile, mobile2, email, shopno, city, email2, parentCompany,paymentMethod,
                     creditPeriod, buyerType);
             Blob photo = rs.getBlob("photo");
             if (photo != null) {
@@ -1176,7 +1178,8 @@ public class DatabaseClient {
 
     public Supplier getSupplierById(int id) throws SQLException, NoSuchElementException {
         ResultSet rs = getResult("select * from suppliers1 where id='" + id + "';");
-        if (rs.next()) {
+        if (rs.next()) 
+        {
             String title = rs.getString("title");
             String firstName = rs.getString("firstName");
             String lastName = rs.getString("lastName");
@@ -1196,12 +1199,14 @@ public class DatabaseClient {
             Supplier receivedSupplier = new Supplier(id, title, firstName, lastName, company, proprietor, mobile,
                     mobile2, email, village, po, tehsil, ac, bank, ifsc);
             
-            if (photo != null) {
+            if (photo != null) 
+            {
                  receivedSupplier.setImagePath(photo);
             }
             return receivedSupplier;
         }
-        else {
+        else 
+        {
             throw new NoSuchElementException("No supplier user in database");
         }
     }
@@ -1263,14 +1268,20 @@ public class DatabaseClient {
 
     public int getRowsNum(String tablename) {
         int rowsNum = 0;
-        try {
-            ResultSet result = getResult("SELECT COUNT(*) FROM " + tablename);
-            while (result.next()) {
-                rowsNum = result.getInt(1);
-            }
-        } catch (SQLException e) {
+        try 
+        {
+            	ResultSet result = getResult("SELECT COUNT(*) FROM " + tablename);
+            	while (result.next()) 
+            	{
+            		rowsNum = result.getInt(1);
+            	}
+        } 
+        catch (SQLException e) 
+        {
             System.out.print("sql exception in getRowsNum\n");
         }
+        
+        System.out.println("rowsNum:::"+rowsNum);
         return rowsNum;
     }
 
@@ -2227,14 +2238,18 @@ public class DatabaseClient {
     }
 
     public List<String> getExpenditureTypeList() {
-        final String sql = "SELECT * FROM expenditureType";
+        final String sql = "SELECT * FROM expendituretype";
         List<String> list = new ArrayList<>();
-        try {
+        try 
+        {
             ResultSet rs = getResult(sql);
-            while (rs.next()) {
+            while (rs.next()) 
+            {
                 list.add(rs.getString("name"));
             }
-        } catch (SQLException e) {
+        } 
+        catch (SQLException e) 
+        {
             e.printStackTrace();
         }
         return list;

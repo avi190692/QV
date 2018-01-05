@@ -149,19 +149,19 @@ public class AddBuyerController implements Initializable {
             		return;
             	}
             	prepareGuarantorCheckBox();
-            	Integer key = 1;
+            	/*Integer key = 1;
             	for (Integer i : UserGlobalParameters.getPaymentMethodMap().keySet() ) {
             		if (paymentMethod.getValue().equals(UserGlobalParameters.getPaymentMethodMap().get(i))) {
             			key = i;
             			break;
             		}
             		System.out.println("INFO:The payment type in combo box is not associated with any of the predefined payment types, using default type!");
-            	}
+            	}*/
                 Buyer buyer = new Buyer(0, "", firstName.getText(), lastName.getText(),
                         company.getText(), proprietor.getText(), mobile.getText(),
                         mobile2.getText(), email.getText(), shop.getText(), city.getText(),
                         email2.getText(),
-                        company.getText(), key, //change to Payment Method get value.
+                        company.getText(), paymentMethod.getValue(), //change to Payment Method get value.
                         (String) creditPeriod.getValue(),ladaanBijak.getValue());
                 if (imgFile  != null) {
                 	try {

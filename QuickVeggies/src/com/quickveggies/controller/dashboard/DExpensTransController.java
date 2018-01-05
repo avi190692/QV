@@ -20,6 +20,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -160,31 +161,44 @@ public class DExpensTransController implements Initializable {
 
         btnPrint.setOnAction((event) -> TableUtil.printTable(table, "Expenditures", deleteCol));
 
-        newExpense.setOnAction((ActionEvent event) -> {
+        //changed by ss on 05-Jan-2018
+        //newExpense.setOnAction((ActionEvent event) -> 
+        newExpense.setOnAction(new EventHandler<ActionEvent>(){
+        	@Override
+    		public void handle(ActionEvent event)
+        	{
+    
             final Stage addTransaction = new Stage();
             addTransaction.centerOnScreen();
             addTransaction.setTitle("Add Expense");
             addTransaction.initModality(Modality.APPLICATION_MODAL);
+            
             addTransaction.setOnCloseRequest((WindowEvent event1) -> {
                 Main.getStage().getScene().getRoot().setEffect(null);
             });
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/expenditureadd.fxml"));
-                ExpenseAddController controller = new ExpenseAddController();
-                loader.setController(controller);
-                Parent parent = loader.load();
-                Scene scene = new Scene(parent);
-                scene.setOnKeyPressed((KeyEvent event1) -> {
-                    if (event1.getCode() == KeyCode.ESCAPE) {
-                        Main.getStage().getScene().getRoot().setEffect(null);
-                        addTransaction.close();
-                    }
-                });
-                addTransaction.setScene(scene);
-                addTransaction.show();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+	            try 
+	            {
+	                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/expenditureadd.fxml"));
+	                ExpenseAddController controller = new ExpenseAddController();
+	                loader.setController(controller);
+	                Parent parent = loader.load();
+	                Scene scene = new Scene(parent);
+	                scene.setOnKeyPressed((KeyEvent event1) -> 
+	                {
+	                    if (event1.getCode() == KeyCode.ESCAPE) 
+	                    {
+	                        Main.getStage().getScene().getRoot().setEffect(null);
+	                        addTransaction.close();
+	                    }
+	             });
+	                addTransaction.setScene(scene);
+	                addTransaction.show();
+	            } 
+	            catch (IOException e) 
+	            {
+	                e.printStackTrace();
+	            }
+           }
         });
         setupTotalAmountsTable(lines);
     }
