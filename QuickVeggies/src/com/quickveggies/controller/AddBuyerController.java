@@ -4,8 +4,10 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -43,6 +45,9 @@ public class AddBuyerController implements Initializable {
 
     @FXML
     private TextField lastName;
+    
+    @FXML
+    private TextField milestone;
 
     @FXML
     private TextField company;
@@ -135,6 +140,12 @@ public class AddBuyerController implements Initializable {
             		GeneralMethods.errorMsg("Please enter appropriate mobile number!");
             		return;
             	}
+            	try{
+            		Double.valueOf(milestone.getText());
+            	}catch(NumberFormatException e){
+            		GeneralMethods.errorMsg("Please enter appropriate milestone!");
+            		return;
+            	}
             	if (mobile2.getText() != null && !mobile2.getText().trim().isEmpty()) {
             		try {
                 		Long.valueOf(mobile2.getText());
@@ -162,14 +173,24 @@ public class AddBuyerController implements Initializable {
                         mobile2.getText(), email.getText(), shop.getText(), city.getText(),
                         email2.getText(),
                         company.getText(), paymentMethod.getValue(), //change to Payment Method get value.
-                        (String) creditPeriod.getValue(),ladaanBijak.getValue());
+                        (String) creditPeriod.getValue(),ladaanBijak.getValue(),Double.valueOf(milestone.getText()));
                 if (imgFile  != null) {
                 	try {
-                		buyer.setImageStream(new BufferedInputStream(new FileInputStream(imgFile)));
-					} catch (FileNotFoundException e) {
-						e.printStackTrace();
+                		  String imagePath =  UserGlobalParameters.qvprofileImagePath + email.getText() + ".jpeg";
+                		  OutputStream out = new FileOutputStream(new File(imagePath));
+               		      int read = 0;
+                		  final byte[] bytes = new byte[1024];
+                		  FileInputStream filecontent = new FileInputStream(imgFile);
+                		  while ((read = filecontent.read(bytes)) != -1) {
+                		     out.write(bytes, 0, read);
+                		  }
+                		  buyer.setImagePath(imagePath);
+
+                 	} catch(IOException e){
+                 		GeneralMethods.errorMsg("Faceing problem in uploading profile pic");
 					}
                 }
+
                 try {
                     DatabaseClient.getInstance().saveBuyer(buyer);
                     create.getScene().getWindow().hide();

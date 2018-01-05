@@ -587,10 +587,11 @@ public class DatabaseClient {
         String paymentMethod = buyer.getPaymentMethod();
         String creditPeriod = buyer.getCreditPeriod();
         String buyerType = buyer.getBuyerType();
+        Double milestone = buyer.getMilestone();
         // Statement execStmt = connection.createStatement();
         // execStmt.execute("SET IDENTITY_INSERT buyers1 ON");
         String sql = "INSERT INTO buyers1"
-                + " (title,firstName,lastName,company,proprietor,mobile,mobile2,email,shopno,city,email2,parentCompany,creditPeriod,paymentMethod,buyerType,photo) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                + " (title,firstName,lastName,company,proprietor,mobile,mobile2,email,shopno,city,email2,parentCompany,creditPeriod,paymentMethod,buyerType,photo,milestone) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         statement.setString(1, title);
         statement.setString(2, firstName);
@@ -607,7 +608,8 @@ public class DatabaseClient {
         statement.setString(13, creditPeriod);
         statement.setString(14, paymentMethod);
         statement.setString(15, buyerType);
-        statement.setBlob(16, buyer.getImageStream());
+        statement.setString(16, buyer.getImagePath());
+        statement.setDouble(17, milestone);
         statement.executeUpdate();
         int genId = getGeneratedKey(statement);
         insertAuditRecord(new AuditLog(0, getCurrentUser(), null, "ADDED new buyer:".concat(title), "buyers1", genId));
@@ -930,9 +932,9 @@ public class DatabaseClient {
             Buyer receivedBuyer = new Buyer(id, title, firstName, lastName, company, proprietor, mobile, mobile2, email,
                     shopno, city, email2, parentCompany,paymentMethod, creditPeriod, buyerType);
             
-            Blob photo = rs.getBlob("photo");
+            String photo = rs.getString("photo");
             if (photo != null) {
-                receivedBuyer.setImageStream(photo.getBinaryStream());
+                receivedBuyer.setImagePath(photo);
             }
             list.add(receivedBuyer);
         }
@@ -1133,9 +1135,9 @@ public class DatabaseClient {
             Buyer receivedBuyer = new Buyer(id, title, firstName, lastName, company, proprietor,
                     mobile, mobile2, email, shopno, city, email2, parentCompany,paymentMethod,
                     creditPeriod, buyerType);
-            Blob photo = rs.getBlob("photo");
+            String photo = rs.getString("photo");
             if (photo != null) {
-                receivedBuyer.setImageStream(photo.getBinaryStream());
+                receivedBuyer.setImagePath(photo);
             }
             return receivedBuyer;
         }
@@ -1827,9 +1829,10 @@ public class DatabaseClient {
             ps.setString(8, mpr.getChequeNo());
             ps.setString(9, mpr.getDepositDate());
             ps.setString(10, mpr.getIsAdvanced());
-            ps.setBlob(11, mpr.getReceipt());
-            ps.setString(12, mpr.getDescription());
-            ps.executeUpdate();
+            ps.setString(11, mpr.getDescription());
+           //ps.setBlob(12, mpr.getReceipt());
+           
+            ps.execute();
             String auditMsg;
             if (auditLogMsg != null && !auditLogMsg.isEmpty()) {
                 auditMsg = auditLogMsg;
@@ -2263,8 +2266,9 @@ public class DatabaseClient {
             ps.setString(3, xpr.getComment());
             ps.setString(4, xpr.getPayee());
             ps.setString(5, xpr.getType());
-            ps.setBlob(6, xpr.getReceipt());
-            ps.executeUpdate();
+            //ps.setBlob(6, xpr.getReceipt());
+            
+            ps.execute();
             insertAuditRecord(new AuditLog(0, getCurrentUser(), null,
                     "Expenditure entry recorded in system",
                     "expenditures", getGeneratedKey(ps)));
@@ -2592,13 +2596,14 @@ public class DatabaseClient {
     private static final String SELECT_FRUIT_QUALITY_QRY = "select * from qualities qt where qt.id in (select quality_id from fruitQuality where fruit_id in(select id from fruits where name=?) )";
 
     private static final String INSERT_EXPENSE_INFO_QRY = "IF NOT EXISTS (SELECT * FROM expenseInfo  WHERE name = ?)  INSERT INTO expenseInfo  (name, type, defaultAmount )  VALUES (?,?,?)";
-
+    //changed by ss
+    // blocked the picture saving facilities 
     private static final String INSERT_PARTY_MONEY_QRY = "INSERT INTO partyMoney ("
-            + "title , partyType , date , paymentMode , paid , received, bankName , chequeNo , depositDate , isAdvanced , receipt, description ) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?)";
+            + "title , partyType , date , paymentMode , paid , received, bankName , chequeNo , depositDate , isAdvanced , description ) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
     private static final String INSERT_BUYER_EXPENSE_INFO_QRY = "IF NOT EXISTS (SELECT * FROM buyerExpenseInfo  WHERE name = ?)  INSERT INTO buyerExpenseInfo  (name, type, defaultAmount )  VALUES (?,?,?)";
 
     private static final String INSERT_EXPENDITURE_QRY = "INSERT INTO expenditures  ("
-            + "amount ,date , comment , billto , type, receipt) VALUES (?, ?, ?, ?, ?, ?); ";
+            + "amount ,date , comment , billto , type) VALUES (?, ?, ?, ?, ?); ";
 
 }

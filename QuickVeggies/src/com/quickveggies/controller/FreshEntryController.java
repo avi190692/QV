@@ -4,6 +4,7 @@ import static java.awt.event.KeyEvent.VK_CAPS_LOCK;
 
 import java.awt.Robot;
 import java.awt.Toolkit;
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -84,8 +85,8 @@ public class FreshEntryController implements Initializable {
     @FXML
     private TextArea expenses;
 
-    @FXML
-    private AutoCompleteTextField grower;
+   @FXML
+   private AutoCompleteTextField grower;
 
     @FXML
     private TextField truckNo;
@@ -230,8 +231,10 @@ public class FreshEntryController implements Initializable {
                 fullCase, halfCase, fwAgent, truckNo, driverNoField, remarks, display, addLots, growersEntry,
                 buyersEntry);
 
-        try {
-            parent = FXMLLoader.load(getClass().getResource("/fxml/addcharges.fxml"));
+        try 
+        {
+           // parent = FXMLLoader.load(getClass().getResource("/fxml/addcharges.fxml"));
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/addcharges.fxml"));
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -274,8 +277,10 @@ public class FreshEntryController implements Initializable {
             return;
         }
         fruitSelection.valueProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> ov, String t, String t1) {
+            
+        	@Override
+            public void changed(ObservableValue<? extends String> ov, String t, String t1) 
+            {
                 resetFruitQualsAndBoxes();
             }
         });
@@ -286,9 +291,11 @@ public class FreshEntryController implements Initializable {
         grower.linkToWindow(FreshEntryController.this, "/fxml/supplieradd.fxml", "Add new supplier", STR_ADD_NEW,
                 new AddSupplierController());
         grower.focusedProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
+          
+        	@Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldValue,
-                    Boolean newValue) {
+                    Boolean newValue)
+        	{
                 grower.getMenu().hide();
                 growersList = updateGrowersList();
                 grower.setEntries(growersList);
@@ -983,22 +990,26 @@ public class FreshEntryController implements Initializable {
         updateTable(buyersEntry, lines);
     }
 
-    private java.util.TreeSet<String> updateGrowersList() {
+    private java.util.TreeSet<String> updateGrowersList() 
+    {
         int rowsNum = dbclient.getRowsNum("suppliers1");
         java.util.TreeSet<String> result = new java.util.TreeSet<>();
         
         for (int supp_id = 1; supp_id <= rowsNum; supp_id++) {
-            try {
+            try 
+            {
                 com.quickveggies.entities.Supplier supplier = dbclient.getSupplierById(supp_id);
                 result.add(supplier.getTitle());
             }
-            catch (java.sql.SQLException e) {
+            catch (java.sql.SQLException e) 
+            {
                 System.out.print("sqlexception in populating suppliers list");
             }
         }
         if (result.isEmpty()) {
             result.add(STR_ADD_NEW);
         }
+        System.out.println("result:::"+result.size());
         return result;
     }
 

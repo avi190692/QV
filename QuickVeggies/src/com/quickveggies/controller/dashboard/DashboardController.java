@@ -238,50 +238,6 @@ public class DashboardController extends AbstractFreshEntryController implements
                     loader.setController(new IntroDashController(DashboardController.this));
                     mainView.getChildren().setAll((Node) loader.load());
                     setupDashboardAnchors();
-                    /*					Label dashDate = (Label) ((Pane) mainView.getChildren().get(0)).getChildren().get(2);
-					LocalDateTime date = LocalDateTime.now();
-					dashDate.setText("" + date.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.ENGLISH) + ", "
-							+ date.getDayOfMonth() + ", "
-							+ date.getMonth().getDisplayName(TextStyle.FULL, Locale.ENGLISH) + ", " + date.getYear());
-                     */ /*
-					 * for (Node node : ((Pane)
-					 * mainView.getChildren().get(0)).getChildren()) {
-					 * System.out.print(((Pane)
-					 * mainView.getChildren().get(0)).getChildren().indexOf(
-					 * node) + " - "); System.out.println(node.getId()); }
-                     */
- /*
-					 * SessionDataController session =
-					 * SessionDataController.getInstance(); lblPendingLadaan =
-					 * (Label) ((Pane)
-					 * mainView.getChildren().get(0)).getChildren().get(5);
-					 * lblPendingLadaan.textProperty().bindBidirectional(session
-					 * .pendingLadaanEntriesProp);
-					 * lblPendingLadaan.textProperty().addListener(new
-					 * ChangeListener<String>() {
-					 * 
-					 * @Override public void changed(ObservableValue<? extends
-					 * String> observable, String oldValue, String newValue) {
-					 * int pendingLads = Integer.valueOf(newValue); if
-					 * (pendingLads == 0) {
-					 * lblPendingLadaan.setTextFill(Color.GREEN); } else if
-					 * (pendingLads > 0) {
-					 * lblPendingLadaan.setTextFill(Color.HOTPINK); } } });
-					 * lblPendingLadaan.setOnMouseClicked(new
-					 * EventHandler<MouseEvent>() {
-					 * 
-					 * @Override public void handle(MouseEvent event) { if
-					 * (event.getButton() != null) { if (event.getButton() ==
-					 * MouseButton.PRIMARY) { ladaan.fire(); } } } });
-					 * lblPendingLadaan.setTooltip(new
-					 * Tooltip("Click to open Ladaan/Bijak Dashboard"));
-					 * lblPendingLadaan.setBackground( new Background(new
-					 * BackgroundFill(Color.BURLYWOOD, CornerRadii.EMPTY,
-					 * Insets.EMPTY)));
-					 * addHoverEffectsToControl(lblPendingLadaan);
-					 * 
-					 * session.resetPendingLadaanEntries();
-                     */
                 }
                 catch (IOException e) {
                     e.printStackTrace();
