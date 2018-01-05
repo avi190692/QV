@@ -17,6 +17,7 @@ import com.quickveggies.PaymentMethodSource;
 import com.quickveggies.UserGlobalParameters;
 import com.quickveggies.dao.DatabaseClient;
 import com.quickveggies.entities.Buyer;
+import com.sun.media.jfxmedia.logging.Logger;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

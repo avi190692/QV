@@ -12,13 +12,13 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="687.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.quickveggies.controller.AddBuyerController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="687.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.quickveggies.controller.AddBuyerController">
    <children>
       <!-- <Region layoutY="234.0" prefHeight="98.0" prefWidth="600.0" style="-fx-background-color: #99ccff; -fx-opacity: 0.8;" /> -->
-      <Label layoutX="213.0" layoutY="14.0" text="First Name" />
-      <Label layoutX="376.0" layoutY="14.0" text="Last Name" />
+      <Label layoutX="72.0" layoutY="14.0" text="First Name" />
+      <Label layoutX="225.0" layoutY="14.0" text="Last Name" />
       <Label layoutX="27.0" layoutY="71.0" prefWidth="140.0" text="Company / Orchard name" />
-      <Label layoutX="379.0" layoutY="71.0" text="Proprietor" />
+      <Label layoutX="364.0" layoutY="14.0" text="Proprietor" />
       <Label layoutX="64.0" layoutY="123.0" text="Mobile" />
       <Label layoutX="230.0" layoutY="123.0" text="Mobile2" />
       <Label layoutX="374.0" layoutY="123.0" text="Email1" />
@@ -28,10 +28,10 @@
       <Label layoutX="17.0" layoutY="242.0" text="Preferred Payment method" />
       <Label layoutX="374.0" layoutY="242.0" text="Credit period" />
       <!-- <TextField fx:id="title" layoutX="15.0" layoutY="31.0" promptText="Title" />-->
-      <TextField fx:id="firstName" layoutX="179.0" layoutY="31.0" prefHeight="25.0" promptText="First Name" />
-      <TextField fx:id="lastName" layoutX="334.0" layoutY="31.0" promptText="Last Name" />
-      <TextField fx:id="company" layoutX="17.0" layoutY="88.0" prefHeight="25.0" prefWidth="298.0" promptText="Company / Orchard name" />
-      <TextField fx:id="proprietor" layoutX="334.0" layoutY="88.0" promptText="Proprietor" />
+      <TextField fx:id="firstName" layoutX="22.0" layoutY="32.0" prefHeight="25.0" promptText="First Name" />
+      <TextField fx:id="lastName" layoutX="184.0" layoutY="34.0" prefHeight="25.0" prefWidth="140.0" promptText="Last Name" />
+      <TextField fx:id="company" layoutX="17.0" layoutY="88.0" prefHeight="25.0" prefWidth="306.0" promptText="Company / Orchard name" />
+      <TextField fx:id="proprietor" layoutX="334.0" layoutY="35.0" promptText="Proprietor" />
       <TextField fx:id="mobile" layoutX="17.0" layoutY="138.0" promptText="Mobile" />
       <TextField fx:id="mobile2" layoutX="179.0" layoutY="138.0" prefHeight="25.0" promptText="Mobile" />
       <TextField fx:id="email" layoutX="334.0" layoutY="138.0" promptText="Email address 1" />
@@ -59,5 +59,7 @@
             <ImageView fx:id="imvPhoto" fitHeight="155.0" fitWidth="173.0" layoutX="-1.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </Pane>
+      <Label layoutX="364.0" layoutY="71.0" text="Milestone" />
+      <TextField fx:id="milestone" layoutX="334.0" layoutY="88.0" prefHeight="25.0" prefWidth="149.0" promptText="MileStone" />
    </children>
 </Pane>
