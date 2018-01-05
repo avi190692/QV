@@ -587,10 +587,11 @@ public class DatabaseClient {
         String paymentMethod = buyer.getPaymentMethod();
         String creditPeriod = buyer.getCreditPeriod();
         String buyerType = buyer.getBuyerType();
+        Double milestone = buyer.getMilestone();
         // Statement execStmt = connection.createStatement();
         // execStmt.execute("SET IDENTITY_INSERT buyers1 ON");
         String sql = "INSERT INTO buyers1"
-                + " (title,firstName,lastName,company,proprietor,mobile,mobile2,email,shopno,city,email2,parentCompany,creditPeriod,paymentMethod,buyerType,photo) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                + " (title,firstName,lastName,company,proprietor,mobile,mobile2,email,shopno,city,email2,parentCompany,creditPeriod,paymentMethod,buyerType,photo,milestone) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         statement.setString(1, title);
         statement.setString(2, firstName);
@@ -607,7 +608,8 @@ public class DatabaseClient {
         statement.setString(13, creditPeriod);
         statement.setString(14, paymentMethod);
         statement.setString(15, buyerType);
-        statement.setBlob(16, buyer.getImageStream());
+        statement.setString(16, buyer.getImagePath());
+        statement.setDouble(17, milestone);
         statement.executeUpdate();
         int genId = getGeneratedKey(statement);
         insertAuditRecord(new AuditLog(0, getCurrentUser(), null, "ADDED new buyer:".concat(title), "buyers1", genId));
@@ -893,7 +895,7 @@ public class DatabaseClient {
             String creditPeriod = rs.getString("creditPeriod");
             String buyerType = rs.getString("buyerType");
 
-            Buyer receivedBuyer = new Buyer(id, title, firstName, lastName, company, proprietor, mobile, mobile2, email,shopno, city, email2, parentCompany,paymentMethod, creditPeriod, buyerType);
+            Buyer receivedBuyer = new Buyer(id, title, firstName, lastName, company, proprietor, mobile, mobile2, email,shopno, city, email2, parentCompany,paymentMethod, creditPeriod, buyerType,0.0);
             //Blob photo = rs.getBlob("photo");
            // if (photo != null) 
            // {
@@ -928,11 +930,11 @@ public class DatabaseClient {
             String buyerType = rs.getString("buyerType");
 
             Buyer receivedBuyer = new Buyer(id, title, firstName, lastName, company, proprietor, mobile, mobile2, email,
-                    shopno, city, email2, parentCompany,paymentMethod, creditPeriod, buyerType);
+                    shopno, city, email2, parentCompany,paymentMethod, creditPeriod, buyerType,0.0);
             
-            Blob photo = rs.getBlob("photo");
+            String photo = rs.getString("photo");
             if (photo != null) {
-                receivedBuyer.setImageStream(photo.getBinaryStream());
+                receivedBuyer.setImagePath(photo);
             }
             list.add(receivedBuyer);
         }
@@ -1132,10 +1134,10 @@ public class DatabaseClient {
 
             Buyer receivedBuyer = new Buyer(id, title, firstName, lastName, company, proprietor,
                     mobile, mobile2, email, shopno, city, email2, parentCompany,paymentMethod,
-                    creditPeriod, buyerType);
-            Blob photo = rs.getBlob("photo");
+                    creditPeriod, buyerType, 0.0);
+            String photo = rs.getString("photo");
             if (photo != null) {
-                receivedBuyer.setImageStream(photo.getBinaryStream());
+                receivedBuyer.setImagePath(photo);
             }
             return receivedBuyer;
         }
