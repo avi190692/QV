@@ -256,6 +256,7 @@ public class ProfileViewController implements Initializable {
                     image = new Image(buyer.getImagePath());
                 }
 
+                
             } else if (supplier != null) {
                 nameLabel.setText(supplier.getFirstName() + " " + supplier.getLastName());
                 companyLabel.setText(supplier.getCompany());
