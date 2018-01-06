@@ -252,8 +252,8 @@ public class ProfileViewController implements Initializable {
                 titleLabel.setText(buyer.getTitle());
                 paymentType.setText(UserGlobalParameters.getPaymentMethodMap().get(buyer.getPaymentMethod()).toString());
                 creditLimit.setText(buyer.getCreditPeriod());
-                if (buyer.getImageStream() != null) {
-                    image = new Image(buyer.getImageStream());
+                if (buyer.getImagePath() != null) {
+                    image = new Image(buyer.getImagePath());
                 }
 
             } else if (supplier != null) {
