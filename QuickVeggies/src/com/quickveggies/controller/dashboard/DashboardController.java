@@ -238,6 +238,8 @@ public class DashboardController extends AbstractFreshEntryController implements
                     loader.setController(new IntroDashController(DashboardController.this));
                     mainView.getChildren().setAll((Node) loader.load());
                     setupDashboardAnchors();
+
+                    
                 }
                 catch (IOException e) {
                     e.printStackTrace();

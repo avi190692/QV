@@ -644,7 +644,8 @@ public class DBuyerController implements Initializable {
         addBuyer.centerOnScreen();
         addBuyer.setTitle("Add new Buyer/Kharedar");
         addBuyer.initModality(Modality.APPLICATION_MODAL);
-        addBuyer.setOnCloseRequest(new EventHandler<WindowEvent>() {
+        addBuyer.setOnCloseRequest(new EventHandler<WindowEvent>() 
+        {
             public void handle(WindowEvent event) {
                 Main.getStage().getScene().getRoot().setEffect(null);
             }
@@ -666,7 +667,8 @@ public class DBuyerController implements Initializable {
             e.printStackTrace();
         }
     }
-
+    
+    
     private void performPostInit() {
         actionCols.visibleProperty().bindBidirectional(isTimeLineView);
         calculateDues();
