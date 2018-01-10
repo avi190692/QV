@@ -52,6 +52,7 @@ import com.quickveggies.entities.Template;
 import com.quickveggies.entities.DSupplierTableLine;
 import com.quickveggies.entities.User;
 import com.quickveggies.entities.AccountEntryPayment;
+import com.quickveggies.entities.AccountMaster;
 import com.quickveggies.model.EntityType;
 
 public class DatabaseClient {
@@ -99,6 +100,32 @@ public class DatabaseClient {
             }
         
         return instance;
+    }
+    private static final String account_code_entry = "insert into public.accountmaster (accountcode,accountname,amount,fin_year,report_flag,active_flag,month)"+
+    											     "values(?,?,?,?,?,?,?)";
+    public void accountCodeEntry(AccountMaster accountMaster)
+    {
+    	 try 
+    	 {
+			PreparedStatement psmt = connection.prepareStatement(account_code_entry);
+							  psmt.setString(1,accountMaster.getAccountcode());
+							  psmt.setString(2,accountMaster.getAccountname());
+							  psmt.setDouble(3,accountMaster.getAmount());
+							  psmt.setString(4,accountMaster.getFin_year());
+							  //psmt.setString(5,accountMaster.getCreation_date());
+							  psmt.setString(5,accountMaster.getReport_flag());
+							  psmt.setBoolean(6,true);
+							  psmt.setString(7,accountMaster.getMonth());
+							  
+							  psmt.execute();
+							  
+							  
+							  
+		 } 
+    	 catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
     public int countSpecificRows(String tablename, String columnName, String value) throws SQLException {

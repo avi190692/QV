@@ -7,12 +7,19 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 
+import com.quickveggies.controller.dashboard.DBuyerController;
+
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class Main extends Application {
 
@@ -62,6 +69,50 @@ public class Main extends Application {
        
         return page;
     }
+    
+    //## added by ss on 07Jan2018
+    //## new window scene replacement.
+    public Parent newWindowSceneReplacementContecnt(String fxml)
+    {
+    	Parent parent = null;
+    	
+    	final Stage accoutCodeCreation = new Stage();
+		accoutCodeCreation.centerOnScreen();
+		accoutCodeCreation.setTitle("Account Code Creation");
+		accoutCodeCreation.initModality(Modality.APPLICATION_MODAL);
+		accoutCodeCreation.setOnCloseRequest(new EventHandler<WindowEvent>() 
+        {
+            public void handle(WindowEvent event) 
+            {
+                Main.getStage().getScene().getRoot().setEffect(null);
+            }
+        });
+		try 
+		{
+	            parent = FXMLLoader.load(DBuyerController.class.getResource(fxml));
+	            Scene scene = new Scene(parent, 687, 400);
+	            scene.setOnKeyPressed(new EventHandler<KeyEvent>() 
+	            {
+	                public void handle(KeyEvent event)
+	                {
+	                    if (event.getCode() == KeyCode.ESCAPE) 
+	                    {
+	                        Main.getStage().getScene().getRoot().setEffect(null);
+	                        accoutCodeCreation.close();
+	                    }
+	                }
+	            });
+	            accoutCodeCreation.setScene(scene);
+	            accoutCodeCreation.show();
+	      } 
+		catch (IOException e){
+	            e.printStackTrace();}
+
+    	
+    	return parent;
+    }
+    
+    
 
     public static void closeCurrentStage(Stage stage) {
         stage.close();
