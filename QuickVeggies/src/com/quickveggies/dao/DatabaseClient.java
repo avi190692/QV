@@ -955,9 +955,9 @@ public class DatabaseClient {
             String paymentMethod = rs.getString("paymentMethod");
             String creditPeriod = rs.getString("creditPeriod");
             String buyerType = rs.getString("buyerType");
-
+	    String mileston = rs.getString("milestone");
             Buyer receivedBuyer = new Buyer(id, title, firstName, lastName, company, proprietor, mobile, mobile2, email,
-                    shopno, city, email2, parentCompany,paymentMethod, creditPeriod, buyerType,0.0);
+                   shopno, city, email2, parentCompany,paymentMethod, creditPeriod, buyerType,Double.parseDouble(mileston));
             
             String photo = rs.getString("photo");
             if (photo != null) {
