@@ -71,12 +71,14 @@ public class AuditLogController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+    	//## blocked by ss
         logLines.clear();
         List<AuditLog> logs = dbc.getAuditRecords();
         logLines.addAll(logs);
         localFormatter = DateTimeFormatter.ofPattern("yyyy.MM.dd"); //HH:mm:ss
         //Lookup additional information
-        for (AuditLog log : logLines) {
+        for (AuditLog log : logLines) 
+        {
             String name = "";
             String date = "";
             String amount = "";
@@ -93,8 +95,9 @@ public class AuditLogController implements Initializable {
                                 entryObject = value;
                                 name = value.getTitle();
                                 date = value.getDate();
-                                amount = String.valueOf(Math.abs(Integer.valueOf(value.getReceived())
-                                        - Integer.valueOf(value.getPaid())));
+                                System.out.println("test test:::"+value.getReceived());
+                                // ## blocked for time being
+                                //amount = String.valueOf(Math.abs(Integer.valueOf(value.getReceived()) - Integer.valueOf(value.getPaid())));
                             }
                         break;
                         }
@@ -201,7 +204,8 @@ public class AuditLogController implements Initializable {
                     x.printStackTrace();
                 }
                 try {
-                    log.setAmount(Double.parseDouble(amount));
+                	//##blocked for time being
+                    //log.setAmount(Double.parseDouble(amount));
                 }
                 catch (NumberFormatException x) {
                     log.setAmount(null);

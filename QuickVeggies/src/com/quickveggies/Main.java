@@ -70,7 +70,7 @@ public class Main extends Application {
         return page;
     }
     
-    //## added by ss on 07Jan2018
+    //## modified by ss on 12Jan2018
     //## new window scene replacement.
     public Parent newWindowSceneReplacementContecnt(String fxml)
     {
@@ -83,7 +83,7 @@ public class Main extends Application {
          Scene scene;
          if (!fxml.contains("register") && !fxml.contains("login"))
          {
-             scene = new Scene(page,687, 400);
+             scene = new Scene(page,687,400);
          } 
          else 
          {

@@ -68,7 +68,7 @@ public class FruitButtonEventHandler implements EventHandler<ActionEvent> {
 					try {
 				   		ScrollPane paneProducts = (ScrollPane) settingsPane.getChildren().get(1);
 				   		VBox content = (VBox) paneProducts.getContent();
-			    		content.getChildren().set(0, (Node) FXMLLoader.load(getClass().getResource("/fruitviewer.fxml")));
+			    		content.getChildren().set(0, (Node) FXMLLoader.load(getClass().getResource("/fxml/fruitviewer.fxml")));
 					} catch (IOException e) {
 						e.printStackTrace();
 					}

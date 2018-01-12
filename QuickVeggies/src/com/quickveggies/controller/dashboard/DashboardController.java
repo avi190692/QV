@@ -253,8 +253,8 @@ public class DashboardController extends AbstractFreshEntryController implements
         {
         	
         	//System.out.println("dashboard controller");
-        	String currentUserType = SessionDataController.getInstance().getCurrentUser().getUsertype();
-        	if(currentUserType.equals("Admin"))
+        	 String currentUserType = SessionDataController.getInstance().getCurrentUser().getUsertype();
+        	 if(currentUserType.equals("Admin"))
         	{
 	        	final Stage accoutCodeCreation = new Stage();
 				accoutCodeCreation.centerOnScreen();
