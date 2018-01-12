@@ -252,16 +252,68 @@ public class DashboardController extends AbstractFreshEntryController implements
                     loader.setController(new IntroDashController(DashboardController.this));
                     mainView.getChildren().setAll((Node) loader.load());
                     setupDashboardAnchors();
-                
-		
-		
-		 }
+                    
+                }
                 catch (IOException e) {
                     e.printStackTrace();
                 }
             }
         });
         dashboard.fire();// display the main dash at the beginning of program
+
+        
+      //## added by ss on 07Jan2018
+      //## account code creation
+        adminpanel.setOnAction((ActionEvent event) -> 
+        {
+        	
+        	//System.out.println("dashboard controller");
+        	 String currentUserType = SessionDataController.getInstance().getCurrentUser().getUsertype();
+        	 if(currentUserType.equals("Admin"))
+        	{
+	        	final Stage accoutCodeCreation = new Stage();
+				accoutCodeCreation.centerOnScreen();
+				accoutCodeCreation.setTitle("Account Code Creation");
+				accoutCodeCreation.initModality(Modality.APPLICATION_MODAL);
+				accoutCodeCreation.setOnCloseRequest(new EventHandler<WindowEvent>() 
+		        {
+		            public void handle(WindowEvent event) 
+		            {
+		                Main.getStage().getScene().getRoot().setEffect(null);
+		            }
+		        });
+				try 
+				{
+			            Parent parent = FXMLLoader.load(DBuyerController.class.getResource("/fxml/accountcode_creation.fxml"));
+			            Scene scene = new Scene(parent, 687, 400);
+			            scene.setOnKeyPressed(new EventHandler<KeyEvent>() 
+			            {
+			                public void handle(KeyEvent event)
+			                {
+			                    if (event.getCode() == KeyCode.ESCAPE) 
+			                    {
+			                        Main.getStage().getScene().getRoot().setEffect(null);
+			                        accoutCodeCreation.close();
+			                    }
+			                }
+			            });
+			            accoutCodeCreation.setScene(scene);
+			            accoutCodeCreation.show();
+			      } 
+				catch (IOException e){
+			            e.printStackTrace();}
+
+        	}
+        	else
+        	{
+        		 Alert alert = new Alert(Alert.AlertType.WARNING);
+                 	   alert.setTitle("Restricted!");
+                       alert.setHeaderText("Access Restricted!");
+                       alert.setContentText("login as admin user.");
+                       alert.showAndWait();
+        	}
+        	});
+       
 
         buyer.setOnAction((ActionEvent event) -> {
             try {
@@ -520,7 +572,8 @@ public class DashboardController extends AbstractFreshEntryController implements
     }
     
     private void setupDashboardAnchors() {
-        if (mainView.getChildren().get(0) != null) {
+        if (mainView.getChildren().get(0) != null)
+        {
             AnchorPane.setTopAnchor(mainView.getChildren().get(0), 1.0);
             AnchorPane.setLeftAnchor(mainView.getChildren().get(0), 1.0);
             AnchorPane.setBottomAnchor(mainView.getChildren().get(0), 1.0);

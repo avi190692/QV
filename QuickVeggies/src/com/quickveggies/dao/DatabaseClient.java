@@ -101,6 +101,7 @@ public class DatabaseClient {
         
         return instance;
     }
+    //added by ss for account code entry
     private static final String account_code_entry = "insert into public.accountmaster (accountcode,accountname,amount,fin_year,report_flag,active_flag,month)"+
     											     "values(?,?,?,?,?,?,?)";
     public void accountCodeEntry(AccountMaster accountMaster)
@@ -118,15 +119,38 @@ public class DatabaseClient {
 							  psmt.setString(7,accountMaster.getMonth());
 							  
 							  psmt.execute();
-							  
-							  
-							  
+				  
 		 } 
     	 catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     }
+    //## added by ss for account code logic test
+    private static final String account_code_search = "select * from public.accountmaster where accountcode=?";
+    public List<String> accountCodeSearch(String accountCode)
+    {
+    	List<String> acm = new ArrayList<String>();
+			PreparedStatement psmt;
+			try 
+			{
+				psmt = connection.prepareStatement(account_code_search);
+				psmt.setString(1,accountCode);
+			    ResultSet rs = psmt.executeQuery();
+			    while(rs.next())
+			    {
+			    	System.out.println(rs.getString(2));
+			    	acm.add(rs.getString(2));
+			    } 
+			} 
+			catch (SQLException e)
+			{
+				e.printStackTrace();
+			}
+	   return acm;		
+    }
+    
+    
 
     public int countSpecificRows(String tablename, String columnName, String value) throws SQLException {
         int result = 0;
@@ -682,7 +706,8 @@ public class DatabaseClient {
             ps.setString(11, entryline.getComment());
             ps.setString(12, entryline.getTransIdCol());
             
-            if (entryline.getParentId() != null) {
+            if (entryline.getParentId() != null) 
+            {
                 ps.setInt(13, entryline.getParentId());
             }
             else {
@@ -2033,13 +2058,17 @@ public class DatabaseClient {
         return list;
     }
     
-    public MoneyPaidRecd getMoneyPaidRecd(int id) {
+    public MoneyPaidRecd getMoneyPaidRecd(int id) 
+    {
         MoneyPaidRecd value = new MoneyPaidRecd();
-        try (PreparedStatement ps = connection.prepareStatement(
-                "Select * from partyMoney where id=?")) {
-            ps.setString(1, id + "");
+        try (PreparedStatement ps = connection.prepareStatement("Select * from partymoney where id=?")) 
+        {
+        	//changed by ss
+           // ps.setString(1, id + "");
+        	ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
+            if (rs.next()) 
+            {
                 value.setDate(rs.getString("date"));
                 value.setId(rs.getInt("id"));
                 value.setPaid(rs.getString("paid"));
@@ -2052,15 +2081,18 @@ public class DatabaseClient {
                 value.setChequeNo(rs.getString("chequeNo"));
                 value.setDepositDate(rs.getString("depositDate"));
                 Blob blob = rs.getBlob("receipt");
-                if (blob != null) {
+                if (blob != null) 
+                {
                     value.setReceipt(blob.getBinaryStream());
                 }
             }
-            else {
+            else 
+            {
                 throw new NoSuchElementException("No selected Id in partyMoney table");
             }
         }
-        catch (SQLException sqle) {
+        catch (SQLException sqle) 
+        {
             sqle.printStackTrace();
         }
         return value;
@@ -2553,21 +2585,25 @@ public class DatabaseClient {
     }
 
     public List<AuditLog> getAuditRecords() {
-        String sql = "SELECT * FROM auditLog";
+        String sql = "SELECT * FROM auditlog";
         List<AuditLog> list = new ArrayList<>();
         try {
             ResultSet rs = getResult(sql);
-            while (rs.next()) {
-                AuditLog log = new AuditLog(rs.getInt(1), rs.getString("userId"),
-                        rs.getDate("eventtime"),
-                        rs.getString("eventDetail"), rs.getString("eventObject"),
-                        rs.getInt("eventObjectId")) {{
-                            setOldValues(rs.getString("oldValues"));
-                            setNewValues(rs.getString("newValues"));
+            while (rs.next()) 
+            {
+                AuditLog log = new AuditLog(rs.getInt(1), 
+                		                    rs.getString("userid"),
+                		                    rs.getDate("eventtime"),
+                		                    rs.getString("eventdetail"), 
+                		                    rs.getString("eventobject"),
+                		                    rs.getInt("eventobjectid")) 
+                {{//are outside the constructor
+                            setOldValues(rs.getString("oldvalues"));
+                            setNewValues(rs.getString("newvalues"));
                             setName(rs.getString("name"));
                             setDate(rs.getDate("date") == null ? null : new Date(rs.getDate("date").getTime()));
                             setAmount(rs.getDouble("amount"));
-                        }};
+                }};
                 list.add(log);
             }
 

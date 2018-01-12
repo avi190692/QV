@@ -5,6 +5,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import com.quickveggies.Main;
@@ -62,6 +63,7 @@ public class AccountCodeCreationController implements Initializable {
             	 String accCode = accountcode.getText();
             	 String accName = accountname.getText();
             	 double amount = Double.parseDouble(amt.getText());
+            	 String accType = accounttype.getValue();
             	 String reportFlag = accountcat.getValue();
             	 //## by default it will be true.
             	 boolean active_flag = true;
@@ -81,14 +83,63 @@ public class AccountCodeCreationController implements Initializable {
             	 String finYr = currYr+"-"+nxtYr.toString();
             	// System.out.println(finYr);
             	 
-            	 AccountMaster acm = new AccountMaster(accCode, accName, amount,finYr, currDt_withTimeZone, reportFlag, active_flag, month);
+            	 //## defining rules for account codes
+            	 String accCodeExistChk = "no";
+            	 String chkLength = accountCodeLengthChk(accCode,accType);
+            	 List<String> acCode =  DatabaseClient.getInstance().accountCodeSearch(accCode);
+            	 System.out.println("size:::"+acCode.size());
+            	 if(acCode.size()>0)
+            	 {
+            	 	accCodeExistChk="yes";
+            	 }
             	 
-            	 DatabaseClient.getInstance().accountCodeEntry(acm);
-            	 Alert alert = new Alert(Alert.AlertType.WARNING);
-   		 	   		   alert.setTitle("Success!");
-   		 	   		   alert.setHeaderText("Successfully Saved!");
-   		 	   		   alert.setContentText("please check the log for details.");
-   		 	   		   alert.showAndWait();
+            	 if(accCodeExistChk.equals("no") && chkLength.equals("yes"))
+            	 {
+            		 AccountMaster acm = new AccountMaster(accCode, accName, amount,finYr, currDt_withTimeZone, reportFlag, active_flag, month);
+            		 DatabaseClient.getInstance().accountCodeEntry(acm);
+            		 
+            		 Alert alert = new Alert(Alert.AlertType.WARNING);
+ 		 	   		       alert.setTitle("Success!");
+ 		 	   		       alert.setHeaderText("Successfully Saved!");
+ 		 	   		       alert.setContentText("please check the log for details.");
+ 		 	   		       alert.showAndWait();
+            	 }
+            	 else
+            	 {
+            		 //System.out.println("here here");
+            		 Alert alert = new Alert(Alert.AlertType.WARNING);
+            		 
+            		 if(accCode.length()!=7)
+            		 {
+		 	   		       alert.setTitle("Failure!");
+		 	   		       alert.setHeaderText("Please check the account code length!");
+		 	   		       alert.setContentText("Data not Saved	");
+		 	   		       alert.showAndWait();
+            		 }
+            		else if(accounttype.getValue().equalsIgnoreCase("Gl") && !accCode.substring(5,7).equals("00"))
+            		{
+ 		 	   		       alert.setTitle("Failure!");
+ 		 	   		       alert.setHeaderText("Check Account Code and Account Type");
+ 		 	   		       alert.setContentText("This is not a Gl code");
+ 		 	   		       alert.showAndWait();
+            		}
+            		else if(accounttype.getValue().equalsIgnoreCase("SubGL") && accCode.substring(5,7).equals("00"))
+            		{
+ 		 	   		       alert.setTitle("Failure!");
+ 		 	   		       alert.setHeaderText("Check Account Code and Account Type");
+ 		 	   		       alert.setContentText("This is not a SubGL code");
+ 		 	   		       alert.showAndWait();
+            		}
+            		else if(accCodeExistChk.equals("yes"))
+            		{
+            			   alert.setTitle("Failure!");
+		 	   		       alert.setHeaderText("Check Account Code");
+		 	   		       alert.setContentText("Account Code already exists!");
+		 	   		       alert.showAndWait();
+            		}
+            	 }
+	
+            	 
             	 
             	 String currentUserType = SessionDataController.getInstance().getCurrentUser().getUsertype();
              	 if(currentUserType.equals("Admin"))
@@ -98,7 +149,7 @@ public class AccountCodeCreationController implements Initializable {
              	 }
              	 else
              	 {
-             		// Alert alert = new Alert(Alert.AlertType.WARNING);
+             		 Alert alert = new Alert(Alert.AlertType.WARNING);
              		 	   alert.setTitle("Restricted!");
              		 	   alert.setHeaderText("Access Restricted!");
              		 	   alert.setContentText("login as admin user.");
@@ -107,6 +158,35 @@ public class AccountCodeCreationController implements Initializable {
              }
          });
 		
+	 }
+	 
+	 //## checking account code length and gl-subgl check
+	 public String accountCodeLengthChk(String accountCode,String accountType)
+	 {
+		 String returnResult =null;
+		 //System.out.println("gl chk:::"+accountCode.substring(5,7));
+		 int chkLength = accountCode.length();
+		 if(chkLength==7)
+		 {
+			 if(accountType.equalsIgnoreCase("Gl") && accountCode.substring(5,7).equals("00"))
+			 {
+				 returnResult="yes";
+			 }
+			 else if(accountType.equalsIgnoreCase("SubGL") && !accountCode.substring(5,7).equals("00"))
+			 {
+				 returnResult="yes";
+			 }
+			 else
+			 {
+				 returnResult="no";
+			 }
+			 
+		 }
+		 else
+		 {
+			 returnResult="no";
+		 }
+		 return returnResult;
 	 }
 
 }
