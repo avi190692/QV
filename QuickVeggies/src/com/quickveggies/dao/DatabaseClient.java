@@ -101,6 +101,7 @@ public class DatabaseClient {
         
         return instance;
     }
+    //added by ss for account code entry
     private static final String account_code_entry = "insert into public.accountmaster (accountcode,accountname,amount,fin_year,report_flag,active_flag,month)"+
     											     "values(?,?,?,?,?,?,?)";
     public void accountCodeEntry(AccountMaster accountMaster)
@@ -127,6 +128,30 @@ public class DatabaseClient {
 			e.printStackTrace();
 		}
     }
+    //## added by ss for account code logic test
+    private static final String account_code_search = "select accountcode from public.accountmaster where accountcode=?";
+    public List<String> accountCodeSearch(String accountCode)
+    {
+    	List<String> acm = new ArrayList<String>();
+			PreparedStatement psmt;
+			try 
+			{
+				psmt = connection.prepareStatement(account_code_search);
+				psmt.setString(1,accountCode);
+			    ResultSet rs = psmt.executeQuery();
+			    while(rs.next())
+			    {
+			    	acm.add(rs.getString(2));
+			    } 
+			} 
+			catch (SQLException e)
+			{
+				e.printStackTrace();
+			}
+	   return acm;		
+    }
+    
+    
 
     public int countSpecificRows(String tablename, String columnName, String value) throws SQLException {
         int result = 0;
