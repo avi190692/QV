@@ -119,9 +119,7 @@ public class DatabaseClient {
 							  psmt.setString(7,accountMaster.getMonth());
 							  
 							  psmt.execute();
-							  
-							  
-							  
+				  
 		 } 
     	 catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -705,7 +703,8 @@ public class DatabaseClient {
             ps.setString(11, entryline.getComment());
             ps.setString(12, entryline.getTransIdCol());
             
-            if (entryline.getParentId() != null) {
+            if (entryline.getParentId() != null) 
+            {
                 ps.setInt(13, entryline.getParentId());
             }
             else {
