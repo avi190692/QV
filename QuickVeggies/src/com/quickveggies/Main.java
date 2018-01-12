@@ -74,42 +74,31 @@ public class Main extends Application {
     //## new window scene replacement.
     public Parent newWindowSceneReplacementContecnt(String fxml)
     {
-    	Parent parent = null;
-    	
-    	final Stage accoutCodeCreation = new Stage();
-		accoutCodeCreation.centerOnScreen();
-		accoutCodeCreation.setTitle("Account Code Creation");
-		accoutCodeCreation.initModality(Modality.APPLICATION_MODAL);
-		accoutCodeCreation.setOnCloseRequest(new EventHandler<WindowEvent>() 
-        {
-            public void handle(WindowEvent event) 
-            {
-                Main.getStage().getScene().getRoot().setEffect(null);
-            }
-        });
-		try 
-		{
-	            parent = FXMLLoader.load(DBuyerController.class.getResource(fxml));
-	            Scene scene = new Scene(parent, 687, 400);
-	            scene.setOnKeyPressed(new EventHandler<KeyEvent>() 
-	            {
-	                public void handle(KeyEvent event)
-	                {
-	                    if (event.getCode() == KeyCode.ESCAPE) 
-	                    {
-	                        Main.getStage().getScene().getRoot().setEffect(null);
-	                        accoutCodeCreation.close();
-	                    }
-	                }
-	            });
-	            accoutCodeCreation.setScene(scene);
-	            accoutCodeCreation.show();
-	      } 
-		catch (IOException e){
-	            e.printStackTrace();}
+    	 Parent page = null;
+         try {
+             page = FXMLLoader.load(getClass().getResource(fxml));
+         } catch (IOException e) {
+             e.printStackTrace();
+         }
+         Scene scene;
+         if (!fxml.contains("register") && !fxml.contains("login"))
+         {
+             scene = new Scene(page,687, 400);
+         } 
+         else 
+         {
+             scene = new Scene(page);
+         }
+         scene.getStylesheets().add("/css/style.css");
+         stage.setScene(scene);
+         stage.setResizable(false);
+         stage.setTitle("Account Code Creation");
+         stage.setFullScreen(true);
+         stage.show();
+         stage.centerOnScreen();
+        
+         return page;
 
-    	
-    	return parent;
     }
     
     
