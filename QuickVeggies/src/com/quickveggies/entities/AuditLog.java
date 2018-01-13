@@ -21,7 +21,15 @@ public class AuditLog {
     //For internal purpose
     private Object entryObject;
     
-    public AuditLog(String userId, Date eventTime,String eventDetail, String eventObject, Integer eventObjectId) 
+    
+    
+    
+    public AuditLog() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public AuditLog(String userId, Date eventTime,String eventDetail, String eventObject, Integer eventObjectId) 
     {
         super();
         this.userId = userId;

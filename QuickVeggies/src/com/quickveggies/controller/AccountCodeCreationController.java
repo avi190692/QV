@@ -11,6 +11,7 @@ import java.util.ResourceBundle;
 import com.quickveggies.Main;
 import com.quickveggies.dao.DatabaseClient;
 import com.quickveggies.entities.AccountMaster;
+import com.quickveggies.entities.AuditLog;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -25,9 +26,13 @@ import javafx.scene.control.TextField;
 
 public class AccountCodeCreationController implements Initializable {
 
+
+	 @FXML
+	 private Button searchaccountcode;
 	
 	 @FXML
 	 private Button createbtn;
+	 
 	 @FXML
 	 private Button editbtn;
 	 
@@ -55,11 +60,13 @@ public class AccountCodeCreationController implements Initializable {
 		 accounttype.setItems(accType);
 		 accountcat.setItems(accountCategory);
 		 
-		 System.out.println("dashboard controller");
+		 //System.out.println("dashboard controller");
 		 createbtn.setOnAction(new EventHandler<ActionEvent>() 
 		 {
              public void handle(ActionEvent event) 
              {
+            	 
+            	 String currentUserType = SessionDataController.getInstance().getCurrentUser().getUsertype();
             	 String accCode = accountcode.getText();
             	 String accName = accountname.getText();
             	 double amount = Double.parseDouble(amt.getText());
@@ -92,11 +99,24 @@ public class AccountCodeCreationController implements Initializable {
             	 {
             	 	accCodeExistChk="yes";
             	 }
+            	 AuditLog auditlog = new AuditLog();
+            	 
+            	 
             	 
             	 if(accCodeExistChk.equals("no") && chkLength.equals("yes"))
             	 {
             		 AccountMaster acm = new AccountMaster(accCode, accName, amount,finYr, currDt_withTimeZone, reportFlag, active_flag, month);
             		 DatabaseClient.getInstance().accountCodeEntry(acm);
+            		 
+            		 
+            		 auditlog.setUserId(currentUserType);
+            		 auditlog.setEventDetail("Account Code added :"+accCode);
+            		 auditlog.setEventObject(accType);
+            		 auditlog.setEventObjectId(0);
+            		 auditlog.setAmount(amount);
+            		           		 
+            		 DatabaseClient.getInstance().insertLog_Audit(auditlog);
+            		 
             		 
             		 Alert alert = new Alert(Alert.AlertType.WARNING);
  		 	   		       alert.setTitle("Success!");
@@ -141,7 +161,7 @@ public class AccountCodeCreationController implements Initializable {
 	
             	 
             	 
-            	 String currentUserType = SessionDataController.getInstance().getCurrentUser().getUsertype();
+            	
              	 if(currentUserType.equals("Admin"))
              	 {
              		// new Main().replaceSceneContent("/fxml/accountcode_creation.fxml");
@@ -157,8 +177,21 @@ public class AccountCodeCreationController implements Initializable {
              	 }
              }
          });
+		 
+		 
+		 
+		 searchaccountcode.setOnAction(new EventHandler<ActionEvent>(){
+			public void handle(ActionEvent event) 
+			{
+				 new Main().newWindowSceneReplacementContecnt("/fxml/accountcode_view.fxml");
+			}
+		 });
 		
 	 }
+	 
+	
+	 
+	 
 	 
 	 //## checking account code length and gl-subgl check
 	 public String accountCodeLengthChk(String accountCode,String accountType)

@@ -150,6 +150,93 @@ public class DatabaseClient {
 	   return acm;		
     }
     
+    //## added by ss for account search engine
+    private static final String account_code_search_engine_bycodename = "select * from public.accountmaster where accountcode=? and accountname like %?%";
+    public List<AccountMaster> accountCodeSearch(String byCode,String byName)
+    {
+    	List<AccountMaster> acm = new ArrayList<AccountMaster>();
+    	
+			PreparedStatement psmt;
+			try 
+			{
+				if(!byCode.equals("") && byName.equals(""))
+				{
+					psmt = connection.prepareStatement("select * from public.accountmaster where accountcode like '%"+byCode+"%'");
+					ResultSet rs = psmt.executeQuery();
+					while(rs.next())
+					{
+						AccountMaster am = new AccountMaster();
+						
+						//System.out.println(rs.getString(2));
+						am.setAccountcode(rs.getString(2));
+						am.setAccountname(rs.getString(3));
+						am.setAmount(rs.getDouble(4));
+						
+						acm.add(am);
+					} 
+				}
+				
+				if(byCode.equals("") && !byName.equals(""))
+				{
+					psmt = connection.prepareStatement("select * from public.accountmaster where accountname like '%"+byName+"%'");
+					ResultSet rs = psmt.executeQuery();
+					while(rs.next())
+					{
+						AccountMaster am = new AccountMaster();
+						
+						am.setAccountcode(rs.getString(2));
+						am.setAccountname(rs.getString(3));
+						am.setAmount(rs.getDouble(4));
+						
+						acm.add(am);
+					} 
+				}
+				if(!byCode.equals("") && !byName.equals(""))
+				{
+					psmt = connection.prepareStatement("select * from public.accountmaster where accountcode like '%"+byCode+"%' and accountname like '%"+byName+"%'");
+					ResultSet rs = psmt.executeQuery();
+					while(rs.next())
+					{
+						AccountMaster am = new AccountMaster();
+						
+						am.setAccountcode(rs.getString(2));
+						am.setAccountname(rs.getString(3));
+						am.setAmount(rs.getDouble(4));
+						
+						acm.add(am);
+					} 
+				}
+			}
+			catch (SQLException e)
+			{
+				e.printStackTrace();
+			}
+	   return acm;		
+    }
+    
+   //## audit log entry for account code creation
+    private static final String audit_log_entry="insert into auditlog (userid,eventdetail,eventobject,eventobjectid,amount) values (?,?,?,?,?)";
+    public void insertLog_Audit(AuditLog auditlog)
+    {
+    	PreparedStatement psmt;
+    	try 
+    	{
+			psmt = connection.prepareStatement(audit_log_entry);
+			psmt.setString(1,auditlog.getUserId());
+			psmt.setString(2,auditlog.getEventDetail());
+			psmt.setString(3,auditlog.getEventObject());
+			psmt.setInt(4,auditlog.getEventObjectId());
+			psmt.setDouble(5,auditlog.getAmount());
+			
+			psmt.execute();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+    }
+    
     
 
     public int countSpecificRows(String tablename, String columnName, String value) throws SQLException {
