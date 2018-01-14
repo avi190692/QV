@@ -86,7 +86,7 @@ public class BuyerExpenseInfoViewController implements Initializable {
 				Button btn = (Button) event.getSource();
 				ExpenseInfo expenseToEdit = (ExpenseInfo) btn.getUserData();
 				// System.out.println(expenseToEdit);
-				handleAddEditButton("/buyerExpenseInfoEdit.fxml", "Edit Buyer Expense Info", true, expenseToEdit);
+				handleAddEditButton("/fxml/buyerExpenseInfoEdit.fxml", "Edit Buyer Expense Info", true, expenseToEdit);
 			}
 		};
 
@@ -241,7 +241,7 @@ public class BuyerExpenseInfoViewController implements Initializable {
 		btnAddExpense.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				handleAddEditButton("/buyerExpenseInfoAdd.fxml", "Add Buyer Expense Info", false, null);
+				handleAddEditButton("/fxml/buyerExpenseInfoAdd.fxml", "Add Buyer Expense Info", false, null);
 			}
 		});
 	}

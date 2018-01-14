@@ -1758,8 +1758,7 @@ public class DatabaseClient {
     }
 
     public void updateBuyerExpenseInfo(String name, String type, String defaultAmount) {
-
-        try (PreparedStatement ps = connection
+         try (PreparedStatement ps = connection
                 .prepareStatement("UPDATE buyerExpenseInfo SET type=?,  defaultAmount=?  WHERE name = ?")) {
             ps.setString(1, type);
             ps.setString(2, defaultAmount);
@@ -1788,11 +1787,11 @@ public class DatabaseClient {
 
     public void addBuyerExpenseInfo(String name, String type, String defaultAmount) {
         try (PreparedStatement ps = connection.prepareStatement(INSERT_BUYER_EXPENSE_INFO_QRY)) {
-            ps.setString(1, name);
-            ps.setString(2, name);
-            ps.setString(3, type);
-            ps.setString(4, defaultAmount);
-            ps.executeUpdate();
+        	ps.setString(1, name);
+        	ps.setString(2, type);
+            ps.setString(3, defaultAmount);
+            ps.setString(4, name);
+            ps.executeQuery();
             insertAuditRecord(new AuditLog(0, getCurrentUser(), null, "ADDED buyerExpenseInfo info :".concat(name), null, 0));
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -2752,8 +2751,9 @@ public class DatabaseClient {
     private static final String INSERT_PARTY_MONEY_QRY = "INSERT INTO partyMoney ("
             + "title , partyType , date , paymentMode , paid , received, bankName , chequeNo , depositDate , isAdvanced , description ) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
-    private static final String INSERT_BUYER_EXPENSE_INFO_QRY = "IF NOT EXISTS (SELECT * FROM buyerExpenseInfo  WHERE name = ?)  INSERT INTO buyerExpenseInfo  (name, type, defaultAmount )  VALUES (?,?,?)";
-
+    //private static final String INSERT_BUYER_EXPENSE_INFO_QRY = "IF NOT EXISTS (SELECT * FROM buyerExpenseInfo  WHERE name = ?)  INSERT INTO buyerExpenseInfo  (name, type, defaultAmount )  VALUES (?,?,?)";
+    private static final String INSERT_BUYER_EXPENSE_INFO_QRY = "INSERT INTO buyerExpenseInfo (name, type, defaultAmount )SELECT ?,?,? WHERE NOT EXISTS (SELECT 1 FROM buyerExpenseInfo WHERE buyerExpenseInfo.name = ?)";
+    
     private static final String INSERT_EXPENDITURE_QRY = "INSERT INTO expenditures  ("
             + "amount ,date , comment , billto , type) VALUES (?, ?, ?, ?, ?); ";
 

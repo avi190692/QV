@@ -763,11 +763,11 @@ public class FreshEntryController implements Initializable {
                 }
             }
         });
-        try {
-			parent = FXMLLoader.load(getClass().getResource("/fxml/freshentry.fxml"));
-		} catch (IOException e1) {
-			GeneralMethods.errorMsg(e1.getMessage());
-		}
+//        try {
+//			parent = FXMLLoader.load(getClass().getResource("/fxml/freshentry.fxml"));
+//		} catch (IOException e1) {
+//			GeneralMethods.errorMsg(e1.getMessage());
+//		}
         setFocusListenerForTableColumn(buyersEntry, tcBuyerSelect);
         // CHARGES SECTION
         chargesView = new Stage();
