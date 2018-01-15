@@ -19,9 +19,9 @@ public class Buyer{
     private String paymentMethod;
     private String creditPeriod;
     private String buyerType="Regular";
-	private InputStream imageStream;
-    
-    private String type="Buyer";
+	private Double milestone;
+	private String imagePath;
+	private String type="Buyer";
 	public static final String GODOWN_BUYER_TITLE = "Godown";
 	public static final String COLD_STORE_BUYER_TITLE = "Cold Store";
     
@@ -66,11 +66,12 @@ public class Buyer{
                  String mobile, String mobile2, String email,
                  String shopno, String city, String email2,
                  String parentCompany, String paymentMethod,
-                 String creditPeriod,String buyerType) 
+                 String creditPeriod,String buyerType, Double milestone) 
     {
     	System.out.println("m here...");
         this.id = id;
         this.title = title;
+        this.milestone = milestone;
         this.firstName = firstName;
         this.lastName = lastName;
         this.company = company;
@@ -216,12 +217,12 @@ public class Buyer{
 		this.buyerType = buyerType;
 	}
 	
-	public InputStream getImageStream() {
-		return imageStream;
+	public String getImagePath() {
+		return imagePath;
 	}
 
-	public void setImageStream(InputStream imageStream) {
-		this.imageStream = imageStream;
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
 	}
 
 	public String getPaymentMethod() {
@@ -232,6 +233,13 @@ public class Buyer{
 		this.paymentMethod = paymentMethod;
 	}
 	
+	public Double getMilestone() {
+		return milestone;
+	}
+
+	public void setMilestone(Double milestone) {
+		this.milestone = milestone;
+	}
 	
 
 }

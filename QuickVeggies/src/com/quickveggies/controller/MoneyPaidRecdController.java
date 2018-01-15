@@ -6,6 +6,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
@@ -20,6 +22,7 @@ import com.quickveggies.misc.AutoCompleteTextField;
 import com.quickveggies.misc.SearchPartyButton;
 import com.quickveggies.model.EntityType;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javafx.beans.property.BooleanProperty;
@@ -212,10 +215,13 @@ public class MoneyPaidRecdController implements Initializable, DaoGeneratedKey {
         }
 
         DateTimeFormatter formatter = null;
-
+        DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
         try {
-            String format = DateUtil.determineDateFormat(defDate);
+        	   
+        	 String currDt_str = df.format(new Date());
+            String format = DateUtil.determineDateFormat(currDt_str);
             formatter = DateTimeFormatter.ofPattern(format);
+            defDate=currDt_str;
         } catch (Exception x) {
             x.printStackTrace();
         }

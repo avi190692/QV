@@ -75,6 +75,7 @@ public class AddChargesController implements Initializable {
 		amanatRate.focusedProperty().addListener(createUpdateChargeListener(amanatRate, amanatValue, amanatType));
 		List<ExpenseInfo> eiList = DatabaseClient.getInstance().getExpenseInfoList();
 		int count = 0;
+		if(eiList.size() >= 2){
 		for (ExpenseInfo ei : eiList) {
 			if (ei != null && ei.getName().trim().equalsIgnoreCase("amanat")) {
 				amanatName.setText(ei.getName().trim());
@@ -138,8 +139,9 @@ public class AddChargesController implements Initializable {
 					}
 				}
 			}
+		
 			vbChargeTypes.getChildren().add(currChargeHB);
-
+		}
 		}
 
 		save.setOnAction(new EventHandler<ActionEvent>() {

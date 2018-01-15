@@ -146,7 +146,6 @@ public class FruitAddController implements Initializable {
 				{
 					listBoxes.add(bs.getName());
 				}
-				
 				for (QualityType qt : qualTypes) 
 				{
 					listQualities.add(qt.getName());

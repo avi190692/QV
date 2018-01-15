@@ -248,14 +248,14 @@ public class ExpenseAddController implements Initializable, DaoGeneratedKey {
         xpr.setComment(commentField.getText());
         xpr.setPayee(payeeField.getText());
         xpr.setType(searchExpenseType.getText());
-        if (imgFile != null && imgFile.exists()) {
+       /* if (imgFile != null && imgFile.exists()) {
             try {
                 xpr.setReceipt(new FileInputStream(imgFile));
             }
             catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
-        }
+        }*/
         DatabaseClient dbc = DatabaseClient.getInstance();
         MoneyPaidRecd mpr = new MoneyPaidRecd();
         String partyType = ((EntityType) payeeField.getUserData()).getValue();
@@ -276,7 +276,8 @@ public class ExpenseAddController implements Initializable, DaoGeneratedKey {
         }
         mpr.setPaymentMode(cboPaymentType.getValue());
         // save transaction
-        if (dbc.addExpenditure(xpr)) {
+        if (dbc.addExpenditure(xpr)) 
+        {
             generatedKey = dbc.addMoneyPaidRecdInfo(mpr, title);
         }
     }

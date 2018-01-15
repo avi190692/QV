@@ -231,7 +231,7 @@ public class SearchPartyController implements Initializable {
         
         switch (partyType) {
             case BUYERS:
-                result = getDatabaseBuyersList(keyword, null);
+                result = getDatabaseBuyersList(keyword,"Buyers");
                 return result;
             case LADAAN:
                 result = getDatabaseBuyersList(keyword, "Ladaan");
@@ -243,7 +243,8 @@ public class SearchPartyController implements Initializable {
                 result = getDatabaseSuppliersList(keyword);
                 return result;
             case BUYER_SUPPLIERS:
-                result = getDatabaseBuyersList(keyword, null);
+            	
+                result = getDatabaseBuyersList(keyword, "Buyer Suppliers");
                 result.addAll(getDatabaseSuppliersList(keyword));
                 return result;
             case EXPENDITURE_TYPES:
@@ -301,23 +302,36 @@ public class SearchPartyController implements Initializable {
     private ArrayList<Buyer> getDatabaseBuyersList(String keyword, String subtype) {
         DatabaseClient dbclient = DatabaseClient.getInstance();
         int rowsNum = dbclient.getRowsNum("buyers1");
+        System.out.println("subtype:::"+subtype);
+        System.out.println("rowsNum:::"+rowsNum);
         ArrayList<Buyer> result = new ArrayList<>();
-        for (int buyer_id = 1; buyer_id <= rowsNum; buyer_id++) {
+        for (int buyer_id = 1; buyer_id <= rowsNum; buyer_id++) 
+        {
             try {
+            	System.out.println("buyer_id:::"+buyer_id);
                 Buyer buyer = dbclient.getBuyerById(buyer_id);
+                System.out.println("title1:::"+buyer.getTitle());
                 String title = buyer.getTitle().toLowerCase();
+                System.out.println("title:::"+title);
                 if ("cold store".equals(title) || "godown".equals(title)
                          || "cash sale".equals(title) || "bank sale".equals(title)) {
                     continue;
                 }
                 // check if ladaan/bijak
-                if (subtype != null && !buyer.getBuyerType().equals(subtype)) {
+                if (subtype != null && !buyer.getBuyerType().equals(subtype)) 
+                {
                     continue;
                 }
-                if (keyword == null) {
+                if (keyword == null) 
+                {
+                	System.out.println("123");
                     result.add(buyer);
-                } else {
-                    if ((buyer.getTitle().toLowerCase()).contains((keyword).toLowerCase())) {
+                } 
+                else 
+                {
+                    if ((buyer.getTitle().toLowerCase()).contains((keyword).toLowerCase())) 
+                    {
+                    	System.out.println("345");
                         result.add(buyer);
                     }
                 }

@@ -5,17 +5,34 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import com.quickveggies.CosmeticStyles;
+import com.quickveggies.GeneralMethods;
+import com.quickveggies.Main;
+import com.quickveggies.controller.AbstractFreshEntryController;
+import com.quickveggies.controller.AuditLogController;
+import com.quickveggies.controller.BudgetSelectorController;
+import com.quickveggies.controller.FreshEntryController;
+import com.quickveggies.controller.MoneyPaidRecdController;
+import com.quickveggies.controller.MoneyPaidRecdController.AmountType;
+import com.quickveggies.controller.SessionDataController;
+import com.quickveggies.controller.SupplierCreditController;
+import com.quickveggies.dao.DatabaseClient;
+import com.quickveggies.entities.PartyType;
+import com.quickveggies.entities.User;
+import com.quickveggies.misc.SearchPartyButton;
+import com.quickveggies.model.EntityType;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.input.KeyCode;
@@ -26,22 +43,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
-
-import com.quickveggies.CosmeticStyles;
-import com.quickveggies.GeneralMethods;
-import com.quickveggies.Main;
-import com.quickveggies.controller.AbstractFreshEntryController;
-import com.quickveggies.controller.AuditLogController;
-import com.quickveggies.controller.FreshEntryController;
-import com.quickveggies.controller.MoneyPaidRecdController;
-import com.quickveggies.controller.MoneyPaidRecdController.AmountType;
-import com.quickveggies.controller.SessionDataController;
-import com.quickveggies.controller.SupplierCreditController;
-import com.quickveggies.dao.DatabaseClient;
-import com.quickveggies.entities.User;
-import com.quickveggies.entities.PartyType;
-import com.quickveggies.misc.SearchPartyButton;
-import com.quickveggies.model.EntityType;
 
 public class DashboardController extends AbstractFreshEntryController implements Initializable {
 
@@ -193,7 +194,7 @@ public class DashboardController extends AbstractFreshEntryController implements
             @Override
             public void handle(ActionEvent event) {
             	String currentUserType = SessionDataController.getInstance().getCurrentUser().getUsertype();
-            	if(currentUserType.equals("Admin"))
+            	if(("Admin").equals(currentUserType))
             	{
             		showPopup("/fxml/auditlogviewer.fxml", "Audit Log", new AuditLogController(DashboardController.this));
             	}
@@ -205,6 +206,19 @@ public class DashboardController extends AbstractFreshEntryController implements
                      alert.setContentText("You are not authorized to view this page.Contact Admin or logged in as Admin.Thank You!");
                      alert.showAndWait();
             	}
+            }
+        });
+        
+        budgetSelector.setOnAction((ActionEvent event) -> {
+            try {
+            	BudgetSelectorController controller = new BudgetSelectorController();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/budgetSelector.fxml"));
+                loader.setController(controller);
+                mainView.getChildren().setAll((Node) loader.load());
+                setupDashboardAnchors();
+            }
+            catch (IOException e) {
+                e.printStackTrace();
             }
         });
 
@@ -246,6 +260,7 @@ public class DashboardController extends AbstractFreshEntryController implements
             }
         });
         dashboard.fire();// display the main dash at the beginning of program
+
         
       //## added by ss on 07Jan2018
       //## account code creation
