@@ -11,21 +11,25 @@ import javafx.scene.control.TableView;
 public class BudgetSelectorController {
 
 	@FXML
-	private TableView<BuyerDTO> budgetSelectionTable;
+	private TableView<BuyerDTO> budgetMileStonTable;
 
 	@FXML
 	private TableColumn<BuyerDTO, String> buyerEmail;
 
 	@FXML
-	private TableColumn<BuyerDTO, Double> milestoneProgress;
+	private TableColumn<BuyerDTO, Double> buyerMilestoneProgress;
 
 	@FXML
 	private void initialize() {
-		budgetSelectionTable.setItems(new BuyerService().getBuyerDto());
+		setBuyerMileston();
+	}
+	
+	public void setBuyerMileston(){
+		budgetMileStonTable.setItems(new BuyerService().getBuyerDto());
 		
 		buyerEmail.setCellValueFactory(cellData -> cellData.getValue().getEmailProp());
-		milestoneProgress.setCellValueFactory(cellData -> cellData.getValue().getMilestoneProp().asObject());
-		milestoneProgress.setCellFactory(column -> new TableCell<BuyerDTO, Double>(){
+		buyerMilestoneProgress.setCellValueFactory(cellData -> cellData.getValue().getMilestoneProp().asObject());
+		buyerMilestoneProgress.setCellFactory(column -> new TableCell<BuyerDTO, Double>(){
             @Override
             protected void updateItem(Double item, boolean empty) {
                 super.updateItem(item, empty);
@@ -45,7 +49,6 @@ public class BudgetSelectorController {
                 }
             }
         });
+
 	}
-	
-	
 }
