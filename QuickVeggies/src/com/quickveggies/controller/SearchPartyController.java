@@ -81,6 +81,7 @@ public class SearchPartyController implements Initializable {
          */
         // populate the searchbar options
         searchbar.setOnMousePressed((Event event) -> {
+        	
             if (PartyType.EXPENDITURE_TYPES.equals(profileType.getValue())) {
                 searchbar.setEntries(profilesTitlesFromEntities(
                         searchPartyInDatabase(profileType.getValue(), null)));
@@ -231,7 +232,7 @@ public class SearchPartyController implements Initializable {
         
         switch (partyType) {
             case BUYERS:
-                result = getDatabaseBuyersList(keyword,"Buyers");
+                result = getDatabaseBuyersList(keyword,"Regular");
                 return result;
             case LADAAN:
                 result = getDatabaseBuyersList(keyword, "Ladaan");
@@ -308,11 +309,8 @@ public class SearchPartyController implements Initializable {
         for (int buyer_id = 1; buyer_id <= rowsNum; buyer_id++) 
         {
             try {
-            	System.out.println("buyer_id:::"+buyer_id);
                 Buyer buyer = dbclient.getBuyerById(buyer_id);
-                System.out.println("title1:::"+buyer.getTitle());
                 String title = buyer.getTitle().toLowerCase();
-                System.out.println("title:::"+title);
                 if ("cold store".equals(title) || "godown".equals(title)
                          || "cash sale".equals(title) || "bank sale".equals(title)) {
                     continue;
@@ -322,16 +320,15 @@ public class SearchPartyController implements Initializable {
                 {
                     continue;
                 }
+                System.out.println("KeyWord      "+ keyword);
                 if (keyword == null) 
-                {
-                	System.out.println("123");
+                {	System.out.println("Buyer Type"+ buyer.getBuyerType());
                     result.add(buyer);
                 } 
                 else 
                 {
                     if ((buyer.getTitle().toLowerCase()).contains((keyword).toLowerCase())) 
                     {
-                    	System.out.println("345");
                         result.add(buyer);
                     }
                 }
@@ -339,6 +336,7 @@ public class SearchPartyController implements Initializable {
                 System.out.println("sqlexception in populating buyers list in SearchPartyController");
             }
         }
+       
         return result;
     }
 
