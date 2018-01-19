@@ -282,7 +282,7 @@ public class FreshEntryController implements Initializable {
         });
         growersList = updateGrowersList();
         grower.setEntries(growersList);
-        // grower.setLinkedTextFields(new TextField[] { grNo });
+         grower.setLinkedTextFields(new TextField[] { grNo });
         grower.setLinkedFieldsReturnType(AutoCompleteTextField.ENTRY_IND);
         grower.linkToWindow(FreshEntryController.this, "/fxml/supplieradd.fxml", "Add new supplier", STR_ADD_NEW,
                 new AddSupplierController());
@@ -372,7 +372,7 @@ public class FreshEntryController implements Initializable {
         final TableColumn tcLotsQty = new TableColumn("Qty (No. of Box)");
         tcLotsQty.setCellValueFactory(new PropertyValueFactory<FreshEntryTableData.AddLotTableLine, String>("qty"));
 
-        // tcLotsQty.setCellFactory(TextFieldTableCell.forTableColumn());
+        tcLotsQty.setCellFactory(TextFieldTableCell.forTableColumn());
         tcLotsQty.setCellFactory(
                 new Callback<TableColumn<FreshEntryTableData.AddLotTableLine, String>, TableCell<FreshEntryTableData.AddLotTableLine, String>>() {
             @Override
@@ -1042,14 +1042,13 @@ public class FreshEntryController implements Initializable {
             totalLotQty += Integer.parseInt(line.getQty());
         }
 
-        /*
-		 * 
-		 * for (FreshEntryTableData.GrowerEntryTableLine line : growerLines) {
-		 * totalGrowersQty += Integer.parseInt(line.getGrowerQty()); }
-		 * 
-		 * for (FreshEntryTableData.BuyerEntryTableLine line : buyerLines) {
-		 * totalBuyersQty += Integer.parseInt(line.getBuyerQty()); }
-         */
+         
+//		  for (FreshEntryTableData.GrowerEntryTableLine line : growerLines) {
+//		  totalGrowersQty += Integer.parseInt(line.getGrowerQty()); }
+//		  
+//		  for (FreshEntryTableData.BuyerEntryTableLine line : buyerLines) {
+//		  totalBuyersQty += Integer.parseInt(line.getBuyerQty()); }
+         
         int totalQuantity = Integer.parseInt(totalQty.getText());
 
         int totalGrowerQtyForQuality = getTotalGrCountOfQtyForQuality(sessionController.quality);
@@ -1199,18 +1198,26 @@ public class FreshEntryController implements Initializable {
                 }
             }
 
-            /*
-			 * checkQuantities(); // only one table can be enabled at any moment
-			 * (the one being // edited) String emptyFieldMsg =
-			 * "Can't continue-current table hasn't been properly filled!"; if
-			 * (currTable == LOT) { addLots.requestFocus(); if
-			 * (areTableFieldsEmpty(addLots))
-			 * GeneralMethods.errorMsg(emptyFieldMsg); else { //
-			 * addLots.setEditable(false); growersEntry.setEditable(true);
-			 * growersEntry.requestFocus(); currTable = GROWERS; } }
-			 * 
-			 * else if (currTable == GROWERS) { if
-			 * (areTableFieldsEmpty(growersEntry))
+            
+//			 checkQuantities(); // only one table can be enabled at any moment(the one being // edited)
+//			 String emptyFieldMsg = "Can't continue-current table hasn't been properly filled!"; 
+//			 if (currTable == LOT) { 
+//				 addLots.requestFocus(); 
+//				 if (areTableFieldsEmpty(addLots))
+//					 GeneralMethods.errorMsg(emptyFieldMsg);
+//				 else { //
+//					 addLots.setEditable(false); growersEntry.setEditable(true);
+//					 growersEntry.requestFocus(); currTable = GROWERS; 
+//				 }
+//			}
+			  
+/*			  else if (currTable == GROWERS) { 
+				  if(areTableFieldsEmpty(growersEntry)){
+					  System.out.println("Just go for it");
+				  }
+			  
+			  }
+*/			/* 
 			 * GeneralMethods.errorMsg(emptyFieldMsg); else { // if the entry is
 			 * a regular one, continue to populate the // buyers table if
 			 * (freshEntryType == FreshEntryController.REGULAR) {

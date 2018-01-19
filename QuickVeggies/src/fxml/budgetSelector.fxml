@@ -19,10 +19,11 @@
                             <Tab text="Buyer">
                                  <content>
                                  
-                                                                                                      <TableView fx:id="budgetMileStonTable">
+                                                                                                      <TableView fx:id="buyerMileStonTable">
                                                         <columns>
-                                                          <TableColumn fx:id="buyerEmail" prefWidth="261.0" text="Buyer" />
-                                                          <TableColumn fx:id="buyerMilestoneProgress" prefWidth="368.0" text="Milestone Progress" />
+                                                          <TableColumn fx:id="buyerNameMT" prefWidth="261.0" text="Buyer" />
+                                          <TableColumn fx:id="buyerCompanyNameMT" prefWidth="75.0" text="Company Name" />
+                                                          <TableColumn fx:id="buyerMilestoneProgressMT" prefWidth="368.0" text="Milestone Progress" />
                                                         </columns>
                                                       </TableView>
                                  </content>
@@ -48,9 +49,22 @@
                <content>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+                        <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <tabs>
-                            <Tab text="Buyer" />
+                            <Tab text="Buyer">
+                                 <content>
+                                    <TableView fx:id="buyerBudgetTable" prefHeight="200.0" prefWidth="200.0">
+                                      <columns>
+                                        <TableColumn fx:id="buyerNameBT" prefWidth="75.0" text="Budget Name" />
+                                        <TableColumn fx:id="buyerCompanyNameBT" prefWidth="75.0" text="Company Name" />
+                                          <TableColumn fx:id="buyerTypeBT" prefWidth="75.0" text="Type" />
+                                          <TableColumn fx:id="buyerMilestonBT" prefWidth="75.0" text="Budget Cap" />
+                                          <TableColumn fx:id="buyerbudgetProgressBT" prefWidth="75.0" text="Progress" />
+                                          <TableColumn fx:id="buyerOverDueBT" prefWidth="75.0" text="Over Due" />
+                                          <TableColumn fx:id="buyerActionBT" prefWidth="75.0" text="Action" />
+                                      </columns>
+                                    </TableView>
+                                 </content></Tab>
                               <Tab text="Ladaan">
                                 <content>
                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
