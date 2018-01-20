@@ -274,7 +274,7 @@ public class AuditLogController implements Initializable {
                             switch (log.getEventObject()) {
                                 case "partyMoney": {
                                     String pdf = prepareMoneyCashPdf((MoneyPaidRecd) log.getEntryObject());
-                                    DashboardController.showPopup("/auditlogentrypopup.fxml", "Log Entry Preview",
+                                    DashboardController.showPopup("/fxml/auditlogentrypopup.fxml", "Log Entry Preview",
                                             new AuditLogEntryPopupController(pdf, null){{
                                                 setEventData(log.getDate().toInstant().atZone(
                                                         ZoneId.systemDefault()).toLocalDateTime().format(localFormatter));
@@ -307,7 +307,7 @@ public class AuditLogController implements Initializable {
                                     if (oldLine.deserialize(log.getOldValues())) {
                                         pdfOldValues = prepareBuyerDealPdf(oldLine);
                                     }
-                                    DashboardController.showPopup("/auditlogentrypopup.fxml", "Log Entry Preview",
+                                    DashboardController.showPopup("/fxml/auditlogentrypopup.fxml", "Log Entry Preview",
                                             new AuditLogEntryPopupController(pdf, pdfOldValues){{
                                                 setEventData(log.getDate().toInstant().atZone(
                                                         ZoneId.systemDefault()).toLocalDateTime().format(localFormatter));

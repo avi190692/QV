@@ -99,22 +99,22 @@ public class EditTableButtonCell<S, T> extends TableCell<S, T> {
                     switch (bType) {
                         case "BIJAK":
                         case "LADAAN":
-                            guiToLoad = "/updateentryladaanbuyer.fxml";
+                            guiToLoad = "/fxml/updateentryladaanbuyer.fxml";
                             controller = new UpdateLadaanEntryController(tableLineType, lineId, valuesList);
                             width1 = 707;
                             height1 = 500;
                             break;
                         case "REGULAR":
-                            guiToLoad = "/updateentry.fxml";
+                            guiToLoad = "/fxml/updateentry.fxml";
                             controller = new UpdateRegularBuyerController(tableLineType, lineId, valuesList);
                             break;
                     }
                 } else if (tableLineType.equalsIgnoreCase("DSupplierTableLine")) {
-                    guiToLoad = "/updateentry.fxml";
+                    guiToLoad = "/fxml/updateentry.fxml";
                     controller = new UpdateSupplierEntryController(tableLineType, lineId, valuesList);
 
                 } else {
-                    guiToLoad = "/updateentry.fxml";
+                    guiToLoad = "/fxml/updateentry.fxml";
                     controller = new UpdateEntryController(tableLineType, colNamesList.toArray(new String[0]),
                             lineId, valuesList, cellValuesFactoryList);
                 }

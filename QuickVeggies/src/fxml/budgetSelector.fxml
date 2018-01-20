@@ -6,6 +6,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
+
 <AnchorPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -66,15 +67,48 @@
                                     </TableView>
                                  </content></Tab>
                               <Tab text="Ladaan">
-                                <content>
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                </content>
+                                 <content>
+                                    <TableView prefHeight="200.0" prefWidth="200.0">
+                                      <columns>
+                                        <TableColumn prefWidth="75.0" text="Budget Name" />
+                                          <TableColumn prefWidth="75.0" text="Company Name" />
+                                          <TableColumn prefWidth="75.0" text="Type" />
+                                          <TableColumn prefWidth="75.0" text="Budget Cap" />
+                                          <TableColumn prefWidth="75.0" text="Progress" />
+                                          <TableColumn prefWidth="75.0" text="Over Due" />
+                                          <TableColumn prefWidth="75.0" text="Action" />
+                                      </columns>
+                                    </TableView>
+                                 </content>
                               </Tab>
-                            <Tab text="Suplier" />
+                            <Tab text="Suplier">
+                                 <content>
+                                    <TableView prefHeight="200.0" prefWidth="200.0">
+                                      <columns>
+                                        <TableColumn prefWidth="75.0" text="Budget Name" />
+                                        <TableColumn prefWidth="75.0" text="Company Name" />
+                                          <TableColumn prefWidth="75.0" text="Type" />
+                                          <TableColumn prefWidth="75.0" text="Budget Cap" />
+                                          <TableColumn prefWidth="75.0" text="Progress" />
+                                          <TableColumn prefWidth="75.0" text="Over Due" />
+                                          <TableColumn prefWidth="75.0" text="Action" />
+                                      </columns>
+                                    </TableView>
+                                 </content></Tab>
                               <Tab text="Bijak">
-                                <content>
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                </content>
+                                 <content>
+                                    <TableView prefHeight="200.0" prefWidth="200.0">
+                                      <columns>
+                                        <TableColumn prefWidth="75.0" text="Budget Name" />
+                                        <TableColumn prefWidth="75.0" text="Company Name" />
+                                          <TableColumn prefWidth="75.0" text="Type" />
+                                          <TableColumn prefWidth="75.0" text="Budget Cap" />
+                                          <TableColumn prefWidth="75.0" text="Progress" />
+                                          <TableColumn prefWidth="75.0" text="Over Due" />
+                                          <TableColumn prefWidth="75.0" text="Action" />
+                                      </columns>
+                                    </TableView>
+                                 </content>
                               </Tab>
                           </tabs>
                         </TabPane>

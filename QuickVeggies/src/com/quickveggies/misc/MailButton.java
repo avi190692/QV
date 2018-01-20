@@ -40,7 +40,7 @@ public class MailButton extends Button{
                 addTransaction.setTitle("New email");
                 addTransaction.initModality(Modality.APPLICATION_MODAL);
                 try {
-                	FXMLLoader loader=new FXMLLoader(getClass().getResource("/mailwindow.fxml"));
+                	FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/mailwindow.fxml"));
                 	EnteremailpaneController controller=new EnteremailpaneController(mailReceiver,mailSender, null);
                 	loader.setController(controller);
                     Parent parent = loader.load();

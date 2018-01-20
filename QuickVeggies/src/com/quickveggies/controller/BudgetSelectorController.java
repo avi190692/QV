@@ -63,34 +63,13 @@ public class BudgetSelectorController {
 		setBuyerBudget();
 	}
 
+	
 	public void setBuyerMileston() {
 		buyerMileStonTable.setItems(new BuyerService().getBuyerDto());
-
 		buyerNameMT.setCellValueFactory(cellData -> cellData.getValue().getNameProp());
 		buyerCompanyNameMT.setCellValueFactory(cellData -> cellData.getValue().getCompanyProp());
 		buyerMilestoneProgressMT.setCellValueFactory(cellData -> cellData.getValue().getMilestoneProp().asObject());
-		buyerMilestoneProgressMT.setCellFactory(column -> new TableCell<BuyerDTO, Double>() {
-			@Override
-			protected void updateItem(Double item, boolean empty) {
-				super.updateItem(item, empty);
-				if (item != null && !empty) {
-					setText(item.toString());
-
-					double percent = item * 100;
-
-					String color = "169f16";
-					if (percent > 90) {
-						color = "ff0303";
-					} else if (percent > 75) {
-						color = "ffd742";
-					}
-
-					setStyle("-fx-background-color: linear-gradient(from 0% 100% to " + (percent) + "% 100%, #" + color
-							+ ", #" + color + " 99.99%, transparent);");
-				}
-			}
-		});
-
+		
 	}
 	
 	public void setBuyerBudget(){
