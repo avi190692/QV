@@ -115,7 +115,7 @@ public class ExpenditureTypeViewController implements Initializable {
 		btnAddExpenditure.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				handleAddEditButton("/expendituretypeadd.fxml", "Add Expenditure Type");
+				handleAddEditButton("/fxml/expendituretypeadd.fxml", "Add Expenditure Type");
 			}
 		});
 

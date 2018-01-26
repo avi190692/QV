@@ -141,8 +141,9 @@ public class ExpenseInfoViewController implements Initializable {
 		VBox vb = vboxExpenseChild1;
 		int hbCount = 0;
 		int vbCount = 0;
+		System.out.println("Expenses       " + expenses.size() + "--------" + amanatInfo.getName());
 		for (ExpenseInfo ei : expenses) {
-			// System.out.println("processing expense id:" + ei.getId());
+			 System.out.println("processing expense id:" + ei.getId());
 			if (ei.getName().trim().equalsIgnoreCase(amanatInfo.getName())) {
 				txtXamt.setText(ei.getDefaultAmount());
 				txtXtype.setText(ei.getType());
