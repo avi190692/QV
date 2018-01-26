@@ -2,6 +2,8 @@ package com.quickveggies;
 
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseEvent;
 
 public class CosmeticStyles {
@@ -30,8 +32,31 @@ public class CosmeticStyles {
             }
         });
     }
+    
+    
     public static void addHoverEffect(Button... buttons){
         for (Button button : buttons) {
+            addHoverEffect(button);
+        }
+    }
+ 
+    public static void addHoverEffect(final MenuButton button) {
+        button.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                button.setStyle(getDefaultButtonStyle());
+            }
+        });
+        button.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                button.setStyle(getHoverDefaultButtonStyle());
+            }
+        });
+    }
+    
+    public static void addHoverEffect(MenuButton... buttons){
+        for (MenuButton button : buttons) {
             addHoverEffect(button);
         }
     }

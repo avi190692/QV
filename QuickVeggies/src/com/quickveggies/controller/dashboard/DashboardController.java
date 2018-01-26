@@ -34,6 +34,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitPane;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -50,9 +52,6 @@ public class DashboardController extends AbstractFreshEntryController implements
 
     @FXML
     private SplitPane splitView;
-
-    @FXML
-    private Pane transSubmenu;
 
     @FXML
     private Button dashboard;
@@ -79,25 +78,25 @@ public class DashboardController extends AbstractFreshEntryController implements
     private Button ladaan;
 
     @FXML
-    private Button transactions;
+    private MenuButton transactions;
 
     @FXML
     private Label loggedAs;
 
     @FXML
-    private Button sales;
+    private MenuItem sales;
 
     @FXML
-    private Button banking;
+    private MenuItem banking;
 
     @FXML
-    private Button expenses;
+    private MenuItem expenses;
 
     @FXML
     private Button expensesAdd;
 
     @FXML
-    private Button teeps;
+    private MenuItem teeps;
 
     @FXML
     private Button closePlusMenu;
@@ -114,9 +113,9 @@ public class DashboardController extends AbstractFreshEntryController implements
     @FXML
     private Button newColdstore;
     @FXML
-    private Button coldstore;
+    private MenuItem coldstore;
     @FXML
-    private Button godown;
+    private MenuItem godown;
 
     @FXML
     private Button accounts;
@@ -149,12 +148,11 @@ public class DashboardController extends AbstractFreshEntryController implements
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        CosmeticStyles.addHoverEffect(dashboard, buyer, suppliers, ladaan, transactions, reports, accounts,adminpanel,budgetSelector);
-        CosmeticStyles.addHoverEffect(banking, sales, godown, coldstore, expenses, teeps);
+        CosmeticStyles.addHoverEffect(dashboard, buyer, suppliers, ladaan, reports, accounts,adminpanel,budgetSelector);
+        CosmeticStyles.addHoverEffect(transactions);
+        
         // CosmeticStyles.addHoverEffect(freshEntry,expensesAdd);
         //Todo: Disable unused button
-        banking.setVisible(false);
-        transSubmenu.setMaxHeight(transSubmenu.getPrefHeight() - 26);
 
         DatabaseClient dbclient = DatabaseClient.getInstance();
         if (dbclient == null) {
@@ -435,23 +433,6 @@ public class DashboardController extends AbstractFreshEntryController implements
             public void handle(ActionEvent event) {
                 switchVisible(entryMenu, splitView);
             }
-        });
-        transactions.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent event) {
-                double leyoutY;
-                if (!transSubmenu.isVisible()) {
-                    leyoutY = transSubmenu.getLayoutY() + transSubmenu.getHeight() + 1;
-                    accounts.setLayoutY(leyoutY);
-                    reports.setLayoutY(leyoutY + accounts.getHeight());
-                    transSubmenu.setVisible(true);
-                } else {
-                    leyoutY = transactions.getLayoutY() + transactions.getHeight() + 1;
-                    reports.setLayoutY(leyoutY);
-                    accounts.setLayoutY(leyoutY + reports.getHeight());
-                    transSubmenu.setVisible(false);
-                }
-            }
-
         });
         sales.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
