@@ -108,7 +108,7 @@ public class EditBuyerController implements Initializable {
         email2.setText(buyerToEdit.getEmail2());
         shop.setText(buyerToEdit.getShopno());
         city.setText(buyerToEdit.getCity());
-        paymentMethod.setValue(buyerPayMethodMap.get(buyerToEdit.getPaymentMethod()).toString());
+        paymentMethod.setValue(buyerToEdit.getPaymentMethod());
         creditPeriod.setValue(buyerToEdit.getCreditPeriod());
         prepareGuarantorCheckBox();
 

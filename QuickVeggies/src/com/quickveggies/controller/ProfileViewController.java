@@ -365,7 +365,7 @@ public class ProfileViewController implements Initializable {
                         }
                     });
                     try {
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/buyeredit.fxml"));
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/buyeredit.fxml"));
                         EditBuyerController controller = new EditBuyerController(buyer.getTitle());
                         loader.setController(controller);
                         Parent parent = loader.load();
