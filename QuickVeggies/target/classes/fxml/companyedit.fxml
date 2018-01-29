@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import com.quickveggies.misc.BoundedNumericTextField?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="559.0" prefWidth="538.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.quickveggies.controller.CompanyInfoEditController">
+   <children>
+      <TextField fx:id="txtCompanyName" layoutX="191.0" layoutY="150.0" prefHeight="25.0" prefWidth="192.0" promptText="Quick Veggies" />
+      <TextField fx:id="txtAddress" layoutX="191.0" layoutY="187.0" prefHeight="25.0" prefWidth="313.0" promptText="501, Lexington StreetmNY, 11001, USA" />
+      <Button fx:id="btnSave" layoutX="210.0" layoutY="515.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Save" />
+      <Label layoutX="37.0" layoutY="39.0" text="Company Logo">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtEmail" layoutX="191.0" layoutY="293.0" promptText="joe@domain.com" />
+      <Label layoutX="37.0" layoutY="153.0" text="Company Name">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="37.0" layoutY="192.0" text="Address">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="38.0" layoutY="231.0" text="Website">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="38.0" layoutY="263.0" text="Phone">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="38.0" layoutY="298.0" text="Email">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="36.0" layoutY="338.0" text="Industry Type">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtWebsite" layoutX="191.0" layoutY="223.0" prefHeight="25.0" prefWidth="192.0" promptText="www.qv.com" />
+      <BoundedNumericTextField fx:id="txtPhone" layoutX="191.0" layoutY="256.0" prefHeight="25.0" prefWidth="192.0" promptText="011-022-2349876" />
+      <TextField fx:id="txtIndustryType" layoutX="192.0" layoutY="331.0" promptText="Agriculture Produce" />
+      <Button fx:id="btnUpload" layoutX="383.0" layoutY="37.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Upload Logo" />
+      <Pane fx:id="imagePanel" layoutX="190.0" layoutY="8.0" prefHeight="125.0" prefWidth="156.0" style="-fx-border-color: black;">
+         <children>
+            <ImageView fx:id="imgLogo" fitHeight="125.0" fitWidth="156.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: 2px;" />
+         </children>
+      </Pane>
+      <Pane layoutX="33.0" layoutY="381.0" prefHeight="125.0" prefWidth="483.0" style="-fx-border-color: black;">
+         <children>
+            <Label layoutX="185.0" layoutY="-10.0" style="-fx-background-color: grey;" text="Admin Password">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="26.0" layoutY="28.0" text="Old Password">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font>
+            </Label>
+            <PasswordField fx:id="pwdOld" layoutX="138.0" layoutY="23.0" prefHeight="25.0" prefWidth="192.0" />
+            <Label layoutX="26.0" layoutY="62.0" text="New Password">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font>
+            </Label>
+            <PasswordField fx:id="pwdNew" layoutX="139.0" layoutY="56.0" prefHeight="25.0" prefWidth="192.0" />
+            <Label layoutX="25.0" layoutY="90.0" text="Confirm Password">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font>
+            </Label>
+            <PasswordField fx:id="pwdConfirm" layoutX="139.0" layoutY="87.0" prefHeight="25.0" prefWidth="192.0" />
+         </children>
+      </Pane>
+   </children>
+</Pane>

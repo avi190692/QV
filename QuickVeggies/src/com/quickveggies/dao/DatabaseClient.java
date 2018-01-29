@@ -1725,9 +1725,9 @@ public class DatabaseClient {
 	public void addExpenseInfo(String name, String type, String defaultAmount) {
 		try (PreparedStatement ps = connection.prepareStatement(INSERT_EXPENSE_INFO_QRY)) {
 			ps.setString(1, name);
-			ps.setString(2, name);
-			ps.setString(3, type);
-			ps.setString(4, defaultAmount);
+			ps.setString(4, name);
+			ps.setString(2, type);
+			ps.setString(3, defaultAmount);
 			ps.executeUpdate();
 			insertAuditRecord(new AuditLog(0, getCurrentUser(), null, "ADDED exepense info :".concat(name), null, 0));
 
@@ -1789,7 +1789,7 @@ public class DatabaseClient {
 	public List<ExpenseInfo> getExpenseInfoList() {
 		List<ExpenseInfo> list = new ArrayList<>();
 		try {
-			ResultSet rs = getResult("Select * from expenseInfo  order by name");
+			ResultSet rs = getResult("Select * from expenseinfo  order by name");
 			while (rs.next()) {
 				ExpenseInfo ei = new ExpenseInfo();
 				ei.setId(rs.getInt("id"));
@@ -2630,7 +2630,7 @@ public class DatabaseClient {
 
 	}
 
-	private static final String INSERT_EXPENDITURE_TYPE_QRY = "IF NOT EXISTS (SELECT * FROM expenditureType WHERE name = ?)  INSERT INTO expenditureType (name)  VALUES (?)";
+	private static final String INSERT_EXPENDITURE_TYPE_QRY = "INSERT INTO expenditureType (name) SELECT ? WHERE NOT EXISTS (SELECT 1 FROM expenditureType WHERE expenditureType.name = ?)";
 
 	private static final String QRY_PAID_RECD_MONEY_FOR_PARTY_ = "Select * from partyMoney where RTRIM(LTRIM(LOWER(partyType))) = ? ";
 
@@ -2676,7 +2676,7 @@ public class DatabaseClient {
 
 	private static final String SELECT_FRUIT_QUALITY_QRY = "select * from qualities qt where qt.id in (select quality_id from fruitQuality where fruit_id in(select id from fruits where name=?) )";
 
-	private static final String INSERT_EXPENSE_INFO_QRY = "IF NOT EXISTS (SELECT * FROM expenseInfo  WHERE name = ?)  INSERT INTO expenseInfo  (name, type, defaultAmount )  VALUES (?,?,?)";
+	private static final String INSERT_EXPENSE_INFO_QRY = "INSERT INTO expenseInfo (name, type, defaultAmount) SELECT ?,?,? WHERE NOT EXISTS (SELECT 1 FROM expenseInfo WHERE expenseInfo.name = ?)";
 	// changed by ss
 	// blocked the picture saving facilities
 	private static final String INSERT_PARTY_MONEY_QRY = "INSERT INTO partyMoney ("

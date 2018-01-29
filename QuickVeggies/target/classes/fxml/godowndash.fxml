@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@css/center_table_style.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+       <Pane fx:id="paneSettingButtons" layoutX="415.0" layoutY="61.0" prefHeight="43.0" prefWidth="188.0" style="-fx-background-color: transparent;">
+         <children>
+            <Button fx:id="btnColSettings" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" layoutX="14.0" layoutY="2.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="48.0" style="-fx-background-color: transparent;" text="Button" textOverrun="CLIP">
+               <graphic>
+                  <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/gear.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="btnPrint" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" layoutX="69.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="48.0" style="-fx-background-color: transparent;" text="Button" textOverrun="CLIP">
+               <graphic>
+                  <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/print.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="btnExport" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" layoutX="123.0" layoutY="2.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="48.0" style="-fx-background-color: transparent;" text="Button" textOverrun="CLIP">
+               <graphic>
+                  <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/export.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </Pane>
+   
+      <TableView fx:id="tvSalesDash" layoutY="114.0" prefHeight="428.0" prefWidth="610.0" AnchorPane.bottomAnchor="26.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="114.0">
+      </TableView>
+      <Label fx:id="lblStoreType" layoutX="41.0" layoutY="35.0" prefHeight="35.0" prefWidth="165.0" text="Cold Store">
+         <font>
+            <Font name="System Bold" size="21.0" />
+         </font>
+      </Label>
+      <Label layoutX="305.0" layoutY="26.0" prefHeight="31.0" prefWidth="92.0" text="In Store:">
+         <font>
+            <Font name="System Bold" size="21.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblCaseCount" layoutX="404.0" layoutY="26.0" prefHeight="31.0" prefWidth="75.0" text="3037" textFill="#709ada">
+         <font>
+            <Font name="System Bold" size="21.0" />
+         </font>
+      </Label>
+      <Label layoutX="476.0" layoutY="26.0" prefHeight="31.0" prefWidth="92.0" text="Cases">
+         <font>
+            <Font name="System Bold" size="21.0" />
+         </font>
+      </Label>
+      <TableView id="tableTotal" fx:id="tableTotal" layoutY="542.0" prefHeight="26.0" prefWidth="610.0" stylesheets="@css/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+   </children>
+</AnchorPane>

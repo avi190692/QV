@@ -1,0 +1,26 @@
+.menu-button, .menu-button .menu-item, .menu-button .context-menu {
+    -fx-background-color: linear-gradient(to top, rgba(0,0,0,.27), rgba(255,255,255,.47));  
+}
+.menu-button .label {
+    -fx-text-fill: white ;
+}
+
+.menu-button .menu-item:hover {
+    -fx-background-color: rgba(0,0,0,.27) ;
+}
+.menu-button .menu-item .label {
+    -fx-text-fill: white ;
+}
+.menu-button > .arrow-button {
+    -fx-background-color: white, #28559c ;
+    -fx-background-insets: 1, 3 ;
+    -fx-background-radius: 8, 8 ;
+    -fx-padding: 8 ;
+
+}
+.menu-button > .arrow-button > .arrow {
+   -fx-background-insets: 1 0 -1 0, 0;
+    -fx-background-color: -fx-mark-highlight-color, -fx-mark-color;
+    -fx-padding: 0.25em; /* 3 */
+    -fx-shape: "M 0 -3.5 v 7 l 4 -3.5 z";
+}
