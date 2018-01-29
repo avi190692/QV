@@ -56,7 +56,8 @@ public class DBuyerTableLine {
         this.boxSizeType = boxSizeType;
         this.fruit = fruit;
         //get buyer type
-        if (buyerTitle.length() == 0) {
+        if (buyerTitle.length() == 0) 
+        {
             return;
         }
         try 
