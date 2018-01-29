@@ -3,6 +3,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
@@ -12,8 +14,7 @@
 
 <?import com.quickveggies.misc.SearchPartyButton?>
 
-
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="610.0" minWidth="788.0" prefHeight="610.0" prefWidth="788.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.quickveggies.controller.dashboard.DashboardController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="610.0" minWidth="788.0" prefHeight="610.0" prefWidth="788.0" stylesheets="@css/word-like-menu-button.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.quickveggies.controller.dashboard.DashboardController">
     <children>
         <SplitPane fx:id="splitView" dividerPositions="0.21018276762402088" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="610.0" prefWidth="788.0" stylesheets="@css/splitpane.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
@@ -62,14 +63,6 @@
                                 <Insets left="10.0" />
                             </padding>
                         </Button>
-                        <Button fx:id="transactions" alignment="BASELINE_LEFT" contentDisplay="CENTER" layoutX="1.0" layoutY="306.0" minHeight="50.0" minWidth="158.0" mnemonicParsing="false" style="-fx-background-color: linear-gradient(to top, rgba(0,0,0,.27), rgba(255,255,255,.37)); -fx-text-fill: #f5f5f8; -fx-border-radius: 3px;" text="Transactions        &gt;" textAlignment="RIGHT">
-                            <font>
-                                <Font name="Verdana Bold" size="13.0" />
-                            </font>
-                            <padding>
-                                <Insets left="10.0" />
-                            </padding>
-                        </Button>
                         <Button fx:id="ladaan" alignment="BASELINE_LEFT" contentDisplay="CENTER" layoutX="1.0" layoutY="253.0" minHeight="50.0" minWidth="158.0" mnemonicParsing="false" style="-fx-background-color: linear-gradient(to top, rgba(0,0,0,.27), rgba(255,255,255,.37)); -fx-text-fill: #f5f5f8; -fx-border-radius: 3px;" text="Ladaan Bijak" textAlignment="RIGHT">
                             <font>
                                 <Font name="Verdana Bold" size="13.0" />
@@ -102,16 +95,6 @@
                                 </LinearGradient>
                             </textFill>
                         </Label>
-                        <Pane fx:id="transSubmenu" layoutX="44.0" layoutY="345.0" prefHeight="156.0" prefWidth="114.0" visible="false">
-                            <children>
-                                <Button fx:id="sales" graphicTextGap="1.0" layoutY="0.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="115.0" style="-fx-background-color: linear-gradient(to top, rgba(0,0,0,.27), rgba(255,255,255,.47)); -fx-border-radius: 3px; -fx-text-fill: White;" text="Sales (Arrival)" />
-                                <Button fx:id="coldstore" graphicTextGap="1.0" layoutY="26.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="115.0" style="-fx-background-color: linear-gradient(to top, rgba(0,0,0,.27), rgba(255,255,255,.47)); -fx-border-radius: 3px; -fx-text-fill: White;" text="Sales (Cold store)" />
-                                <Button fx:id="godown" graphicTextGap="1.0" layoutY="52.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="115.0" style="-fx-background-color: linear-gradient(to top, rgba(0,0,0,.27), rgba(255,255,255,.47)); -fx-border-radius: 3px; -fx-text-fill: White;" text="Sales (Go Down)" />
-                                <Button fx:id="expenses" graphicTextGap="1.0" layoutY="78.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="115.0" style="-fx-background-color: linear-gradient(to top, rgba(0,0,0,.27), rgba(255,255,255,.47)); -fx-border-radius: 3px; -fx-text-fill: White;" text="Expenses" />
-                                <Button fx:id="teeps" graphicTextGap="1.0" layoutY="104.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="115.0" style="-fx-background-color: linear-gradient(to top, rgba(0,0,0,.27), rgba(255,255,255,.47)); -fx-border-radius: 3px; -fx-text-fill: White;" text="Teep" />
-                                <Button fx:id="banking" graphicTextGap="1.0" layoutY="130.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="115.0" style="-fx-background-color: linear-gradient(to top, rgba(0,0,0,.27), rgba(255,255,255,.47)); -fx-border-radius: 3px; -fx-text-fill: White;" text="Banking" />
-                            </children>
-                        </Pane>
                   <Button fx:id="budgetSelector" alignment="BASELINE_LEFT" contentDisplay="CENTER" layoutX="2.0" layoutY="517.0" minHeight="50.0" minWidth="158.0" mnemonicParsing="false" style="-fx-background-color: linear-gradient(to top, rgba(0,0,0,.27), rgba(255,255,255,.37)); -fx-text-fill: #f5f5f8; -fx-border-radius: 3px;" text=" Budget Selector " textAlignment="RIGHT">
                      <font>
                         <Font name="Verdana Bold" size="13.0" />
@@ -120,14 +103,24 @@
                         <Insets left="10.0" />
                      </padding>
                   </Button>
+                  <MenuButton fx:id="transactions" layoutX="1.0" layoutY="306.0" minHeight="50.0" minWidth="158.0" mnemonicParsing="false" popupSide="RIGHT" style="-fx-background-color: linear-gradient(to top, rgba(0,0,0,.27), rgba(255,255,255,.37)); -fx-text-fill: #f5f5f8; -fx-border-radius: 3px;" text="Transactions" textAlignment="RIGHT">
+                    <items>
+                      <MenuItem fx:id="coldstore" mnemonicParsing="false" text="Sales (Cold Store)" />
+                      <MenuItem fx:id="sales" mnemonicParsing="false" text="Sales(Arrival)" />
+                        <MenuItem fx:id="godown" mnemonicParsing="false" text="Sales (Go Down)" />
+                        <MenuItem fx:id="expenses" mnemonicParsing="false" text="Expenses" />
+                        <MenuItem fx:id="teeps" mnemonicParsing="false" text="Teep" />
+                        <MenuItem fx:id="banking" mnemonicParsing="false" text="Banking" />
+                    </items>
+                     <font>
+                        <Font name="Verdana Bold" size="13.0" />
+                     </font>
+                  </MenuButton>
                     </children>
                 </AnchorPane>
                 <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="607.0" prefWidth="610.0">
                     <children>
-                        <AnchorPane fx:id="mainView" layoutX="-4.0" layoutY="37.0" prefHeight="573.0" prefWidth="622.0" style="-fx-background-color: gray;" stylesheets="@css/center_table_style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="38.0">
-                            <children>
-                            </children>
-                        </AnchorPane>
+                        <AnchorPane fx:id="mainView" layoutX="-4.0" layoutY="37.0" prefHeight="573.0" prefWidth="622.0" style="-fx-background-color: gray;" stylesheets="@css/center_table_style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="38.0" />
                   <AnchorPane layoutX="7.0" layoutY="-6.0" maxHeight="46.0" minHeight="46.0" prefHeight="46.0" style="-fx-background-color: #99CCEA;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-6.0">
                      <children>
                                 <Button fx:id="createEntry" defaultButton="true" layoutX="240.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="60.0" text="+">

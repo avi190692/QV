@@ -16,6 +16,7 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+<<<<<<< HEAD
 	<classpathentry kind="lib" path="D:/SOFTWARES/jars/QuickVeggieLibrary/ai-custom-dates.jar"/>
 	<classpathentry kind="lib" path="D:/SOFTWARES/jars/QuickVeggieLibrary/barcodes-7.0.2.jar"/>
 	<classpathentry kind="lib" path="D:/SOFTWARES/jars/QuickVeggieLibrary/commons-lang-2.5.jar"/>
@@ -43,5 +44,9 @@
 	<classpathentry kind="lib" path="D:/SOFTWARES/jars/QuickVeggieLibrary/font awesome/font-awesome-4.7.0.jar"/>
 	<classpathentry kind="lib" path="D:/SOFTWARES/jars/QuickVeggieLibrary/junit_4/junit-4.12.jar"/>
 	<classpathentry kind="lib" path="D:/SOFTWARES/jars/jasperreports-5.5.0.jar"/>
+=======
+	<classpathentry kind="lib" path="lib/jasperreports-5.5.0.jar"/>
+	<classpathentry kind="lib" path="lib/servlet-api.jar"/>
+>>>>>>> branch 'QV_WorkingBranch' of https://github.com/avi190692/QV.git
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
