@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.TableView?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="650.0" stylesheets="@css/center_table_style.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Text layoutX="10.0" layoutY="50.0" text="Preview Template" id="label-header-on-light"/>
+      <Pane fx:id="prevTablePane" layoutX="10.0" layoutY="80.0" prefHeight="250.0" prefWidth="600.0"/>
+      <!--  <TableView fx:id="previewTable" layoutX="10.0" layoutY="80.0" prefHeight="250.0" prefWidth="350.0"/> -->
+      <Button fx:id="close" layoutX="225.0" layoutY="400.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="100.0" text="Close" />
+   </children>
+</Pane>

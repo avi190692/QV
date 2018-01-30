@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="parentPane" layoutY="100.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="473.0" prefWidth="571.0" style="-fx-background-color: #f2f6ff;;" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.quickveggies.controller.FruitViewController">
+
+   <children>
+      <Pane layoutX="75.0" layoutY="65.0" prefHeight="51.0" prefWidth="421.0" style="-fx-border-color: black; -fx-border-width: 2px;">
+         <children>
+            <Label layoutX="60.0" layoutY="17.0" prefHeight="17.0" prefWidth="109.0" text="Fruit Type">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="cboFruitTypes" layoutX="158.0" layoutY="15.0" prefHeight="25.0" prefWidth="200.0" visible="false" />
+            <TextField fx:id="txtFruitType" editable="false" layoutX="158.0" layoutY="15.0" prefHeight="25.0" prefWidth="200.0" visible="false" />
+         </children>
+      </Pane>
+      <HBox layoutX="75.0" layoutY="116.0" prefHeight="139.0" prefWidth="421.0" style="-fx-border-color: black; -fx-border-image-width: 10px;">
+         <children>
+            <Pane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="60.0" layoutY="69.0" prefHeight="20.0" prefWidth="109.0" text="Fruit Qualities">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <ScrollPane fx:id="scrollPaneFruitQuals" prefHeight="98.0" prefWidth="217.0" />
+         </children>
+      </HBox>
+      <HBox layoutX="75.0" layoutY="253.0" prefHeight="190.0" prefWidth="421.0" style="-fx-border-color: black; -fx-border-image-width: 10px;">
+         <children>
+            <Pane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="63.0" layoutY="68.0" prefHeight="20.0" prefWidth="109.0" text="Box Sizes">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <ScrollPane fx:id="scrollPaneFruitBoxSizes" prefHeight="85.0" prefWidth="217.0" />
+         </children>
+      </HBox>
+      <Button fx:id="btnEdit" layoutX="499.0" layoutY="78.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="58.0" text="Edit" />
+      <Button fx:id="btnDelete" layoutX="499.0" layoutY="111.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="58.0" text="Delete" />
+      <Pane prefHeight="64.0" prefWidth="571.0" style="-fx-background-color: #ecf1f5;">
+         <children>
+            <Label fx:id="Title" layoutX="14.0" layoutY="14.0" text="Product Information">
+               <font>
+                  <Font name="System Bold Italic" size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      
+      
+   </children>
+</Pane>

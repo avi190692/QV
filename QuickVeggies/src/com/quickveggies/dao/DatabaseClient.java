@@ -81,6 +81,7 @@ public class DatabaseClient {
 	protected DatabaseClient() {
 	}
 
+<<<<<<< HEAD
 	public static DatabaseClient getInstance() {
 
 		if (instance == null) {
@@ -93,7 +94,53 @@ public class DatabaseClient {
 				Logger.getLogger(DatabaseClient.class.getName()).log(Level.SEVERE, null, ex);
 			}
 
+=======
+    public static DatabaseClient getInstance() {
+        
+        if (instance == null) {
+            instance = new DatabaseClient();
+            
+               
+            try 
+            {
+                connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/qvdb_local?user=postgres&password=postgres");
+            } 
+            catch (SQLException ex) 
+            {
+                Logger.getLogger(DatabaseClient.class.getName()).log(Level.SEVERE, null, ex);
+            }
+       
+  
+            }
+        
+        return instance;
+    }
+    //added by ss for account code entry
+    private static final String account_code_entry = "insert into public.accountmaster (accountcode,accountname,amount,fin_year,report_flag,active_flag,month,account_type)"+
+    											     "values(?,?,?,?,?,?,?,?)";
+    public void accountCodeEntry(AccountMaster accountMaster)
+    {
+    	 try 
+    	 {
+			PreparedStatement psmt = connection.prepareStatement(account_code_entry);
+							  psmt.setString(1,accountMaster.getAccountcode());
+							  psmt.setString(2,accountMaster.getAccountname());
+							  psmt.setDouble(3,accountMaster.getAmount());
+							  psmt.setString(4,accountMaster.getFin_year());
+							  psmt.setString(5,accountMaster.getReport_flag());
+							  psmt.setBoolean(6,accountMaster.isActive_flag());
+							  psmt.setString(7,accountMaster.getMonth());
+							  psmt.setString(8,accountMaster.getAccountType());
+							  
+							  psmt.execute();
+				  
+		 } 
+    	 catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+>>>>>>> refs/heads/QV_localRepo_working
 		}
+<<<<<<< HEAD
 
 		return instance;
 	}
@@ -114,6 +161,177 @@ public class DatabaseClient {
 			psmt.setBoolean(6, true);
 			psmt.setString(7, accountMaster.getMonth());
 
+=======
+    }
+    private static final String account_info_update="update public.accountmaster set accountname=?,amount=?,report_flag=?,active_flag=?,account_type=?,subgl_link=? where accountcode=?";
+    public void accountInfoUpdate(AccountMaster accountMaster)
+    {
+    	 try 
+    	 {
+			PreparedStatement psmt = connection.prepareStatement(account_info_update);
+							  
+							  psmt.setString(1,accountMaster.getAccountname());
+							  psmt.setDouble(2,accountMaster.getAmount());
+							  psmt.setString(3,accountMaster.getReport_flag());
+							  psmt.setBoolean(4,accountMaster.isActive_flag());							
+							  psmt.setString(5,accountMaster.getAccountType());
+							  psmt.setString(6,accountMaster.getSubglLink());
+							  
+							  psmt.setString(7,accountMaster.getAccountcode());
+							  
+							  psmt.executeUpdate();
+				  
+		 } 
+    	 catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+    //## added by ss for account code logic test
+    private static final String account_code_search = "select * from public.accountmaster where accountcode=?";
+    public List<String> accountCodeSearch(String accountCode)
+    {
+    	List<String> acm = new ArrayList<String>();
+			PreparedStatement psmt;
+			try 
+			{
+				psmt = connection.prepareStatement(account_code_search);
+				psmt.setString(1,accountCode);
+			    ResultSet rs = psmt.executeQuery();
+			    while(rs.next())
+			    {
+			    	System.out.println(rs.getString(2));
+			    	acm.add(rs.getString(2));
+			    } 
+			} 
+			catch (SQLException e)
+			{
+				e.printStackTrace();
+			}
+	   return acm;		
+    }
+    
+    //## added by ss for account search engine
+    //private static final String account_code_search_engine_bycodename = "select * from public.accountmaster where accountcode=? and accountname like %?%";
+    public List<AccountMaster> accountCodeSearch(String searchString,String searchChoice)
+    {
+    	List<AccountMaster> acm = new ArrayList<AccountMaster>();
+    	
+			PreparedStatement psmt;
+			try 
+			{
+				if(searchChoice.equals("accountCodeEdit"))
+				{
+					psmt = connection.prepareStatement("select * from public.accountmaster where accountcode = '"+searchString+"'");
+					ResultSet rs = psmt.executeQuery();
+					while(rs.next())
+					{
+						AccountMaster am = new AccountMaster();
+						
+						//System.out.println(rs.getString(2));
+						am.setAccountcode(rs.getString(2));
+						am.setAccountname(rs.getString(3));
+						am.setAmount(rs.getDouble(4));
+						am.setFin_year(rs.getString(5));
+						am.setReport_flag(rs.getString(7));		
+						am.setActive_flag(rs.getBoolean(8));
+						am.setAccountType(rs.getString(10));	
+						am.setSubglLink(rs.getString(11));
+						
+						acm.add(am);
+					} 
+				}
+				
+			  else if(searchChoice.equals("Type"))
+				{
+					psmt = connection.prepareStatement("select * from public.accountmaster where report_flag like '%"+searchString+"%'");
+					ResultSet rs = psmt.executeQuery();
+					while(rs.next())
+					{
+						AccountMaster am = new AccountMaster();
+						
+						//System.out.println(rs.getString(2));
+						am.setAccountcode(rs.getString(2));
+						am.setAccountname(rs.getString(3));
+						am.setReport_flag(rs.getString(7));
+						am.setAmount(rs.getDouble(4));
+						
+						acm.add(am);
+					} 
+				}
+				
+				else if(searchChoice.equals("Name"))
+				{
+					psmt = connection.prepareStatement("select * from public.accountmaster where accountname like '%"+searchString+"%'");
+					ResultSet rs = psmt.executeQuery();
+					while(rs.next())
+					{
+						AccountMaster am = new AccountMaster();
+						
+						am.setAccountcode(rs.getString(2));
+						am.setAccountname(rs.getString(3));
+						am.setReport_flag(rs.getString(7));
+						am.setAmount(rs.getDouble(4));
+						
+						acm.add(am);
+					} 
+				}
+				else if(searchChoice.equals("Balance"))
+				{
+					psmt = connection.prepareStatement("select * from public.accountmaster where amount like '%"+searchString+"%'");
+					ResultSet rs = psmt.executeQuery();
+					while(rs.next())
+					{
+						AccountMaster am = new AccountMaster();
+						
+						am.setAccountcode(rs.getString(2));
+						am.setAccountname(rs.getString(3));
+						am.setReport_flag(rs.getString(7));
+						am.setAmount(rs.getDouble(4));
+						
+						acm.add(am);
+					} 
+				}
+				else
+				{
+					psmt = connection.prepareStatement("select * from public.accountmaster where accountcode like '%"+searchString+"%'");
+					ResultSet rs = psmt.executeQuery();
+					while(rs.next())
+					{
+						AccountMaster am = new AccountMaster();
+						
+						//System.out.println(rs.getString(2));
+						am.setAccountcode(rs.getString(2));
+						am.setAccountname(rs.getString(3));
+						am.setReport_flag(rs.getString(7));
+						am.setAmount(rs.getDouble(4));
+						
+						acm.add(am);
+					} 
+				}
+			}
+			catch (SQLException e)
+			{
+				e.printStackTrace();
+			}
+	   return acm;		
+    }
+    
+   //## audit log entry for account code creation
+    private static final String audit_log_entry="insert into auditlog (userid,eventdetail,eventobject,eventobjectid,amount) values (?,?,?,?,?)";
+    public void insertLog_Audit(AuditLog auditlog)
+    {
+    	PreparedStatement psmt;
+    	try 
+    	{
+			psmt = connection.prepareStatement(audit_log_entry);
+			psmt.setString(1,auditlog.getUserId());
+			psmt.setString(2,auditlog.getEventDetail());
+			psmt.setString(3,auditlog.getEventObject());
+			psmt.setInt(4,auditlog.getEventObjectId());
+			psmt.setDouble(5,auditlog.getAmount());
+			
+>>>>>>> refs/heads/QV_localRepo_working
 			psmt.execute();
 
 		} catch (SQLException e) {

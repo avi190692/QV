@@ -1,0 +1,111 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+body {
+    -fx-font-family: "sans-serif";
+}
+.form-login, .form-registration {
+    width: 450px;
+    border-radius: 3px;
+    background-color: #3d3d41;
+    box-sizing: border-box;
+    padding: 10px 20px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+label {
+    display: block;
+    text-align: center;
+    padding: 20px 0;
+    color: #f5f5f8;
+}
+input {
+    box-sizing: border-box;
+    color: #fff;
+    padding: 20px 10px;
+    display: inline-block;
+    width: 60%;
+    height: 30px;
+    background-color: #353537;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #292929;
+    border-radius: 2px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: transparent;
+}
+input:focus {
+    outline: none;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #b1b1b3;
+}
+.btn-def {
+    color: #f5f5f8;
+    margin-top: 20px;
+    padding: 10px 0;
+    width: 30%;
+    display: inline-block;
+    cursor: pointer;
+    background-color: #3c3c3f;
+    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.14) 0%, rgba(255, 255, 255, 0.14) 100%);
+    border-width: 1px;
+    border-style: solid;
+    border-color: #292929;
+    border-radius: 2px;
+}
+.btn-left {
+    margin: 20px;
+    width: 200px;
+    padding: 20px 10px;
+    font-size: 1.1em;
+    text-align: left;
+    color: #f5f5f8;
+    cursor: pointer;
+    border-radius: 3px;
+    background-color: #3c3c3f;
+    background-image: linear-gradient(to top, rgba(0,0,0,.27), rgba(255,255,255,.37));
+}
+.btn-left span {
+    float: right;
+    font-size: 1.2em;
+    -fx-font-family: "sans", "arial";
+}
+.btn-small {
+    width: 150px;
+    padding: 10px;
+    color: #fff;
+    cursor: pointer;
+    margin: 20px;
+    border-radius: 3px;
+    background-color: #5b5b5f;
+    text-align: left;
+    background-image: linear-gradient(to top, rgba(0,0,0,.27), rgba(255,255,255,.47));
+}
+.large-txtfield{
+    color: #fff;
+    text-align:left; 
+}
+#menu-item .label {
+    -fx-text-fill: white;
+}
+#menu-item:focused {
+    -fx-background-color: darkgray;
+}
+#menu-item:focused .label {
+    -fx-text-fill: blue;
+}
+
+#tableTotal .scroll-bar:vertical .increment-arrow,
+#tableTotal .scroll-bar:vertical .decrement-arrow,
+#tableTotal .scroll-bar:vertical .increment-button,
+#tableTotal .scroll-bar:vertical .decrement-button,
+#tableTotal .scroll-bar:horizontal .increment-arrow,
+#tableTotal .scroll-bar:horizontal .decrement-arrow,
+#tableTotal .scroll-bar:horizontal .increment-button,
+#tableTotal .scroll-bar:horizontal .decrement-button {
+    -fx-padding: 0;
+}
+

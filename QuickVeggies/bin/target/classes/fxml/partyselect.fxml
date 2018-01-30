@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TreeTableColumn?>
+<?import javafx.scene.control.TreeTableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="375.0" tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.65">
+  <tabs>
+    <Tab closable="false" text="Buyer">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="371.0" prefWidth="422.0">
+               <children>
+                  <TreeTableView prefHeight="385.0" prefWidth="378.0">
+                     <columns>
+                        <TreeTableColumn prefWidth="36.0" text="C1" />
+                        <TreeTableColumn prefWidth="65.0" text="Code" />
+                        <TreeTableColumn prefWidth="124.0" text="Buyer" />
+                        <TreeTableColumn prefWidth="75.0" text="Shop no." />
+                        <TreeTableColumn prefWidth="75.0" text="Select" />
+                     </columns>
+                  </TreeTableView>
+               </children></AnchorPane>
+      </content>
+    </Tab>
+    <Tab closable="false" text="Ladaan &amp; Bijak">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TreeTableView prefHeight="385.0" prefWidth="378.0">
+                    <columns>
+                      <TreeTableColumn prefWidth="36.0" text="C1" />
+                      <TreeTableColumn prefWidth="65.0" text="Code" />
+                        <TreeTableColumn prefWidth="124.0" text="Buyer" />
+                        <TreeTableColumn prefWidth="75.0" text="Shop no." />
+                        <TreeTableColumn prefWidth="75.0" text="Select" />
+                    </columns>
+                  </TreeTableView>
+               </children></AnchorPane>
+      </content>
+    </Tab>
+  </tabs>
+</TabPane>

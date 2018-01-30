@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <!-- <Region layoutY="234.0" prefHeight="98.0" prefWidth="600.0" style="-fx-background-color: #99ccff; -fx-opacity: 0.8;" /> -->
+      <Label layoutX="66.0" layoutY="14.0" text="Title" />
+      <Label layoutX="213.0" layoutY="14.0" text="First Name" />
+      <Label layoutX="376.0" layoutY="14.0" text="Last Name" />
+      <Label layoutX="27.0" layoutY="71.0" prefWidth="140.0" text="Company / Orchard name" />
+      <Label layoutX="379.0" layoutY="71.0" text="Proprietor" />
+      <Label layoutX="64.0" layoutY="123.0" text="Mobile" />
+      <Label layoutX="230.0" layoutY="123.0" text="Mobile2" />
+      <Label layoutX="374.0" layoutY="123.0" text="Email1" />
+      <Label layoutX="374.0" layoutY="181.0" text="Email2" />
+      <Label layoutX="58.0" layoutY="179.0" text="Shop no." />
+      <Label layoutX="219.0" layoutY="179.0" text="City/Town" />
+      <Label layoutX="17.0" layoutY="242.0" text="Preferred Payment method" />
+      <Label layoutX="374.0" layoutY="242.0" text="Credit period" />
+      <TextField fx:id="title" layoutX="15.0" layoutY="31.0" promptText="Title" />
+      <TextField fx:id="firstName" layoutX="179.0" layoutY="31.0" prefHeight="25.0" promptText="First Name" />
+      <TextField fx:id="lastName" layoutX="334.0" layoutY="31.0" promptText="Last Name" />
+      <TextField fx:id="company" layoutX="17.0" layoutY="88.0" prefHeight="25.0" prefWidth="298.0" promptText="Company / Orchard name" />
+      <TextField fx:id="proprietor" layoutX="334.0" layoutY="88.0" promptText="Proprietor" />
+      <TextField fx:id="mobile" layoutX="17.0" layoutY="138.0" promptText="Mobile" />
+      <TextField fx:id="mobile2" layoutX="179.0" layoutY="138.0" prefHeight="25.0" promptText="Mobile" />
+      <TextField fx:id="email" layoutX="334.0" layoutY="138.0" promptText="Email address 1" />
+      <TextField fx:id="shop" layoutX="17.0" layoutY="196.0" promptText="Shop no." />
+      <TextField fx:id="city" layoutX="179.0" layoutY="196.0" promptText="City/Town" />
+      <TextField fx:id="email2" layoutX="334.0" layoutY="196.0" promptText="Email Address 2" />
+      <ImageView fitHeight="80.0" fitWidth="101.0" layoutX="492.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+         <effect>
+            <Shadow />
+         </effect></ImageView>
+      <ComboBox fx:id="paymentMethod" layoutX="15.0" layoutY="270.0" prefHeight="54.0" prefWidth="185.0" promptText="Cash" visibleRowCount="2">
+         <effect>
+            <Glow />
+         </effect>
+      </ComboBox>
+      <ChoiceBox fx:id="creditPeriod" layoutX="324.0" layoutY="270.0" prefHeight="54.0" prefWidth="185.0" />
+      <CheckBox fx:id="hasGuarantor" layoutX="17.0" layoutY="337.0" mnemonicParsing="false" text="Has a guarantor / parent company" />
+      <TextField fx:id="guarantorName" disable="true" layoutX="16.0" layoutY="361.0" prefHeight="25.0" prefWidth="203.0" promptText="Enter Parent Company" />
+      <Button fx:id="save" layoutX="230.0" layoutY="343.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="114.0" text="Save" />
+      <!--  <Button fx:id="delete" layoutX="461.0" layoutY="343.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="114.0" text="Delete profile" /> -->
+      
+   </children>
+</Pane>

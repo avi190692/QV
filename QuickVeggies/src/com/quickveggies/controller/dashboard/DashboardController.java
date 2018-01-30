@@ -222,7 +222,8 @@ public class DashboardController extends AbstractFreshEntryController implements
 
         settings.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                try {
+                try 
+                {
                 String currentUserType = SessionDataController.getInstance().getCurrentUser().getUsertype();
                 if(currentUserType.equals("Admin"))
                 {
@@ -282,7 +283,8 @@ public class DashboardController extends AbstractFreshEntryController implements
 		        });
 				try 
 				{
-			            Parent parent = FXMLLoader.load(DBuyerController.class.getResource("/fxml/accountcode_creation.fxml"));
+			          //Parent parent = FXMLLoader.load(DBuyerController.class.getResource("/fxml/accountcode_creation.fxml"));
+					    Parent parent = FXMLLoader.load(DBuyerController.class.getResource("/fxml/accountCodeSearch.fxml"));
 			            Scene scene = new Scene(parent, 687, 400);
 			            scene.setOnKeyPressed(new EventHandler<KeyEvent>() 
 			            {
@@ -421,16 +423,21 @@ public class DashboardController extends AbstractFreshEntryController implements
         });
         searchProfile.setPartyType(PartyType.BUYER_SUPPLIERS);
 
-        createEntry.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            public void handle(KeyEvent event) {
-                if (event.getCode() == KeyCode.ESCAPE) {
+        createEntry.setOnKeyPressed(new EventHandler<KeyEvent>() 
+        {
+            public void handle(KeyEvent event) 
+            {
+                if (event.getCode() == KeyCode.ESCAPE) 
+                {
                     entryMenu.setVisible(false);
                     splitView.setEffect(null);
                 }
             }
         });
-        createEntry.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent event) {
+        createEntry.setOnAction(new EventHandler<ActionEvent>() 
+        {
+            public void handle(ActionEvent event) 
+            {
                 switchVisible(entryMenu, splitView);
             }
         });

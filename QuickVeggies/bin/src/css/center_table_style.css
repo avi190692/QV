@@ -1,0 +1,45 @@
+.table-cell{
+	-fx-alignment: CENTER;
+}
+
+#label-text-on-dark{
+	-fx-font-size: 16px;
+	-fx-font-family: "Arial";
+   -fx-text-fill: #ffffff;
+}
+
+#label-text-on-dark-bold{
+	-fx-font-size: 16px;
+	-fx-font-family: "Arial Black";
+   -fx-text-fill: #ffffff;
+}
+
+#label-text-on-light-bold{
+	-fx-font-size: 16px;
+	-fx-font-family: "Arial Black";
+   -fx-text-fill: #000000;
+}
+
+#label-text-on-light{
+	-fx-font-size: 16px;
+	-fx-font-family: "Arial";
+   -fx-text-fill: #000000;
+}
+
+#label-header-on-dark{
+	-fx-font-size: 24px;
+	-fx-font-family: "Arial";
+   -fx-text-fill: #ffffff;
+}
+
+#label-header-on-light{
+	-fx-font-size: 24px;
+	-fx-font-family: "Arial";
+   -fx-text-fill: #000000;
+}
+
+#label-header-on-dark-bold{
+	-fx-font-size: 24px;
+	-fx-font-family: "Arial Black";
+   -fx-text-fill: #ffffff;
+}

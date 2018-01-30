@@ -13,25 +13,40 @@ public class AccountMaster {
 	  private String report_flag;
 	  private boolean active_flag;
 	  private String month;
+	  private String accountType;
+	  private String subglLink;
 	  
 	  
 	public AccountMaster() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
 	public AccountMaster(String accountcode, String accountname, double amount, String fin_year,
-                         String creation_date, String report_flag, boolean active_flag, String month) {
+            String creation_date, String report_flag, boolean active_flag, String month,String accountType) {
+			super();
+			
+			this.accountcode = accountcode;
+			this.accountname = accountname;
+			this.amount = amount;
+			this.fin_year = fin_year;
+			this.creation_date = creation_date;
+			this.report_flag = report_flag;
+			this.active_flag = active_flag;
+			this.month = month;
+			this.accountType = accountType;
+	}
+	
+	public AccountMaster(String accountcode, String accountname, double amount,
+                         String report_flag, boolean active_flag,String accountType,String subglLink) {
 		super();
 		
 		this.accountcode = accountcode;
 		this.accountname = accountname;
 		this.amount = amount;
-		this.fin_year = fin_year;
-		this.creation_date = creation_date;
 		this.report_flag = report_flag;
 		this.active_flag = active_flag;
-		this.month = month;
+		this.accountType = accountType;
+		this.subglLink = subglLink;
 		}
 
 	public AccountMaster(int accountmaster_id, String accountcode, String accountname, double amount, String fin_year,
@@ -106,6 +121,22 @@ public class AccountMaster {
 
 	public void setCreation_date(String creation_date) {
 		this.creation_date = creation_date;
+	}
+
+	public String getAccountType() {
+		return accountType;
+	}
+
+	public void setAccountType(String accountType) {
+		this.accountType = accountType;
+	}
+
+	public String getSubglLink() {
+		return subglLink;
+	}
+
+	public void setSubglLink(String subglLink) {
+		this.subglLink = subglLink;
 	}
 	
 	
