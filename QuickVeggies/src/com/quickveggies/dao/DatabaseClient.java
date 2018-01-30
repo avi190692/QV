@@ -57,44 +57,30 @@ import com.quickveggies.model.EntityType;
 
 public class DatabaseClient {
 
-	private static final String STORAGE_BUYER_DEALS = "storagebuyerdeals";
-	private static Connection connection;
-	private static DatabaseClient instance = null;
+    private static final String STORAGE_BUYER_DEALS = "storagebuyerdeals";
+    private static Connection connection;
+    private static DatabaseClient instance = null;
 
-	private final static Map<String, String> TABLE_MAP = new LinkedHashMap<>();
+    private final static Map<String, String> TABLE_MAP = new LinkedHashMap<>();
 
-	static {
-		TABLE_MAP.put("arrival", "Arrival");
-		TABLE_MAP.put("buyerDeals", "Buyer Deal");
-		TABLE_MAP.put("ladaanBijakSaleDeals", "Ladaan/Bijak Sale Deal");
-		TABLE_MAP.put("storageBuyerDeals", "Storage buyer deal");
-		TABLE_MAP.put("supplierDeals", "Supplier Deal");
-		TABLE_MAP.put("templates", "Template");
-		TABLE_MAP.put("buyers1", "buyer");
-		TABLE_MAP.put("accountEntries", "account entry");
-		TABLE_MAP.put("accounts", "account");
-		TABLE_MAP.put("suppliers1", "supplier");
-		TABLE_MAP.put("charges", "charges");
-		TABLE_MAP.put("expenditures", "expenditure");
-	}
+    static {
+        TABLE_MAP.put("arrival", "Arrival");
+        TABLE_MAP.put("buyerDeals", "Buyer Deal");
+        TABLE_MAP.put("ladaanBijakSaleDeals", "Ladaan/Bijak Sale Deal");
+        TABLE_MAP.put("storageBuyerDeals", "Storage buyer deal");
+        TABLE_MAP.put("supplierDeals", "Supplier Deal");
+        TABLE_MAP.put("templates", "Template");
+        TABLE_MAP.put("buyers1", "buyer");
+        TABLE_MAP.put("accountEntries", "account entry");
+        TABLE_MAP.put("accounts", "account");
+        TABLE_MAP.put("suppliers1", "supplier");
+        TABLE_MAP.put("charges", "charges");
+        TABLE_MAP.put("expenditures", "expenditure");
+    }
 
-	protected DatabaseClient() {
-	}
+    protected DatabaseClient() {
+    }
 
-<<<<<<< HEAD
-	public static DatabaseClient getInstance() {
-
-		if (instance == null) {
-			instance = new DatabaseClient();
-
-			try {
-				connection = DriverManager
-						.getConnection("jdbc:postgresql://localhost:5432/qvdb?user=postgres&password=postgres");
-			} catch (SQLException ex) {
-				Logger.getLogger(DatabaseClient.class.getName()).log(Level.SEVERE, null, ex);
-			}
-
-=======
     public static DatabaseClient getInstance() {
         
         if (instance == null) {
@@ -138,30 +124,8 @@ public class DatabaseClient {
     	 catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
->>>>>>> refs/heads/QV_localRepo_working
+
 		}
-<<<<<<< HEAD
-
-		return instance;
-	}
-
-	// added by ss for account code entry
-	private static final String account_code_entry = "insert into public.accountmaster (accountcode,accountname,amount,fin_year,report_flag,active_flag,month)"
-			+ "values(?,?,?,?,?,?,?)";
-
-	public void accountCodeEntry(AccountMaster accountMaster) {
-		try {
-			PreparedStatement psmt = connection.prepareStatement(account_code_entry);
-			psmt.setString(1, accountMaster.getAccountcode());
-			psmt.setString(2, accountMaster.getAccountname());
-			psmt.setDouble(3, accountMaster.getAmount());
-			psmt.setString(4, accountMaster.getFin_year());
-			// psmt.setString(5,accountMaster.getCreation_date());
-			psmt.setString(5, accountMaster.getReport_flag());
-			psmt.setBoolean(6, true);
-			psmt.setString(7, accountMaster.getMonth());
-
-=======
     }
     private static final String account_info_update="update public.accountmaster set accountname=?,amount=?,report_flag=?,active_flag=?,account_type=?,subgl_link=? where accountcode=?";
     public void accountInfoUpdate(AccountMaster accountMaster)
@@ -331,114 +295,16 @@ public class DatabaseClient {
 			psmt.setInt(4,auditlog.getEventObjectId());
 			psmt.setDouble(5,auditlog.getAmount());
 			
->>>>>>> refs/heads/QV_localRepo_working
 			psmt.execute();
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-
-	// ## added by ss for account code logic test
-	private static final String account_code_search = "select * from public.accountmaster where accountcode=?";
-
-	public List<String> accountCodeSearch(String accountCode) {
-		List<String> acm = new ArrayList<String>();
-		PreparedStatement psmt;
-		try {
-			psmt = connection.prepareStatement(account_code_search);
-			psmt.setString(1, accountCode);
-			ResultSet rs = psmt.executeQuery();
-			while (rs.next()) {
-				System.out.println(rs.getString(2));
-				acm.add(rs.getString(2));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return acm;
-	}
-
-	// ## added by ss for account search engine
-	private static final String account_code_search_engine_bycodename = "select * from public.accountmaster where accountcode=? and accountname like %?%";
-
-	public List<AccountMaster> accountCodeSearch(String byCode, String byName) {
-		List<AccountMaster> acm = new ArrayList<AccountMaster>();
-
-		PreparedStatement psmt;
-		try {
-			if (!byCode.equals("") && byName.equals("")) {
-				psmt = connection.prepareStatement(
-						"select * from public.accountmaster where accountcode like '%" + byCode + "%'");
-				ResultSet rs = psmt.executeQuery();
-				while (rs.next()) {
-					AccountMaster am = new AccountMaster();
-
-					// System.out.println(rs.getString(2));
-					am.setAccountcode(rs.getString(2));
-					am.setAccountname(rs.getString(3));
-					am.setAmount(rs.getDouble(4));
-
-					acm.add(am);
-				}
-			}
-
-			if (byCode.equals("") && !byName.equals("")) {
-				psmt = connection.prepareStatement(
-						"select * from public.accountmaster where accountname like '%" + byName + "%'");
-				ResultSet rs = psmt.executeQuery();
-				while (rs.next()) {
-					AccountMaster am = new AccountMaster();
-
-					am.setAccountcode(rs.getString(2));
-					am.setAccountname(rs.getString(3));
-					am.setAmount(rs.getDouble(4));
-
-					acm.add(am);
-				}
-			}
-			if (!byCode.equals("") && !byName.equals("")) {
-				psmt = connection.prepareStatement("select * from public.accountmaster where accountcode like '%"
-						+ byCode + "%' and accountname like '%" + byName + "%'");
-				ResultSet rs = psmt.executeQuery();
-				while (rs.next()) {
-					AccountMaster am = new AccountMaster();
-
-					am.setAccountcode(rs.getString(2));
-					am.setAccountname(rs.getString(3));
-					am.setAmount(rs.getDouble(4));
-
-					acm.add(am);
-				}
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return acm;
-	}
-
-	// ## audit log entry for account code creation
-	private static final String audit_log_entry = "insert into auditlog (userid,eventdetail,eventobject,eventobjectid,amount) values (?,?,?,?,?)";
-
-	public void insertLog_Audit(AuditLog auditlog) {
-		PreparedStatement psmt;
-		try {
-			psmt = connection.prepareStatement(audit_log_entry);
-			psmt.setString(1, auditlog.getUserId());
-			psmt.setString(2, auditlog.getEventDetail());
-			psmt.setString(3, auditlog.getEventObject());
-			psmt.setInt(4, auditlog.getEventObjectId());
-			psmt.setDouble(5, auditlog.getAmount());
-
-			psmt.execute();
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	}
+		
+    }
+    
+    
 
 	public int countSpecificRows(String tablename, String columnName, String value) throws SQLException {
 		int result = 0;
@@ -762,8 +628,8 @@ public class DatabaseClient {
 		}
 	}
 
-	public DSalesTableLine getSalesEntryLineFromSql(int id) throws SQLException, NoSuchElementException {
-		ResultSet set = getResult("select * from arrival where id='" + id + "';");
+    public DSalesTableLine getSalesEntryLineFromSql(int id) throws SQLException, NoSuchElementException {
+        ResultSet set = getResult("select * from arrival where id='" + id + "';");
 
 		String fruit, date, challan, supplier, totalQuantity, fullCase, halfCase, agent, truck, driver, gross, charges,
 				net, remarks, dealID, type, amanat;
@@ -1925,29 +1791,28 @@ public class DatabaseClient {
 		addExpenseInfo(name, type, defaultAmount);
 	}
 
-	public void updateBuyerExpenseInfo(String name, String type, String defaultAmount) {
-		try (PreparedStatement ps = connection
-				.prepareStatement("UPDATE buyerExpenseInfo SET type=?,  defaultAmount=?  WHERE name = ?")) {
-			ps.setString(1, type);
-			ps.setString(2, defaultAmount);
-			ps.setString(3, name);
-			ps.executeUpdate();
-			insertAuditRecord(
-					new AuditLog(0, getCurrentUser(), null, "UPDATED buyer exepense info :".concat(name), null, 0));
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-		addBuyerExpenseInfo(name, type, defaultAmount);
-	}
+    public void updateBuyerExpenseInfo(String name, String type, String defaultAmount) {
+         try (PreparedStatement ps = connection
+                .prepareStatement("UPDATE buyerExpenseInfo SET type=?,  defaultAmount=?  WHERE name = ?")) {
+            ps.setString(1, type);
+            ps.setString(2, defaultAmount);
+            ps.setString(3, name);
+            ps.executeUpdate();
+            insertAuditRecord(new AuditLog(0, getCurrentUser(), null, "UPDATED buyer exepense info :".concat(name), null, 0));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        addBuyerExpenseInfo(name, type, defaultAmount);
+    }
 
-	public void addExpenseInfo(String name, String type, String defaultAmount) {
-		try (PreparedStatement ps = connection.prepareStatement(INSERT_EXPENSE_INFO_QRY)) {
-			ps.setString(1, name);
-			ps.setString(4, name);
-			ps.setString(2, type);
-			ps.setString(3, defaultAmount);
-			ps.executeUpdate();
-			insertAuditRecord(new AuditLog(0, getCurrentUser(), null, "ADDED exepense info :".concat(name), null, 0));
+    public void addExpenseInfo(String name, String type, String defaultAmount) {
+        try (PreparedStatement ps = connection.prepareStatement(INSERT_EXPENSE_INFO_QRY)) {
+            ps.setString(1, name);
+            ps.setString(2, name);
+            ps.setString(3, type);
+            ps.setString(4, defaultAmount);
+            ps.executeUpdate();
+            insertAuditRecord(new AuditLog(0, getCurrentUser(), null, "ADDED exepense info :".concat(name), null, 0));
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -2787,49 +2652,53 @@ public class DatabaseClient {
 		return result;
 	}
 
-	// ## for audit log insert
-	// ## changed by ss
-	public void insertAuditRecord(AuditLog log) {
-		String sql = "INSERT INTO auditLog (userId, eventDetail, eventObject, "
-				+ " eventObjectId, oldValues, newValues, name, date, amount) " + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
-		try (PreparedStatement ps = connection.prepareStatement(sql);) {
-			ps.setString(1, log.getUserId());
-			ps.setString(2, log.getEventDetail());
-			ps.setString(3, log.getEventObject());
-			ps.setInt(4, log.getEventObjectId());
-			ps.setString(5, log.getOldValues());
-			ps.setString(6, log.getNewValues());
-			ps.setString(7, log.getName());
-			ps.setTimestamp(8, log.getDate() == null ? null : new java.sql.Timestamp(log.getDate().getTime()));
-			// Date(8, log.getDate() == null ? null : new
-			// java.sql.Date(log.getDate().getTime()));
-			ps.setDouble(9, log.getAmount() == null ? 0.0 : log.getAmount());
-			// ps.executeUpdate();
-			ps.execute();
+    //## for audit log insert
+    //## changed by ss
+    public void insertAuditRecord(AuditLog log) {
+        String sql = "INSERT INTO auditLog (userId, eventDetail, eventObject, "
+                + " eventObjectId, oldValues, newValues, name, date, amount) "
+                + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
+        try (PreparedStatement ps = connection.prepareStatement(sql);) {
+            ps.setString(1, log.getUserId());
+            ps.setString(2, log.getEventDetail());
+            ps.setString(3, log.getEventObject());
+            ps.setInt(4, log.getEventObjectId());
+            ps.setString(5, log.getOldValues());
+            ps.setString(6, log.getNewValues());
+            ps.setString(7, log.getName());
+            ps.setTimestamp(8, log.getDate() == null ? null : new java.sql.Timestamp(log.getDate().getTime()));
+//            Date(8, log.getDate() == null ? null : new java.sql.Date(log.getDate().getTime()));
+            ps.setDouble(9, log.getAmount() == null ? 0.0 : log.getAmount());
+            //ps.executeUpdate();
+            ps.execute();
 
-		} catch (SQLException ex) {
-			ex.printStackTrace();
-		}
-	}
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
 
-	public List<AuditLog> getAuditRecords() {
-		String sql = "SELECT * FROM auditlog";
-		List<AuditLog> list = new ArrayList<>();
-		try {
-			ResultSet rs = getResult(sql);
-			while (rs.next()) {
-				AuditLog log = new AuditLog(rs.getInt(1), rs.getString("userid"), rs.getDate("eventtime"),
-						rs.getString("eventdetail"), rs.getString("eventobject"), rs.getInt("eventobjectid")) {
-					{// are outside the constructor
-						setOldValues(rs.getString("oldvalues"));
-						setNewValues(rs.getString("newvalues"));
-						setName(rs.getString("name"));
-						setDate(rs.getDate("date") == null ? null : new Date(rs.getDate("date").getTime()));
-						setAmount(rs.getDouble("amount"));
-					}
-				};
-				list.add(log);
-			}
+    public List<AuditLog> getAuditRecords() {
+        String sql = "SELECT * FROM auditlog";
+        List<AuditLog> list = new ArrayList<>();
+        try {
+            ResultSet rs = getResult(sql);
+            while (rs.next()) 
+            {
+                AuditLog log = new AuditLog(rs.getInt(1), 
+                		                    rs.getString("userid"),
+                		                    rs.getDate("eventtime"),
+                		                    rs.getString("eventdetail"), 
+                		                    rs.getString("eventobject"),
+                		                    rs.getInt("eventobjectid")) 
+                {{//are outside the constructor
+                            setOldValues(rs.getString("oldvalues"));
+                            setNewValues(rs.getString("newvalues"));
+                            setName(rs.getString("name"));
+                            setDate(rs.getDate("date") == null ? null : new Date(rs.getDate("date").getTime()));
+                            setAmount(rs.getDouble("amount"));
+                }};
+                list.add(log);
+            }
 
 		} catch (SQLException ex) {
 			ex.printStackTrace();
