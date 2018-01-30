@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="306.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.quickveggies.controller.AddChargesController">
+   <children>
+      <Label layoutX="10.0" prefHeight="51.0" prefWidth="145.0" text="Add charges">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Button fx:id="save" layoutX="177.0" layoutY="275.0" mnemonicParsing="false" text="Add" />
+      <Pane layoutX="43.0" layoutY="44.0" prefHeight="42.0" prefWidth="309.0">
+         <children>
+            <Label layoutX="175.0" layoutY="20.0" text="RATE" />
+            <Label layoutX="235.0" layoutY="20.0" text="TOTAL" />
+            <Label layoutX="101.0" layoutY="20.0" text="TYPE" />
+            <Label layoutX="17.0" layoutY="20.0" text="CHARGES" />
+         </children>
+      </Pane>
+              <ScrollPane layoutX="41.0" layoutY="90.0" prefHeight="174.0" prefWidth="309.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="174.0" prefWidth="294.0">
+               <children>
+               <!-- Following children are not  required now, as they'll be added dynamically -->
+<!--                  <Label text="S.I.T" />
+                  <Label text="FREIGHT" />
+                  <ComboBox fx:id="sitType" prefHeight="25.0" prefWidth="60.0" />
+                  <ComboBox fx:id="freightType" prefHeight="25.0" prefWidth="60.0" />
+                  <Label text="LABOUR" />
+                  <ComboBox fx:id="labourType" prefHeight="25.0" prefWidth="60.0" />
+                  <TextField fx:id="sitRate" prefHeight="25.0" prefWidth="45.0" />
+                  <TextField fx:id="freightRate" prefHeight="25.0" prefWidth="45.0" />
+                  <TextField fx:id="labourRate" layoutX="133.0" layoutY="13.0" prefHeight="25.0" prefWidth="45.0" />
+                  <Text fx:id="sitValue" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+                  <Text fx:id="freightValue" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+                  <Text fx:id="labourValue" strokeType="OUTSIDE" strokeWidth="0.0" text="0" /> 
+                  
+                  -->
+                  <VBox fx:id="vbChargeTypes" prefHeight="182.0" prefWidth="293.0">
+                     <children>
+                        <HBox fx:id="hbAmanatCharge" prefHeight="40.0" prefWidth="293.0" >
+                           <children>
+                              <HBox fx:id="hbAmanatCName" alignment="CENTER" prefHeight="52.0" prefWidth="83.0" >
+                           		  <children>
+					                  <Label fx:id="amanatName" text="AMANAT" />
+                           	      </children>
+                              </HBox>   	    
+                              <HBox fx:id="hbAmanatCType" alignment="CENTER" prefHeight="40.0" prefWidth="74.0">
+                           		  <children>
+					                  <ComboBox fx:id="amanatType" prefHeight="25.0" prefWidth="60.0" />
+                           	      </children>
+                              </HBox>   	
+                              <HBox fx:id="hbAmanatCRate" alignment="CENTER" prefHeight="52.0" prefWidth="76.0">
+                           		  <children>
+					                  <TextField fx:id="amanatRate" prefHeight="25.0" prefWidth="45.0" />
+                           	      </children>
+                              </HBox>   	
+                              <HBox fx:id="hbAmanatCValue" alignment="CENTER" prefHeight="40.0" prefWidth="61.0">
+                           		  <children>
+					                  <Text fx:id="amanatValue" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+                           	      </children>
+                              </HBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+      
+   </children>
+</Pane>

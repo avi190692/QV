@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+     <Region layoutX="-3.0" layoutY="237.0" prefHeight="82.0" prefWidth="603.0" style="-fx-background-color: #99CCFF;" />
+      <Label layoutX="66.0" layoutY="14.0" text="Title" />
+      <Label layoutX="57.0" layoutY="56.0" text="First Name" />
+      <Label layoutX="220.0" layoutY="56.0" text="Last Name" />
+      <Label layoutX="17.0" layoutY="104.0" prefWidth="140.0" text="Company / Orchard name" />
+      <Label layoutX="221.0" layoutY="104.0" text="Proprietor" />
+      <Label layoutX="61.0" layoutY="152.0" text="Mobile" />
+      <Label layoutX="227.0" layoutY="152.0" text="Mobile2" />
+      <Label layoutX="400.0" layoutY="152.0" text="Email ID" />
+      <Label layoutX="61.0" layoutY="192.0" text="Village" />
+      <Label layoutX="234.0" layoutY="192.0" text="PO" />
+      <Label layoutX="406.0" layoutY="192.0" text="Tehsil" />
+      <Label layoutX="19.0" layoutY="242.0" text="Account Details">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label layoutX="60.0" layoutY="270.0" text="A/C" />
+      <Label layoutX="248.0" layoutY="270.0" text="Bank" />
+      <Label layoutX="409.0" layoutY="270.0" text="IFSC CODE:" />
+      <TextField fx:id="title" layoutX="15.0" layoutY="31.0" prefWidth="150.0" promptText="Title" />
+      <TextField fx:id="firstName" layoutX="15.0" layoutY="73.0" prefWidth="150.0" promptText="First Name" />
+      <TextField fx:id="lastName" layoutX="176.0" layoutY="73.0" prefWidth="150.0" promptText="Last Name" />
+      <TextField fx:id="company" layoutX="13.0" layoutY="121.0" prefWidth="150.0" promptText="Company / Orchard name" />
+      <TextField fx:id="proprietor" layoutX="174.0" layoutY="121.0" prefWidth="150.0" promptText="Proprietor" />
+      <TextField fx:id="mobile" layoutX="13.0" layoutY="167.0" prefWidth="150.0" promptText="Mobile" />
+      <TextField fx:id="mobile2" layoutX="176.0" layoutY="167.0" prefWidth="150.0" promptText="Mobile" />
+      <TextField fx:id="email" layoutX="348.0" layoutY="167.0" prefWidth="150.0" promptText="Email" />
+      <TextField fx:id="village" layoutX="13.0" layoutY="209.0" prefWidth="150.0" promptText="Village" />
+      <TextField fx:id="po" layoutX="175.0" layoutY="209.0" prefWidth="150.0" promptText="PO" />
+      <TextField fx:id="tehsil" layoutX="348.0" layoutY="209.0" prefWidth="150.0" promptText="Tehsil" />
+      <TextField fx:id="ac" layoutX="13.0" layoutY="287.0" promptText="A/C" />
+      <TextField fx:id="bank" layoutX="187.0" layoutY="287.0" promptText="Bank" />
+      <TextField fx:id="ifsc" layoutX="363.0" layoutY="287.0" promptText="IFSC Code" />
+      <ImageView fitHeight="140.0" fitWidth="211.0" layoutX="410.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" style="-fx-image: url(&quot;https://cdn0.iconfinder.com/data/icons/thin-photography/57/thin-363_photo_image_album-512.png&quot;); -fx-scale-x: 1.5;" />
+      
+      <Button fx:id="save" layoutX="230.0" layoutY="343.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="114.0" text="Save" />
+      <!--   <Button fx:id="delete" layoutX="461.0" layoutY="343.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="114.0" text="Delete profile" /> -->
+      
+   </children>
+</Pane>

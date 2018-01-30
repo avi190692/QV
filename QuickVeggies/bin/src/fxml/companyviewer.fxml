@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="companySettingsPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="569.0" prefWidth="581.0" style="-fx-background-color: #f2f6ff;" stylesheets="@css/center_table_style.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.quickveggies.controller.CompanyInfoViewController">
+   <children>
+      <ScrollPane fx:id="paneProducts" hbarPolicy="NEVER" layoutY="68.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="446.0" prefWidth="580.0" style="-fx-background-color: #f2f6ff;" vbarPolicy="NEVER">
+         <content>
+            <VBox prefHeight="471.0" prefWidth="575.0">
+               <children>
+                  <AnchorPane fx:id="ancPaneProducts" style="-fx-background-color: #f2f6ff;">
+                     <children>
+                        <VBox fx:id="vboxParent" prefHeight="336.0" prefWidth="551.0">
+                           <children>
+                              <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="476.0" prefWidth="539.0">
+                                 <children>
+                                    <TextField fx:id="txtCompanyName" editable="false" layoutX="201.0" layoutY="160.0" prefHeight="25.0" prefWidth="192.0" promptText="Quick Veggies" />
+                                    <TextField fx:id="txtAddress" layoutX="201.0" layoutY="197.0" editable="false" prefHeight="25.0" prefWidth="343.0" promptText="501, Lexington StreetmNY, 11001, USA" />
+                                    <Label layoutX="47.0" layoutY="49.0" text="Company Logo">
+                                       <font>
+                                          <Font name="Arial" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="txtEmail" editable="false" layoutX="201.0" layoutY="303.0" promptText="joe@domain.com" />
+                                    <Label layoutX="47.0" layoutY="163.0" text="Company Name">
+                                       <font>
+                                          <Font name="Arial" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="47.0" layoutY="202.0" text="Address">
+                                       <font>
+                                          <Font name="Arial" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="48.0" layoutY="241.0" text="Website">
+                                       <font>
+                                          <Font name="Arial" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="48.0" layoutY="273.0" text="Phone">
+                                       <font>
+                                          <Font name="Arial" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="48.0" layoutY="308.0" text="Email">
+                                       <font>
+                                          <Font name="Arial" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="46.0" layoutY="348.0" text="Industry Type">
+                                       <font>
+                                          <Font name="Arial" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="txtWebsite" layoutX="201.0" editable="false" layoutY="233.0" prefHeight="25.0" prefWidth="192.0" promptText="www.qv.com" />
+                                    <TextField fx:id="txtPhone" layoutX="201.0" layoutY="266.0" editable="false" prefHeight="25.0" prefWidth="192.0" promptText="011-022-2349876" />
+                                    <TextField fx:id="txtIndustryType" layoutX="202.0" layoutY="341.0" editable="false" promptText="Agriculture Produce" />
+                                    <Pane fx:id="imagePane" layoutX="200.0" layoutY="18.0" prefHeight="125.0" prefWidth="156.0" style="-fx-border-color: black;">
+                                       <children>
+                                          <ImageView fx:id="imgLogo" fitHeight="125.0" fitWidth="156.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: 2px;" />
+                                       </children>
+                                    </Pane>
+                                    <Label layoutX="47.0" layoutY="393.0" text="Password">
+                                       <font>
+                                          <Font name="Arial" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <PasswordField fx:id="pwdOld" layoutX="201.0" layoutY="388.0" editable="false" prefHeight="25.0" prefWidth="192.0" />
+                                 </children>
+                              </Pane>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </VBox>
+         </content>
+      </ScrollPane>
+      <Pane prefHeight="65.0" prefWidth="580.0" style="-fx-background-color: #ecf1f5;">
+         <children>
+            <Label layoutX="32.0" layoutY="9.0" prefHeight="32.0" prefWidth="231.0" text="Company Info">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Button fx:id="btnAddCompany" layoutX="213.0" layoutY="523.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="151.0" style="-fx-background-color: #516cff;" text="Add Company">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnEditCompany" layoutX="213.0" layoutY="523.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="151.0" style="-fx-background-color: #516cff;" text="Edit Company">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+   </children>
+</Pane>

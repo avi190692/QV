@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="295.0" prefWidth="499.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.quickveggies.controller.ExpenseInfoAddController">
+   <children>
+      <Label layoutX="39.0" layoutY="83.0" prefHeight="30.0" prefWidth="106.0" text="Name">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="39.0" layoutY="132.0" prefHeight="30.0" prefWidth="106.0" text="Type">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="39.0" layoutY="183.0" prefHeight="30.0" prefWidth="118.0" text="Default Amount">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="2.0" layoutY="22.0" prefHeight="30.0" prefWidth="499.0" text="Expense Info Entry">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtName" layoutX="236.0" layoutY="86.0" prefHeight="25.0" prefWidth="168.0" />
+      <ComboBox fx:id="cboChargeTypes" layoutX="236.0" layoutY="135.0" prefHeight="25.0" prefWidth="168.0" />
+      <TextField fx:id="txtAmount" layoutX="236.0" layoutY="186.0" prefHeight="25.0" prefWidth="168.0" />
+      <Button fx:id="btnSave" layoutX="200.0" layoutY="241.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="76.0" text="Save" />
+   </children>
+</Pane>

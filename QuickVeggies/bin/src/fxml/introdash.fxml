@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="610.0" stylesheets="@css/center_table_style.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
+<children>
+                  
+<ImageView fx:id="imgCompanyLogo" fitHeight="60.0" fitWidth="60.0" layoutX="10.0" layoutY="50.0" smooth="true">
+   <image>
+      <Image url="icons/logo.png" />
+       </image>
+</ImageView> 
+<Label fx:id="lblCompanyName" id="label-header-on-dark" layoutX="80.0" layoutY="50.0" text="Company Name" />
+<Label id="label-text-on-dark" fx:id="dashDate" layoutX="80.0" layoutY="80.0" text="?" />
+                    
+<Pane fx:id="dashIncomePane" layoutX="10.0" layoutY="115.0" prefHeight="70.0" prefWidth="580.0" style="-fx-background-color: #cecece">
+  <Label id="label-header-on-light" layoutX="13.0" layoutY="0.0" text="Income" />
+  <Label layoutX="13.0" layoutY="50.0" text="Overdue" />
+  <Label layoutX="83.0" layoutY="50.0" text="Open Invoices" />
+</Pane>
+      <Pane layoutX="63.0" layoutY="202.0" prefHeight="148.0" prefWidth="142.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 2px;">
+         <children>
+      
+      <Label alignment="CENTER" layoutX="6.0" layoutY="14.0" prefHeight="43.0" prefWidth="131.0" text="Ladaan / Bijaak" textFill="#1a13ae">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblPendingLadaan" alignment="CENTER" layoutX="37.0" layoutY="80.0" prefHeight="54.0" prefWidth="69.0" text="0" underline="true">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </Label>
+         </children>
+      </Pane>
+      <Pane layoutX="226.0" layoutY="202.0" prefHeight="148.0" prefWidth="142.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 2px;">
+         <children>
+            <Label alignment="CENTER" layoutX="6.0" layoutY="14.0" prefHeight="43.0" prefWidth="131.0" text="Cold Store" textFill="#1a13ae">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblPendingColdStore" alignment="CENTER" layoutX="37.0" layoutY="80.0" prefHeight="54.0" prefWidth="69.0" text="0" underline="true">
+               <font>
+                  <Font name="System Bold" size="19.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane layoutX="387.0" layoutY="202.0" prefHeight="148.0" prefWidth="142.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 2px;">
+         <children>
+            <Label alignment="CENTER" layoutX="6.0" layoutY="14.0" prefHeight="43.0" prefWidth="131.0" text="Godown" textFill="#1a13ae">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblPendingGodown" alignment="CENTER" layoutX="37.0" layoutY="80.0" prefHeight="54.0" prefWidth="69.0" text="0" underline="true">
+               <font>
+                  <Font name="System Bold" size="19.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+
+
+</children>
+
+</Pane>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<Pane fx:id="paneParent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="850.0" stylesheets="@css/center_table_style.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Text id="label-header-on-light" layoutX="10.0" layoutY="50.0" text="Save Account Template" />
+      <Text id="label-text-on-light" layoutX="10.0" layoutY="80.0" text="Assign columns to match software format:" />
+      
+      <Pane layoutY="100.0" prefHeight="250.0" prefWidth="750.0">
+<!--        <content> -->
+   <children>
+
+         
+        <VBox fx:id="tablePane" prefHeight="250.0" prefWidth="750.0" />
+   </children>
+        
+       <!-- </content>  -->
+      </Pane>
+   
+      <Button fx:id="saveButton" layoutX="280.0" layoutY="400.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="100.0" text="Save" />
+      <Button fx:id="cancelButton" layoutX="570.0" layoutY="400.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="100.0" text="Cancel" />
+   </children>
+</Pane>

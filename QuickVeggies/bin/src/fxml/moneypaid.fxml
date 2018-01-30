@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+
+<?import com.quickveggies.misc.AutoCompleteTextField?>
+<?import com.quickveggies.misc.SearchPartyButton?>
+
+<Pane fx:id="dtpDate" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="581.0" prefWidth="405.0" stylesheets="@css/center_table_style.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label id="label-header-on-light" fx:id="lblTitle" alignment="CENTER" layoutX="-1.0" layoutY="20.0" prefHeight="27.0" prefWidth="388.0" text="Payment Received" />
+      
+      <Label id="label-text-on-light" fx:id="lblPartyType" layoutX="52.0" layoutY="66.0" text="Party Name" />
+      <!-- AutoCompleteTextField --> 
+      <AutoCompleteTextField id="label-text-on-light" fx:id="txtParty" layoutX="52.0" layoutY="86.0" prefHeight="20.0" prefWidth="201.0" />
+      <!-- SearchPartyButton --> 
+      <SearchPartyButton fx:id="btnSearchParty" layoutX="260.0" layoutY="90.0" prefHeight="25.0" prefWidth="30.0" />
+       
+
+      <Label id="label-text-on-light" layoutX="52.0" layoutY="128.0" text="Date" />
+
+
+      <Label id="label-text-on-light" layoutX="52.0" layoutY="191.0" text="Amount" />
+      <TextField id="label-text-on-light" fx:id="txtAmount" layoutX="50.0" layoutY="211.0" prefWidth="201.0" />
+      
+      <Label id="label-text-on-light" layoutX="50.0" layoutY="255.0" prefHeight="20.0" prefWidth="174.0" text="Select Payment Type" />
+      <ComboBox fx:id="cboPaymentType" layoutX="52.0" layoutY="275.0" prefHeight="32.0" prefWidth="273.0" />
+      
+      
+      <Button fx:id="btnSave" layoutX="268.0" layoutY="529.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="114.0" text="Save" />
+      <DatePicker fx:id="dpDate" layoutX="51.0" layoutY="151.0" prefHeight="32.0" prefWidth="174.0" />
+      <Button fx:id="btnAddSnapshot" layoutX="24.0" layoutY="482.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="356.0" text="Add Snapshot" />
+      <Pane fx:id="paneBankDetails" disable="true" layoutX="43.0" layoutY="331.0" prefHeight="122.0" prefWidth="328.0">
+         <children>
+            <Label id="label-text-on-light" layoutX="3.0" text="Cheque No" />
+            <Label id="label-text-on-light" layoutX="3.0" layoutY="45.0" text="Deposit Date" />
+            <Label id="label-text-on-light" layoutX="4.0" layoutY="82.0" text="Bank" />
+            <TextField id="label-text-on-light" fx:id="txtBankName" layoutX="112.0" layoutY="76.0" />
+            <TextField id="label-text-on-light" fx:id="txtChequeNo" layoutX="113.0" layoutY="3.0" />
+            <DatePicker fx:id="dpDepositDate" layoutX="113.0" layoutY="39.0" prefHeight="32.0" prefWidth="174.0" />
+         </children>
+      </Pane>
+      <CheckBox fx:id="chkAdvanced" layoutX="16.0" layoutY="547.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="132.0" text="Advanced Payment" />
+   </children>
+</Pane>

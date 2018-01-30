@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="buyerSettingsPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="471.0" prefWidth="505.0" style="-fx-background-color: #f2f6ff;" stylesheets="@css/center_table_style.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.quickveggies.controller.BuyerExpenseInfoViewController">
+   <children>
+      <ScrollPane fx:id="paneProducts" layoutY="68.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="503.0" style="-fx-background-color: #f2f6ff;">
+         <content>
+            <VBox>
+               <children>
+                  <AnchorPane fx:id="ancPaneProducts" style="-fx-background-color: #f2f6ff;">
+                     <children>
+                        <VBox fx:id="vboxParent" prefHeight="336.0" prefWidth="475.0">
+                           <children>
+                              <VBox fx:id="vboxExpenseChild1" prefHeight="118.0" prefWidth="197.0">
+                                 <children>
+                                    <HBox minHeight="33.0" prefHeight="33.0" prefWidth="453.0">
+                                       <children>
+                                          <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="33.0" prefWidth="178.0" text=".  Expense Name :                     " textOverrun="CLIP">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="txtXname" editable="false" prefHeight="25.0" prefWidth="151.0" text="Amanat" />
+                                       </children>
+                                    </HBox>
+                                    <HBox minHeight="33.0" prefHeight="33.0" prefWidth="453.0">
+                                       <children>
+                                          <Label alignment="CENTER" contentDisplay="RIGHT" prefHeight="33.0" prefWidth="178.0" text=".  Expense Deduction Type :     " textOverrun="CLIP">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="txtXtype" editable="false" prefHeight="25.0" prefWidth="151.0" text="\%" />
+                                          <HBox fx:id="hbEditBtn" alignment="TOP_RIGHT" prefHeight="33.0" prefWidth="69.0">
+                                             <children>
+                                                <Button fx:id="btnEdit" mnemonicParsing="false" text="Edit" />
+                                             </children>
+                                          </HBox>
+                                          <HBox fx:id="hbDeleteBtn" alignment="TOP_RIGHT" prefHeight="33.0" prefWidth="79.0">
+                                             <children>
+                                                <Button fx:id="btnDelete" mnemonicParsing="false" text="Delete" />
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </HBox>
+                                    <HBox minHeight="33.0" prefHeight="33.0" prefWidth="453.0">
+                                       <children>
+                                          <Label alignment="CENTER" contentDisplay="RIGHT" prefHeight="33.0" prefWidth="178.0" text=".  Default Deduction Amount :" textOverrun="CLIP">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="txtXamt" editable="false" prefHeight="25.0" prefWidth="151.0" text="0" />
+                                       </children>
+                                    </HBox>
+                                    <HBox minHeight="16.5" prefWidth="553.0" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </VBox>
+         </content>
+      </ScrollPane>
+      <Pane prefHeight="65.0" prefWidth="580.0" style="-fx-background-color: #ecf1f5;">
+         <children>
+            <Label layoutX="32.0" layoutY="9.0" prefHeight="32.0" prefWidth="231.0" text="Buyer Expenses (Additions)">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Button fx:id="btnAddExpense" layoutX="213.0" layoutY="425.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="151.0" style="-fx-background-color: #516cff;" text="Add Expense">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+   </children>
+</Pane>
