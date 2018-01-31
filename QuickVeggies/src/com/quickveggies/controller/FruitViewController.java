@@ -106,7 +106,7 @@ public class FruitViewController implements Initializable {
 				}
 				Pane settingsScrollingPane = session.getSettingPagePane();
 				session.setNewFruitName(fruitName);
-				new FruitButtonEventHandler("/fruitEdit.fxml", "Edit Fruit Settings", settingsScrollingPane)
+				new FruitButtonEventHandler("/fxml/fruitEdit.fxml", "Edit Fruit Settings", settingsScrollingPane)
 						.handle(event);
 			}
 		});
