@@ -164,7 +164,6 @@ public class DatabaseClient {
 			    ResultSet rs = psmt.executeQuery();
 			    while(rs.next())
 			    {
-			    	System.out.println(rs.getString(2));
 			    	acm.add(rs.getString(2));
 			    } 
 			} 
@@ -192,7 +191,6 @@ public class DatabaseClient {
 					{
 						AccountMaster am = new AccountMaster();
 						
-						//System.out.println(rs.getString(2));
 						am.setAccountcode(rs.getString(2));
 						am.setAccountname(rs.getString(3));
 						am.setAmount(rs.getDouble(4));
@@ -214,7 +212,6 @@ public class DatabaseClient {
 					{
 						AccountMaster am = new AccountMaster();
 						
-						//System.out.println(rs.getString(2));
 						am.setAccountcode(rs.getString(2));
 						am.setAccountname(rs.getString(3));
 						am.setReport_flag(rs.getString(7));
@@ -264,7 +261,6 @@ public class DatabaseClient {
 					{
 						AccountMaster am = new AccountMaster();
 						
-						//System.out.println(rs.getString(2));
 						am.setAccountcode(rs.getString(2));
 						am.setAccountname(rs.getString(3));
 						am.setReport_flag(rs.getString(7));
@@ -701,7 +697,6 @@ public class DatabaseClient {
 			sqlCommand += ",'" + values[i] + "'";
 		}
 		sqlCommand += ")";
-		System.out.println(sqlCommand);
 		try {
 			PreparedStatement statement = connection.prepareStatement(sqlCommand, Statement.RETURN_GENERATED_KEYS);
 			statement.executeUpdate();
@@ -1533,11 +1528,9 @@ public class DatabaseClient {
 				}
 				ps.setString(1, quality);
 				ps.setString(2, quality);
-				ps.addBatch();
+				ps.execute();
 			}
-
-			// ps.executeBatch();
-			ps.execute();
+			ps.executeBatch();
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -1568,13 +1561,21 @@ public class DatabaseClient {
 				newQualityToInsertList.add(qualName);
 			}
 		}
+		
 		addFruitQualities(newQualityToInsertList);
 		List<QualityType> combinedQualityList = new ArrayList<>();
 		if (!newQualityToInsertList.isEmpty()) {
 			Map<String, QualityType> newlyInsertedQuality = getDetailForQuality(newQualityToInsertList);
+			System.out.println("Newly Inserted quality");
+			newlyInsertedQuality.values().forEach(action ->  System.out.println(action));
 			combinedQualityList.addAll(newlyInsertedQuality.values());
 		}
-
+		
+		
+		System.out.println("old Inserted quality");
+		existingQualitiesMap.values().forEach(action ->  System.out.println(action));
+		
+		
 		combinedQualityList.addAll(existingQualitiesMap.values());
 		try (PreparedStatement ps = connection.prepareStatement(INSERT_FRUIT_QUALITY_QRY)) {
 			StringBuilder sb = new StringBuilder();
@@ -1583,11 +1584,11 @@ public class DatabaseClient {
 				ps.setInt(2, qt.getId());
 				ps.setInt(3, fruitId);
 				ps.setInt(4, qt.getId());
-				ps.addBatch();
+				ps.execute();
 				sb.append(qt.getName() + " , ");
 
 			}
-			// ps.executeBatch();
+			ps.executeBatch();
 			ps.execute();
 			insertAuditRecord(
 					new AuditLog(0, getCurrentUser(), null, "ADDED Fruit Qualities :".concat(sb.toString()), null, 0));
@@ -1643,7 +1644,6 @@ public class DatabaseClient {
 				if (boxSize == null || boxSize.trim().isEmpty()) {
 					continue;
 				}
-				// System.out.println(boxSize.s);
 				boxSize = boxSize.toLowerCase();
 
 				ps.setString(1, boxSize);
@@ -2122,7 +2122,6 @@ public class DatabaseClient {
 				}
 			}
 			ladanSql = ladanSql.concat(");");
-			// System.out.println(ladanSql);
 			ResultSet ladanRs = getResult(ladanSql);
 			int ladaanCount = 0;
 			if (ladanRs.next()) {
@@ -2360,7 +2359,6 @@ public class DatabaseClient {
 			ps.executeUpdate();
 			insertAuditRecord(new AuditLog(0, getCurrentUser(), null,
 					"ADDED Template for account:".concat(template.getAccountName()), null, 0));
-			// System.out.println("ADDED a new template");
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		}
@@ -2755,7 +2753,7 @@ public class DatabaseClient {
 	// private static final String INSERT_FRUIT_QUALITY_QRY = "IF NOT EXISTS
 	// (SELECT * FROM fruitQuality WHERE fruit_id = ? AND quality_id = ?) Insert
 	// into fruitQuality (fruit_id,quality_id) values (?,?)";
-	private static final String INSERT_FRUIT_QUALITY_QRY = "select case when (count(*)=0) then (fruitquality(?,?)) end from fruitquality where fruit_id = ? and quality_id = ?";
+	private static final String INSERT_FRUIT_QUALITY_QRY = "select case when (count(quality_id)=0) then (fruitquality(?,?)) end from fruitquality where fruit_id = ? and quality_id = ?";
 	// private static final String INSERT_FRUIT_QRY = "IF NOT EXISTS (SELECT *
 	// FROM fruits WHERE name = ? COLLATE SQL_Latin1_General_CP1_CI_AS) INSERT
 	// INTO fruits (name) VALUES (?)";
