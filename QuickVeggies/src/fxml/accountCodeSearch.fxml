@@ -9,8 +9,8 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="519.0" prefWidth="739.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.quickveggies.controller.AccountCodeSearchController">
    <children>
-      <Button fx:id="createnew" layoutX="623.0" layoutY="23.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="92.0" style="-fx-background-color: #4682B4;" text="Add New" />
-      <Button fx:id="importbtn" layoutX="524.0" layoutY="23.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="92.0" style="-fx-background-color: red;" text="Import" />
+      <Button fx:id="createnew" layoutX="623.0" layoutY="23.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="92.0" style="-fx-background-color: #4682B4;" text="add new" />
+      <Button fx:id="importbtn" layoutX="524.0" layoutY="23.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="92.0" style="-fx-background-color: red;" text="import" />
       <TextField fx:id="searchstring" alignment="CENTER" layoutX="273.0" layoutY="68.0" prefHeight="39.0" prefWidth="380.0" promptText="Search here" style="-fx-background-color: #4682B4;" />
       <TableView fx:id="detailstable" layoutX="22.0" layoutY="124.0" prefHeight="383.0" prefWidth="698.0">
         <columns>
@@ -21,8 +21,8 @@
         </columns>
       </TableView>
       <ComboBox fx:id="searchtype" layoutX="41.0" layoutY="68.0" prefHeight="39.0" prefWidth="194.0" style="-fx-background-color: #4682B4;" />
-      <Button fx:id="searchbutton" layoutX="661.0" layoutY="67.0" minWidth="35.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="54.0" style="-fx-background-color: #4682B4; -fx-background-radius: 40%;" text="S" />
+      <Button fx:id="searchbutton" layoutX="655.0" layoutY="67.0" minWidth="35.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="81.0" style="-fx-background-color: #4682B4; -fx-background-radius: 40%;" text="search" />
       <TextField fx:id="accountcodeedit" layoutX="41.0" layoutY="23.0" prefHeight="32.0" prefWidth="264.0" promptText="Account Code" style="-fx-background-color: #4682B4;" />
-      <Button fx:id="edit" layoutX="320.0" layoutY="23.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="92.0" style="-fx-background-color: #4682B4;" text="Edit" />
+      <Button fx:id="edit" layoutX="320.0" layoutY="23.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="92.0" style="-fx-background-color: #4682B4;" text="edit" />
    </children>
 </AnchorPane>
