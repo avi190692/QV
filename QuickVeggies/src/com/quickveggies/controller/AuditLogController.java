@@ -1,22 +1,28 @@
 package com.quickveggies.controller;
 
-import com.ai.util.dates.DateUtil;
+import static com.quickveggies.controller.dashboard.DBuyerController.buildBuyerInvoicePdf;
 
 import java.net.URL;
-import java.util.List;
-import java.util.ResourceBundle;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Objects;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.Iterator;
-import java.util.Objects;
-import java.util.Date;
 
 import com.ai_int.utils.PDFUtil;
-
+import com.quickveggies.controller.dashboard.DSalesTransController;
+import com.quickveggies.controller.dashboard.DSupplierController;
+import com.quickveggies.controller.dashboard.DashboardController;
+import com.quickveggies.controller.popup.AuditLogEntryPopupController;
 import com.quickveggies.dao.DatabaseClient;
 import com.quickveggies.entities.Account;
 import com.quickveggies.entities.AccountEntryLine;
@@ -25,32 +31,24 @@ import com.quickveggies.entities.Buyer;
 import com.quickveggies.entities.DBuyerTableLine;
 import com.quickveggies.entities.DSalesTableLine;
 import com.quickveggies.entities.DSupplierTableLine;
+import com.quickveggies.entities.Expenditure;
 import com.quickveggies.entities.ExpenseInfo;
 import com.quickveggies.entities.LadaanBijakSaleDeal;
-import com.quickveggies.controller.dashboard.DSupplierController;
-import com.quickveggies.controller.popup.AuditLogEntryPopupController;
-import com.quickveggies.controller.dashboard.DashboardController;
-import com.quickveggies.controller.dashboard.DSalesTransController;
-import com.quickveggies.entities.Expenditure;
 import com.quickveggies.entities.MoneyPaidRecd;
 import com.quickveggies.entities.Supplier;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.paint.Color;
 import javafx.util.Callback;
-import static com.quickveggies.controller.dashboard.DBuyerController.buildBuyerInvoicePdf;
 
 public class AuditLogController implements Initializable {
 
@@ -75,6 +73,25 @@ public class AuditLogController implements Initializable {
         logLines.clear();
         List<AuditLog> logs = dbc.getAuditRecords();
         logLines.addAll(logs);
+       
+//        logLines.forEach( a -> {
+//        	System.out.println(a.);
+//        	
+//        } );
+        
+        FXCollections.sort(logLines, new Comparator<AuditLog>() {
+
+            @Override
+            public int compare(AuditLog o1, AuditLog o2) {
+            	if(o2.getEventTime().getTime() - o1.getEventTime().getTime() >= 0){
+            		return 1;
+            	} else {
+            		return -1;
+            	}
+            }
+
+        });
+        
         localFormatter = DateTimeFormatter.ofPattern("yyyy.MM.dd"); //HH:mm:ss
         //Lookup additional information
         for (AuditLog log : logLines) 
