@@ -100,6 +100,7 @@ public class DatabaseClient {
         
         return instance;
     }
+
     // added by ss for account code upload
     public void dataClean()
     {
@@ -118,8 +119,7 @@ public class DatabaseClient {
                                                           "values(?,?,?,?,?,?,?)";
     public void accountCodeUpoadDraftMode(String accountcode,String accountname,String amount,String report_flag,String accounttype,String subgllink)
     {
-    	
-    	         
+   
     	try 
     	{
 			PreparedStatement pst = connection.prepareStatement(account_code_upload_draft);
