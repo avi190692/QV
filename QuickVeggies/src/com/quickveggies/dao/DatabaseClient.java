@@ -88,7 +88,7 @@ public class DatabaseClient {
                
             try 
             {
-                connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/qvdb_local?user=postgres&password=postgres");
+                connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/qvdb?user=postgres&password=postgres");
             } 
             catch (SQLException ex) 
             {
