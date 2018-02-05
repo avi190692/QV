@@ -16,7 +16,7 @@ public class CommonFunctions {
 	   	 String currDt_str = df.format(currDt);
 	   	 String dt[]=currDt_str.split("/");
 	   	 String month = dt[1];
-	   	 System.out.println("month:::"+month);
+	   	 //System.out.println("month:::"+month);
 	   	 String currYr = dt[2];
 	   	 if(Integer.parseInt(month)==1 || Integer.parseInt(month)==2 || Integer.parseInt(month)==3)
 	      	 {

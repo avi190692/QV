@@ -48,6 +48,7 @@ import com.quickveggies.entities.StorageBuyerDeal;
 import com.quickveggies.entities.Supplier;
 import com.quickveggies.entities.Template;
 import com.quickveggies.entities.User;
+import com.quickveggies.misc.CommonFunctions;
 import com.quickveggies.model.EntityType;
 
 import javafx.collections.FXCollections;
@@ -99,6 +100,32 @@ public class DatabaseClient {
         
         return instance;
     }
+ // added by ss for account code upload
+    private static final String account_code_upload_draft="insert into public.accountmaster_draftupload(accountcode,accountname,amount,reportflag,accounttype,subgllink,finyear)"+
+                                                          "values(?,?,?,?,?,?,?)";
+    public void accountCodeUpoadDraftMode(String accountcode,String accountname,String amount,String report_flag,String accounttype,String subgllink)
+    {
+    	//System.out.println("1");
+    	try 
+    	{
+			PreparedStatement pst = connection.prepareStatement(account_code_upload_draft);
+			                  pst.setString(1,accountcode);
+			                  pst.setString(2,accountname);
+			                  pst.setDouble(3,Double.parseDouble(amount));
+			                  pst.setString(4,report_flag);
+			                  pst.setString(5,accounttype);
+			                  pst.setString(6,subgllink);
+			                  pst.setString(7,new CommonFunctions().financialYear());
+			                  
+			                  pst.executeUpdate();  
+			                  
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+    
+    
     //added by ss for account code entry
     private static final String account_code_entry = "insert into public.accountmaster (accountcode,accountname,amount,fin_year,report_flag,active_flag,month,account_type)"+
     											     "values(?,?,?,?,?,?,?,?)";
