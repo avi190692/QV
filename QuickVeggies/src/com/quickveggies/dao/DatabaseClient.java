@@ -10,30 +10,27 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Date;
-import java.util.Map;
-import java.util.NoSuchElementException;
-import java.util.Vector;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.NoSuchElementException;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-
 import com.ai.util.dates.DateUtil;
-
 import com.quickveggies.GeneralMethods;
-import com.quickveggies.UserGlobalParameters;
 import com.quickveggies.controller.ChargeTypeValueMap;
 import com.quickveggies.controller.SessionDataController;
 import com.quickveggies.entities.Account;
 import com.quickveggies.entities.AccountEntryLine;
+import com.quickveggies.entities.AccountEntryPayment;
+import com.quickveggies.entities.AccountMaster;
 import com.quickveggies.entities.AuditLog;
 import com.quickveggies.entities.BoxSize;
 import com.quickveggies.entities.Buyer;
@@ -41,6 +38,7 @@ import com.quickveggies.entities.Charge;
 import com.quickveggies.entities.Company;
 import com.quickveggies.entities.DBuyerTableLine;
 import com.quickveggies.entities.DSalesTableLine;
+import com.quickveggies.entities.DSupplierTableLine;
 import com.quickveggies.entities.Expenditure;
 import com.quickveggies.entities.ExpenseInfo;
 import com.quickveggies.entities.LadaanBijakSaleDeal;
@@ -49,11 +47,12 @@ import com.quickveggies.entities.QualityType;
 import com.quickveggies.entities.StorageBuyerDeal;
 import com.quickveggies.entities.Supplier;
 import com.quickveggies.entities.Template;
-import com.quickveggies.entities.DSupplierTableLine;
 import com.quickveggies.entities.User;
-import com.quickveggies.entities.AccountEntryPayment;
-import com.quickveggies.entities.AccountMaster;
+import com.quickveggies.misc.CommonFunctions;
 import com.quickveggies.model.EntityType;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class DatabaseClient {
 
@@ -89,7 +88,7 @@ public class DatabaseClient {
                
             try 
             {
-                connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/qvdb?user=postgres&password=postgres");
+                connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/qvdb_local?user=postgres&password=postgres");
             } 
             catch (SQLException ex) 
             {
@@ -101,6 +100,46 @@ public class DatabaseClient {
         
         return instance;
     }
+    // added by ss for account code upload
+    public void dataClean()
+    {
+    	String cleaningDate ="delete from public.accountmaster_draftupload";
+    	try 
+    	{
+			Statement smt = connection.createStatement();
+					  smt.execute(cleaningDate);
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+    }
+    
+    private static final String account_code_upload_draft="insert into public.accountmaster_draftupload(accountcode,accountname,amount,reportflag,accounttype,subgllink,finyear)"+
+                                                          "values(?,?,?,?,?,?,?)";
+    public void accountCodeUpoadDraftMode(String accountcode,String accountname,String amount,String report_flag,String accounttype,String subgllink)
+    {
+    	
+    	         
+    	try 
+    	{
+			PreparedStatement pst = connection.prepareStatement(account_code_upload_draft);
+			                  pst.setString(1,accountcode);
+			                  pst.setString(2,accountname);
+			                  pst.setDouble(3,Double.parseDouble(amount));
+			                  pst.setString(4,report_flag);
+			                  pst.setString(5,accounttype);
+			                  pst.setString(6,subgllink);
+			                  pst.setString(7,new CommonFunctions().financialYear());
+			                  
+			                  pst.executeUpdate();  
+			                  
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+    
+    
     //added by ss for account code entry
     private static final String account_code_entry = "insert into public.accountmaster (accountcode,accountname,amount,fin_year,report_flag,active_flag,month,account_type)"+
     											     "values(?,?,?,?,?,?,?,?)";
@@ -164,7 +203,6 @@ public class DatabaseClient {
 			    ResultSet rs = psmt.executeQuery();
 			    while(rs.next())
 			    {
-			    	System.out.println(rs.getString(2));
 			    	acm.add(rs.getString(2));
 			    } 
 			} 
@@ -192,7 +230,6 @@ public class DatabaseClient {
 					{
 						AccountMaster am = new AccountMaster();
 						
-						//System.out.println(rs.getString(2));
 						am.setAccountcode(rs.getString(2));
 						am.setAccountname(rs.getString(3));
 						am.setAmount(rs.getDouble(4));
@@ -214,7 +251,6 @@ public class DatabaseClient {
 					{
 						AccountMaster am = new AccountMaster();
 						
-						//System.out.println(rs.getString(2));
 						am.setAccountcode(rs.getString(2));
 						am.setAccountname(rs.getString(3));
 						am.setReport_flag(rs.getString(7));
@@ -264,7 +300,6 @@ public class DatabaseClient {
 					{
 						AccountMaster am = new AccountMaster();
 						
-						//System.out.println(rs.getString(2));
 						am.setAccountcode(rs.getString(2));
 						am.setAccountname(rs.getString(3));
 						am.setReport_flag(rs.getString(7));
@@ -701,7 +736,6 @@ public class DatabaseClient {
 			sqlCommand += ",'" + values[i] + "'";
 		}
 		sqlCommand += ")";
-		System.out.println(sqlCommand);
 		try {
 			PreparedStatement statement = connection.prepareStatement(sqlCommand, Statement.RETURN_GENERATED_KEYS);
 			statement.executeUpdate();
@@ -736,7 +770,7 @@ public class DatabaseClient {
 		if (auditMsg == null) {
 			auditMsg = String.format(baseMsg, formattedTableName, generatedId);
 		}
-		insertAuditRecord(new AuditLog(0, getCurrentUser(), null, auditMsg, tableName, generatedId));
+		insertAuditRecord(new AuditLog(0, getCurrentUser(), new Date(), auditMsg, tableName, generatedId));
 	}
 
 	public DSalesTableLine getSalesEntryLineByDealId(int dealid) throws SQLException, NoSuchElementException {
@@ -812,7 +846,7 @@ public class DatabaseClient {
 		statement.setDouble(17, milestone);
 		statement.executeUpdate();
 		int genId = getGeneratedKey(statement);
-		insertAuditRecord(new AuditLog(0, getCurrentUser(), null, "ADDED new buyer:".concat(title), "buyers1", genId));
+		insertAuditRecord(new AuditLog(0, getCurrentUser(), new Date() , "ADDED new buyer:".concat(title), "buyers1", genId));
 
 	}
 
@@ -883,11 +917,11 @@ public class DatabaseClient {
 			ps.executeUpdate();
 			if (auditLog == null) {
 				if (newStatus == 0) {
-					insertAuditRecord(new AuditLog(0, getCurrentUser(), null,
+					insertAuditRecord(new AuditLog(0, getCurrentUser(), new Date() ,
 							"UPDATED transaction entry to account: " + id, "accountEntries", id));
 				}
 			} else if (!"".equals(auditLog)) {
-				insertAuditRecord(new AuditLog(0, getCurrentUser(), null, auditLog, "accountEntries", id));
+				insertAuditRecord(new AuditLog(0, getCurrentUser(), new Date() , auditLog, "accountEntries", id));
 			}
 		} catch (SQLException ex) {
 			ex.printStackTrace();
@@ -950,7 +984,7 @@ public class DatabaseClient {
 		statement.executeUpdate();
 		Integer key = getGeneratedKey(statement);
 		insertAuditRecord(
-				new AuditLog(0, getCurrentUser(), null, "ADDED bank account ".concat(accountName), "accounts", key));
+				new AuditLog(0, getCurrentUser(), new Date() , "ADDED bank account ".concat(accountName), "accounts", key));
 	}
 
 	public void updateAccount(Account account) {
@@ -978,7 +1012,7 @@ public class DatabaseClient {
 			// null, auditMsg, tableName, account.getId()));
 			String auditMsg = "Added new entries in bank account " + account.getBankName();
 			insertAuditRecord(
-					new AuditLog(account.getId(), getCurrentUser(), null, auditMsg, tableName, account.getId()));
+					new AuditLog(account.getId(), getCurrentUser(), new Date() , auditMsg, tableName, account.getId()));
 		} catch (SQLException e) {
 			System.out.print("sql exception in updateAccount " + e.getMessage());
 		}
@@ -1177,7 +1211,7 @@ public class DatabaseClient {
 				auditMsg = auditLogMsg;
 			}
 			if (!"".equals(auditMsg)) {
-				insertAuditRecord(new AuditLog(lineId, getCurrentUser(), null, auditMsg, tableName, lineId) {
+				insertAuditRecord(new AuditLog(lineId, getCurrentUser(), new Date() , auditMsg, tableName, lineId) {
 					{
 						setOldValues(oldValuesFinal);
 					}
@@ -1222,11 +1256,11 @@ public class DatabaseClient {
 			String normalizeTabName = TABLE_MAP.get(tableName);
 			if (auditLogMsg != null) {
 				if (!"".equals(auditLogMsg)) {
-					insertAuditRecord(new AuditLog(0, getCurrentUser(), null, auditLogMsg, tableName, lineId));
+					insertAuditRecord(new AuditLog(0, getCurrentUser(), new Date(), auditLogMsg, tableName, lineId));
 				}
 				return;
 			}
-			insertAuditRecord(new AuditLog(0, getCurrentUser(), null, "UPDATED Entry for ".concat(normalizeTabName),
+			insertAuditRecord(new AuditLog(0, getCurrentUser(), new Date(), "UPDATED Entry for ".concat(normalizeTabName),
 					tableName, lineId));
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -1254,7 +1288,7 @@ public class DatabaseClient {
 			}
 			connection.prepareStatement(deleteCommand).executeUpdate();
 			if (writeAuditLog) {
-				insertAuditRecord(new AuditLog(0, getCurrentUser(), null,
+				insertAuditRecord(new AuditLog(0, getCurrentUser(), new Date(),
 						"DELETED Entry for ".concat(TABLE_MAP.get(tablename)), null, 0));
 			}
 			if (!resetIdColumn) {
@@ -1442,7 +1476,7 @@ public class DatabaseClient {
 		statement.setString(15, supplier.getImagePath());
 
 		statement.executeUpdate();
-		insertAuditRecord(new AuditLog(0, getCurrentUser(), null, "ADDED new entry for supplier :".concat(title),
+		insertAuditRecord(new AuditLog(0, getCurrentUser(), new Date(), "ADDED new entry for supplier :".concat(title),
 				"Suppliers1", getGeneratedKey(statement)));
 
 	}
@@ -1533,11 +1567,9 @@ public class DatabaseClient {
 				}
 				ps.setString(1, quality);
 				ps.setString(2, quality);
-				ps.addBatch();
+				ps.execute();
 			}
-
-			// ps.executeBatch();
-			ps.execute();
+			ps.executeBatch();
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -1568,13 +1600,21 @@ public class DatabaseClient {
 				newQualityToInsertList.add(qualName);
 			}
 		}
+		
 		addFruitQualities(newQualityToInsertList);
 		List<QualityType> combinedQualityList = new ArrayList<>();
 		if (!newQualityToInsertList.isEmpty()) {
 			Map<String, QualityType> newlyInsertedQuality = getDetailForQuality(newQualityToInsertList);
+			System.out.println("Newly Inserted quality");
+			newlyInsertedQuality.values().forEach(action ->  System.out.println(action));
 			combinedQualityList.addAll(newlyInsertedQuality.values());
 		}
-
+		
+		
+		System.out.println("old Inserted quality");
+		existingQualitiesMap.values().forEach(action ->  System.out.println(action));
+		
+		
 		combinedQualityList.addAll(existingQualitiesMap.values());
 		try (PreparedStatement ps = connection.prepareStatement(INSERT_FRUIT_QUALITY_QRY)) {
 			StringBuilder sb = new StringBuilder();
@@ -1583,14 +1623,14 @@ public class DatabaseClient {
 				ps.setInt(2, qt.getId());
 				ps.setInt(3, fruitId);
 				ps.setInt(4, qt.getId());
-				ps.addBatch();
+				ps.execute();
 				sb.append(qt.getName() + " , ");
 
 			}
-			// ps.executeBatch();
+			ps.executeBatch();
 			ps.execute();
 			insertAuditRecord(
-					new AuditLog(0, getCurrentUser(), null, "ADDED Fruit Qualities :".concat(sb.toString()), null, 0));
+					new AuditLog(0, getCurrentUser(), new Date(), "ADDED Fruit Qualities :".concat(sb.toString()), null, 0));
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -1643,7 +1683,6 @@ public class DatabaseClient {
 				if (boxSize == null || boxSize.trim().isEmpty()) {
 					continue;
 				}
-				// System.out.println(boxSize.s);
 				boxSize = boxSize.toLowerCase();
 
 				ps.setString(1, boxSize);
@@ -1758,7 +1797,7 @@ public class DatabaseClient {
 		try (PreparedStatement ps = connection.prepareStatement("DELETE FROM expenseInfo WHERE name = ?")) {
 			ps.setString(1, name);
 			ps.executeUpdate();
-			insertAuditRecord(new AuditLog(0, getCurrentUser(), null, "DELETED exepense info :".concat(name), null, 0));
+			insertAuditRecord(new AuditLog(0, getCurrentUser(), new Date(), "DELETED exepense info :".concat(name), null, 0));
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -1769,7 +1808,7 @@ public class DatabaseClient {
 			ps.setString(1, name);
 			ps.executeUpdate();
 			insertAuditRecord(
-					new AuditLog(0, getCurrentUser(), null, "DELETED buyer exepense info :".concat(name), null, 0));
+					new AuditLog(0, getCurrentUser(), new Date(), "DELETED buyer exepense info :".concat(name), null, 0));
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -1783,7 +1822,7 @@ public class DatabaseClient {
 			ps.setString(2, defaultAmount);
 			ps.setString(3, name);
 			ps.executeUpdate();
-			insertAuditRecord(new AuditLog(0, getCurrentUser(), null, "UPDATED exepense info :".concat(name), null, 0));
+			insertAuditRecord(new AuditLog(0, getCurrentUser(), new Date(), "UPDATED exepense info :".concat(name), null, 0));
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -1798,7 +1837,7 @@ public class DatabaseClient {
             ps.setString(2, defaultAmount);
             ps.setString(3, name);
             ps.executeUpdate();
-            insertAuditRecord(new AuditLog(0, getCurrentUser(), null, "UPDATED buyer exepense info :".concat(name), null, 0));
+            insertAuditRecord(new AuditLog(0, getCurrentUser(), new Date(), "UPDATED buyer exepense info :".concat(name), null, 0));
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -1812,7 +1851,7 @@ public class DatabaseClient {
             ps.setString(3, type);
             ps.setString(4, defaultAmount);
             ps.executeUpdate();
-            insertAuditRecord(new AuditLog(0, getCurrentUser(), null, "ADDED exepense info :".concat(name), null, 0));
+            insertAuditRecord(new AuditLog(0, getCurrentUser(), new Date(), "ADDED exepense info :".concat(name), null, 0));
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -1827,7 +1866,7 @@ public class DatabaseClient {
 			ps.setString(4, name);
 			ps.executeQuery();
 			insertAuditRecord(
-					new AuditLog(0, getCurrentUser(), null, "ADDED buyerExpenseInfo info :".concat(name), null, 0));
+					new AuditLog(0, getCurrentUser(), new Date(), "ADDED buyerExpenseInfo info :".concat(name), null, 0));
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -1927,7 +1966,7 @@ public class DatabaseClient {
 			ps.setString(1, fruitName);
 			ps.executeUpdate();
 			insertAuditRecord(
-					new AuditLog(0, getCurrentUser(), null, "DELETED fruit entry:".concat(fruitName), null, 0));
+					new AuditLog(0, getCurrentUser(), new Date(), "DELETED fruit entry:".concat(fruitName), null, 0));
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		}
@@ -1940,7 +1979,7 @@ public class DatabaseClient {
 			if (rs.next()) {
 				if (rs.getInt(1) < 1) {
 					addOrUpdateCompanyInfo(company, true);
-					insertAuditRecord(new AuditLog(0, getCurrentUser(), null,
+					insertAuditRecord(new AuditLog(0, getCurrentUser(), new Date(),
 							"ADDED company:".concat(company.getName()), null, 0));
 
 				} else {
@@ -1955,7 +1994,7 @@ public class DatabaseClient {
 	public void updateCompany(Company company) {
 		addOrUpdateCompanyInfo(company, false);
 		insertAuditRecord(
-				new AuditLog(0, getCurrentUser(), null, "UPDATED company:".concat(company.getName()), null, 0));
+				new AuditLog(0, getCurrentUser(), new Date(), "UPDATED company:".concat(company.getName()), null, 0));
 
 	}
 
@@ -2018,7 +2057,7 @@ public class DatabaseClient {
 				auditMsg = "MONEY paid to " + mpr.getTitle();
 			}
 			int key = getGeneratedKey(ps);
-			insertAuditRecord(new AuditLog(0, getCurrentUser(), null, auditMsg, "partyMoney", key));
+			insertAuditRecord(new AuditLog(0, getCurrentUser(), new Date(), auditMsg, "partyMoney", key));
 			return key;
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -2122,7 +2161,6 @@ public class DatabaseClient {
 				}
 			}
 			ladanSql = ladanSql.concat(");");
-			// System.out.println(ladanSql);
 			ResultSet ladanRs = getResult(ladanSql);
 			int ladaanCount = 0;
 			if (ladanRs.next()) {
@@ -2214,7 +2252,7 @@ public class DatabaseClient {
 		try (final PreparedStatement ps = connection.prepareStatement(sql)) {
 			ps.setInt(1, id);
 			ps.executeUpdate();
-			insertAuditRecord(new AuditLog(0, getCurrentUser(), null, "DELETED paid/received entry:" + id, null, 0));
+			insertAuditRecord(new AuditLog(0, getCurrentUser(), new Date(), "DELETED paid/received entry:" + id, null, 0));
 			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -2358,9 +2396,8 @@ public class DatabaseClient {
 			ps.setInt(7, t.getBalanceCol());
 			ps.setInt(8, t.getTransIdCol());
 			ps.executeUpdate();
-			insertAuditRecord(new AuditLog(0, getCurrentUser(), null,
+			insertAuditRecord(new AuditLog(0, getCurrentUser(), new Date(),
 					"ADDED Template for account:".concat(template.getAccountName()), null, 0));
-			// System.out.println("ADDED a new template");
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		}
@@ -2378,7 +2415,7 @@ public class DatabaseClient {
 			ps.setInt(6, t.getBalanceCol());
 			ps.setString(7, t.getAccountName());
 			ps.executeUpdate();
-			insertAuditRecord(new AuditLog(0, getCurrentUser(), null,
+			insertAuditRecord(new AuditLog(0, getCurrentUser(), new Date(),
 					"UPDATED Template for account:".concat(template.getAccountName()), null, 0));
 
 			System.out.println("Template updated");
@@ -2393,7 +2430,7 @@ public class DatabaseClient {
 			ps.setString(1, name);
 			ps.executeUpdate();
 			insertAuditRecord(
-					new AuditLog(0, getCurrentUser(), null, "DELETED expenditure type:".concat(name), null, 0));
+					new AuditLog(0, getCurrentUser(), new Date(), "DELETED expenditure type:".concat(name), null, 0));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -2404,7 +2441,7 @@ public class DatabaseClient {
 			ps.setString(1, name);
 			ps.setString(2, name);
 			ps.executeUpdate();
-			insertAuditRecord(new AuditLog(0, getCurrentUser(), null, "ADDED expenditure type:".concat(name), null, 0));
+			insertAuditRecord(new AuditLog(0, getCurrentUser(), new Date(), "ADDED expenditure type:".concat(name), null, 0));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -2435,7 +2472,7 @@ public class DatabaseClient {
 			// ps.setBlob(6, xpr.getReceipt());
 
 			ps.execute();
-			insertAuditRecord(new AuditLog(0, getCurrentUser(), null, "Expenditure entry recorded in system",
+			insertAuditRecord(new AuditLog(0, getCurrentUser(), new Date(), "Expenditure entry recorded in system",
 					"expenditures", getGeneratedKey(ps)));
 			return true;
 		} catch (Exception ex) {
@@ -2517,7 +2554,7 @@ public class DatabaseClient {
 			statement.setInt(1, id);
 			statement.execute();
 			if (writeAuditLog) {
-				insertAuditRecord(new AuditLog(0, getCurrentUser(), null,
+				insertAuditRecord(new AuditLog(0, getCurrentUser(), new Date(),
 						"DELETED Entry for " + TABLE_MAP.get(tableName) + " (" + expenditure.getType() + ")", null, 0) {
 					{
 						setName(expenditure.getPayee());
@@ -2655,13 +2692,13 @@ public class DatabaseClient {
     //## for audit log insert
     //## changed by ss
     public void insertAuditRecord(AuditLog log) {
-        String sql = "INSERT INTO auditLog (userId, eventDetail, eventObject, "
+    	String sql = "INSERT INTO auditLog (userId, eventDetail, eventtime, "
                 + " eventObjectId, oldValues, newValues, name, date, amount) "
                 + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
         try (PreparedStatement ps = connection.prepareStatement(sql);) {
             ps.setString(1, log.getUserId());
             ps.setString(2, log.getEventDetail());
-            ps.setString(3, log.getEventObject());
+            ps.setDate(3, new java.sql.Date (log.getEventTime().getTime()));
             ps.setInt(4, log.getEventObjectId());
             ps.setString(5, log.getOldValues());
             ps.setString(6, log.getNewValues());
@@ -2755,7 +2792,7 @@ public class DatabaseClient {
 	// private static final String INSERT_FRUIT_QUALITY_QRY = "IF NOT EXISTS
 	// (SELECT * FROM fruitQuality WHERE fruit_id = ? AND quality_id = ?) Insert
 	// into fruitQuality (fruit_id,quality_id) values (?,?)";
-	private static final String INSERT_FRUIT_QUALITY_QRY = "select case when (count(*)=0) then (fruitquality(?,?)) end from fruitquality where fruit_id = ? and quality_id = ?";
+	private static final String INSERT_FRUIT_QUALITY_QRY = "select case when (count(quality_id)=0) then (fruitquality(?,?)) end from fruitquality where fruit_id = ? and quality_id = ?";
 	// private static final String INSERT_FRUIT_QRY = "IF NOT EXISTS (SELECT *
 	// FROM fruits WHERE name = ? COLLATE SQL_Latin1_General_CP1_CI_AS) INSERT
 	// INTO fruits (name) VALUES (?)";

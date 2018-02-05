@@ -81,25 +81,13 @@ public class AccountCodeImport implements Initializable{
 			public void handle(ActionEvent event) {
 				
 				 System.out.println("selected File :::"+selectedTemplate.getText());
-				 if(selectedTemplate.getText() == null)
-				 {
-					 Alert alert = new Alert(Alert.AlertType.WARNING);
-					 alert.setTitle("Warning!");
- 		 	   		 alert.setHeaderText("ERROR!");
- 		 	   		 alert.setContentText("please select a file...");
- 		 	   		 alert.showAndWait();
-				 }
-				 else
+				 if(!selectedTemplate.getText().equalsIgnoreCase(""))
 				 {
 					  String currentWorkingDir = System.getProperty("user.dir");
 				      //System.out.println("Current working directory in Java : " + currentWorkingDir);
-				      //System.out.println(currentWorkingDir+"\\UploadFiles");
-				      File f = new File(currentWorkingDir+"\\UploadFiles");
-				       if(f.exists())
-				       {
-				    	   if(f.isDirectory())
-				    	   {
+				      //System.out.println(currentWorkingDir+"\\UploadFiles")
 				    		   //## code for saving the directory.
+					  		  DatabaseClient.getInstance().dataClean();
 				    		   try 
 				    		   {
 								FileInputStream  file = new FileInputStream(new File(selectedTemplate.getText()));
@@ -144,18 +132,19 @@ public class AccountCodeImport implements Initializable{
 								// TODO Auto-generated catch block
 								e.printStackTrace();
 							}
-				    	   } 
-				       }
-				       else
-				       {
-				    	   new File(currentWorkingDir+"/UploadFiles").mkdirs();
-				       }
-				      
-
+				    	  }
+				 		else
+				 		{
+				 				Alert alert = new Alert(Alert.AlertType.WARNING);
+	 		 	   		          	  alert.setTitle("Failure!");
+	 		 	   		          	  alert.setHeaderText("File Not Selected");
+	 		 	   		          	  alert.setContentText("please select a file...");
+	 		 	   		          	  alert.showAndWait();
+					 
+				        }
 			
 				 }
-				 
-			}
+
 		});
 	    
 		
