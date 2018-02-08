@@ -8,9 +8,12 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.ResourceBundle;
+import java.util.TreeSet;
 
 import com.quickveggies.GeneralMethods;
 import com.quickveggies.UserGlobalParameters;
@@ -22,6 +25,7 @@ import com.quickveggies.entities.BoxSize;
 import com.quickveggies.entities.Buyer;
 import com.quickveggies.entities.ExpenseInfo;
 import com.quickveggies.entities.QualityType;
+import com.quickveggies.entities.Supplier;
 import com.quickveggies.entities.PartyType;
 import com.quickveggies.misc.AutoCompleteTableCell;
 import com.quickveggies.misc.AutoCompleteTextField;
@@ -33,6 +37,7 @@ import com.quickveggies.model.LotTableColumnNameEnum;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -989,23 +994,24 @@ public class FreshEntryController implements Initializable {
         updateTable(buyersEntry, lines);
     }
 
-    private java.util.TreeSet<String> updateGrowersList() {
-        int rowsNum = dbclient.getRowsNum("suppliers1");
-        java.util.TreeSet<String> result = new java.util.TreeSet<>();
+    private TreeSet<String> updateGrowersList() {
         
-        for (int supp_id = 1; supp_id <= rowsNum; supp_id++) {
-            try {
-                com.quickveggies.entities.Supplier supplier = dbclient.getSupplierById(supp_id);
-                result.add(supplier.getTitle());
-            }
-            catch (java.sql.SQLException e) {
-                System.out.print("sqlexception in populating suppliers list");
-            }
-        }
-        if (result.isEmpty()) {
-            result.add(STR_ADD_NEW);
-        }
-        return result;
+    	TreeSet<String> result = new TreeSet<String> ();
+		try {
+			result = new TreeSet<String>( dbclient.getSupplier().stream().map( supplier -> supplier.getTitle()).collect(Collectors.toList()));
+		} catch (NoSuchElementException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			 if (result.isEmpty()) {
+		            result.add(STR_ADD_NEW);
+		        }
+		        
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+       
     }
 
     private java.util.TreeSet<String> updateBuyersList() {

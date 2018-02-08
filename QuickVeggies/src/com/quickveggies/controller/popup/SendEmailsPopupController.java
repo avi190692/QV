@@ -82,7 +82,7 @@ public class SendEmailsPopupController {
         primaryStage.initModality(Modality.APPLICATION_MODAL);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Send Email(s)");
-        primaryStage.setResizable(false);
+        primaryStage.setResizable(true);
         primaryStage.sizeToScene();
         primaryStage.show();
     }

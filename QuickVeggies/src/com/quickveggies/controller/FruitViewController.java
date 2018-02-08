@@ -164,6 +164,7 @@ public class FruitViewController implements Initializable {
 	private void repopulateFruitInfo(String fruit) {
 		List<BoxSize> boxSizes = dbclient.getBoxSizesForFruit(fruit);
 		List<QualityType> qualityTypes = dbclient.getQualityTypesForFruit(fruit);
+		qualityTypes.forEach(q -> System.out.println(q.getName()));
 		List<String> qualityTypesList = new ArrayList<>();
 		for (QualityType qt : qualityTypes) {
 			qualityTypesList.add(qt.getName());

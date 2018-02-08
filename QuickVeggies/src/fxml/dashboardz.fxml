@@ -105,12 +105,12 @@
                   </Button>
                   <MenuButton fx:id="transactions" layoutX="1.0" layoutY="306.0" minHeight="50.0" minWidth="158.0" mnemonicParsing="false" popupSide="RIGHT" style="-fx-background-color: linear-gradient(to top, rgba(0,0,0,.27), rgba(255,255,255,.37)); -fx-text-fill: #f5f5f8; -fx-border-radius: 3px;" text="Transactions" textAlignment="RIGHT">
                     <items>
-                      <MenuItem fx:id="coldstore" mnemonicParsing="false" text="Sales (Cold Store)" />
-                      <MenuItem fx:id="sales" mnemonicParsing="false" text="Sales(Arrival)" />
-                        <MenuItem fx:id="godown" mnemonicParsing="false" text="Sales (Go Down)" />
-                        <MenuItem fx:id="expenses" mnemonicParsing="false" text="Expenses" />
-                        <MenuItem fx:id="teeps" mnemonicParsing="false" text="Teep" />
-                        <MenuItem fx:id="banking" mnemonicParsing="false" text="Banking" />
+                      <MenuItem fx:id="coldstore" mnemonicParsing="false" style="-fx-background-color: linear-gradient(to top, rgb(85,85,85), rgb(17,17,17));" text="Sales (Cold Store)" />
+                      <MenuItem fx:id="sales" mnemonicParsing="false" style="-fx-background-color: linear-gradient(to top, rgb(85,85,85), rgb(17,17,17));" text="Sales(Arrival)" />
+                        <MenuItem fx:id="godown" mnemonicParsing="false" style="-fx-background-color: linear-gradient(to top, rgb(85,85,85), rgb(17,17,17));" text="Sales (Go Down)" />
+                        <MenuItem fx:id="expenses" mnemonicParsing="false" style="-fx-background-color: linear-gradient(to top, rgb(85,85,85), rgb(17,17,17));" text="Expenses" />
+                        <MenuItem fx:id="teeps" mnemonicParsing="false" style="-fx-background-color: linear-gradient(to top, rgb(85,85,85), rgb(17,17,17));" text="Teep" />
+                        <MenuItem fx:id="banking" mnemonicParsing="false" style="-fx-background-color: linear-gradient(to top, rgb(85,85,85), rgb(17,17,17));" text="Banking" />
                     </items>
                      <font>
                         <Font name="Verdana Bold" size="13.0" />

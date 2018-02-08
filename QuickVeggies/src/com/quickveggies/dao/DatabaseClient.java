@@ -15,10 +15,12 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.Set;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -1426,7 +1428,42 @@ public class DatabaseClient {
 			throw new NoSuchElementException("No supplier user in database");
 		}
 	}
+	public Set<Supplier> getSupplier() throws SQLException, NoSuchElementException {
+		ResultSet rs = getResult("select * from suppliers1;");
+		Set<Supplier> suplierList = new HashSet<Supplier>();
+		while (rs.next()) {
+			String id = rs.getString("id");
+			String title = rs.getString("title");
+			String firstName = rs.getString("firstName");
+			String lastName = rs.getString("lastName");
+			String company = rs.getString("company");
+			String proprietor = rs.getString("proprietor");
+			String mobile = rs.getString("mobile");
+			String mobile2 = rs.getString("mobile2");
+			String email = rs.getString("email");
+			String village = rs.getString("village");
+			String po = rs.getString("po");
+			String tehsil = rs.getString("tehsil");
+			String ac = rs.getString("ac");
+			String bank = rs.getString("bank");
+			String ifsc = rs.getString("ifsc");
+			String photo = rs.getString("photo");
 
+			Supplier receivedSupplier = new Supplier(Integer.parseInt(id), title, firstName, lastName, company, proprietor, mobile,
+					mobile2, email, village, po, tehsil, ac, bank, ifsc);
+
+			if (photo != null) {
+				receivedSupplier.setImagePath(photo);
+			}
+			
+			suplierList.add(receivedSupplier);
+		}
+		return suplierList;
+	}
+
+	
+	
+	
 	private ResultSet getResult(String query) throws SQLException {
 		Statement statement = connection.createStatement();
 		ResultSet resultSet = statement.executeQuery(query);

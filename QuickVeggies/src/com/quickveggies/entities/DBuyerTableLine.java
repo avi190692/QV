@@ -56,10 +56,15 @@ public class DBuyerTableLine {
         this.boxSizeType = boxSizeType;
         this.fruit = fruit;
         //get buyer type
-        if (buyerTitle.length() == 0) 
-        {
-            return;
+        if(buyerTitle ==  null){
+        	return;
+        } else {
+        	if (buyerTitle.length() == 0) 
+            {
+                return;
+            }
         }
+        
         try 
         {
             setBuyerType(DatabaseClient.getInstance().getBuyerByName(buyerTitle).getBuyerType());

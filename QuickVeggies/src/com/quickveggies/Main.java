@@ -61,7 +61,7 @@ public class Main extends Application {
         }
         scene.getStylesheets().add("/css/style.css");
         stage.setScene(scene);
-        stage.setResizable(false);
+        stage.setResizable(true);
         stage.setTitle("Quick Veggies");
         stage.setFullScreen(true);
         stage.show();
