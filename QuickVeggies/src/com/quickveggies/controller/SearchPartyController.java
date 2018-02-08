@@ -2,8 +2,10 @@ package com.quickveggies.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.ResourceBundle;
 import java.util.TreeSet;
 
@@ -264,22 +266,14 @@ public class SearchPartyController implements Initializable {
 
     private ArrayList<Supplier> getDatabaseSuppliersList(String keyword) {
         DatabaseClient dbclient = DatabaseClient.getInstance();
-        int rowsNum = dbclient.getRowsNum("suppliers1");
-        ArrayList<Supplier> result = new ArrayList<>();
-        for (int supp_id = 1; supp_id <= rowsNum; supp_id++) {
-            try {
-                if (keyword == null) {
-                    result.add(dbclient.getSupplierById(supp_id));
-                } else {
-                    Supplier supplier = dbclient.getSupplierById(supp_id);
-                    if ((supplier.getTitle().toLowerCase()).contains((keyword).toLowerCase())) {
-                        result.add(supplier);
-                    }
-                }
-            } catch (java.sql.SQLException e) {
-                System.out.print("sqlexception in populating suppliers list in SearchPartyController");
-            }
-        }
+        ArrayList<Supplier> result = null;
+		try {
+			result = new ArrayList<>(dbclient.getSupplier());
+		} catch (NoSuchElementException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
         return result;
     }
 
