@@ -1428,7 +1428,7 @@ public class DatabaseClient {
 			throw new NoSuchElementException("No supplier user in database");
 		}
 	}
-	public Set<Supplier> getSupplier() throws SQLException, NoSuchElementException {
+	public Set<Supplier> getSuppliers() throws SQLException, NoSuchElementException {
 		ResultSet rs = getResult("select * from suppliers1;");
 		Set<Supplier> suplierList = new HashSet<Supplier>();
 		while (rs.next()) {
@@ -1884,9 +1884,9 @@ public class DatabaseClient {
     public void addExpenseInfo(String name, String type, String defaultAmount) {
         try (PreparedStatement ps = connection.prepareStatement(INSERT_EXPENSE_INFO_QRY)) {
             ps.setString(1, name);
-            ps.setString(2, name);
-            ps.setString(3, type);
-            ps.setString(4, defaultAmount);
+            ps.setString(2, type);
+            ps.setString(3, defaultAmount);
+            ps.setString(4, name);
             ps.executeUpdate();
             insertAuditRecord(new AuditLog(0, getCurrentUser(), new Date(), "ADDED exepense info :".concat(name), null, 0));
 

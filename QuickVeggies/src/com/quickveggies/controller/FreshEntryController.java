@@ -82,6 +82,10 @@ public class FreshEntryController implements Initializable {
 
     private static final String GROWER_QTY_COL_NAME = "Quantity";
 
+    private static final String COLDSTORE = "coldstore";
+    
+    private static final String GODOWN = "godown";
+    
     private TableColumn<?, String> nextTabColumnToFocus;
 
     @FXML
@@ -998,7 +1002,7 @@ public class FreshEntryController implements Initializable {
         
     	TreeSet<String> result = new TreeSet<String> ();
 		try {
-			result = new TreeSet<String>( dbclient.getSupplier().stream().map( supplier -> supplier.getTitle()).collect(Collectors.toList()));
+			result = new TreeSet<String>( dbclient.getSuppliers().stream().map( supplier -> supplier.getTitle()).collect(Collectors.toList()));
 		} catch (NoSuchElementException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -1022,7 +1026,7 @@ public class FreshEntryController implements Initializable {
                     result.add(buyer.getTitle());
                 }
             }
-            if (result.isEmpty()) {
+                     if (result.isEmpty()) {
                 result.add(STR_ADD_NEW);
             }
         }
@@ -1335,6 +1339,7 @@ public class FreshEntryController implements Initializable {
 
     private AutoCompleteTextField createAutoCompleteBuyerTextField() {
         buyersList = updateBuyersList();
+                
         final AutoCompleteTextField buyerSelectTextField = new AutoCompleteTextField();
         buyerSelectTextField.setEntries(buyersList);
         buyerSelectTextField.linkToWindow(FreshEntryController.this, "/fxml/buyeradd.fxml", "Add new buyer", STR_ADD_NEW,

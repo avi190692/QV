@@ -38,7 +38,7 @@ public class SendEmailsPopupController {
         //Add panels for every email template
         for (SendEmailData email : templates) {
             FXMLLoader loader = new FXMLLoader(SendEmailsPopupController.class.
-                    getResource("/enteremailpane.fxml"));
+                    getResource("/fxml/enteremailpane.fxml"));
             EnteremailpaneController controller = new EnteremailpaneController(
                     email.to, email.from, email.attachment);
             loader.setController(controller);
@@ -65,7 +65,7 @@ public class SendEmailsPopupController {
             for (EnteremailpaneController controller : panels) {
                 dealsToSend.add(controller.getEmailData());
             }
-            DashboardController.showPopup("/sendemailpopup.fxml", "Email",
+            DashboardController.showPopup("/fxml/sendemailpopup.fxml", "Email",
                     new SendemailpopupController(dealsToSend));
             sendButton.getScene().getWindow().hide();
         });

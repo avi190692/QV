@@ -268,7 +268,7 @@ public class SearchPartyController implements Initializable {
         DatabaseClient dbclient = DatabaseClient.getInstance();
         ArrayList<Supplier> result = null;
 		try {
-			result = new ArrayList<>(dbclient.getSupplier());
+			result = new ArrayList<>(dbclient.getSuppliers());
 		} catch (NoSuchElementException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

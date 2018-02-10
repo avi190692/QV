@@ -128,7 +128,7 @@ public class UpdatePendingSalesController implements Initializable {
     private void setupRatesAdjustmentFlow() {
         btnAdjustRates.setOnAction((ActionEvent event) -> {
             SupplierAdjustRateController controller = new SupplierAdjustRateController(saleDeal, inprocessSupplierDeal);
-            Stage stage = DashboardController.showPopup("/supplieradjustrates.fxml",
+            Stage stage = DashboardController.showPopup("/fxml/supplieradjustrates.fxml",
                     "Pending Entries", controller);
             EventHandler<WindowEvent> we = new EventHandler<WindowEvent>() {
                 @Override
@@ -581,7 +581,7 @@ public class UpdatePendingSalesController implements Initializable {
         buyersList = updateBuyersList();
         final AutoCompleteTextField buyerSelectTextField = new AutoCompleteTextField();
         buyerSelectTextField.setEntries(buyersList);
-        buyerSelectTextField.linkToWindow(UpdatePendingSalesController.this, "/buyeradd.fxml", "Add new buyer", STR_ADD_NEW,
+        buyerSelectTextField.linkToWindow(UpdatePendingSalesController.this, "/fxml/buyeradd.fxml", "Add new buyer", STR_ADD_NEW,
                 new AddBuyerController());
         buyerSelectTextField.focusedProperty().addListener(new ChangeListener<Boolean>() {
             @Override

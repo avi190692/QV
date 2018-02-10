@@ -119,7 +119,7 @@ public class UploadAccountActivityController implements Initializable {
             stage.setTitle("Add/Change Template");
             stage.initModality(Modality.APPLICATION_MODAL);
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/save_template.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/save_template.fxml"));
                 SaveTemplateController controller = new SaveTemplateController(chooseAccount.getValue(),
                         xlsreader.getDataAsTableView(), removeTemplate, addTemplate, templateName, preview);
                 loader.setController(controller);
@@ -238,7 +238,7 @@ public class UploadAccountActivityController implements Initializable {
                 prevWindow.setTitle("Preview Template");
                 prevWindow.initModality(Modality.APPLICATION_MODAL);
                 try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/preview_template.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/preview_template.fxml"));
                     PreviewAccTableController controller = new PreviewAccTableController(previewTable);
                     loader.setController(controller);
                     Parent parent = loader.load();

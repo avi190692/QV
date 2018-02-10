@@ -234,7 +234,7 @@ public class DPendingSalesController implements Initializable {
                                 UpdatePendingSalesController controller = new UpdatePendingSalesController(
                                         buyerDeal, saleDealMap.get(buyerDeal.getDealID()),
                                         linkedSupplierDeal);
-                                Stage stage = DashboardController.showPopup("/updatePendingSales.fxml",
+                                Stage stage = DashboardController.showPopup("/fxml/updatePendingSales.fxml",
                                         "Pending Entries", controller);
                                 
                                 EventHandler<WindowEvent> we = (WindowEvent event1) -> {

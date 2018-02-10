@@ -60,7 +60,7 @@ public class EnteremailpaneController implements Initializable {
             addTransaction.setTitle("New email");
             addTransaction.initModality(Modality.APPLICATION_MODAL);
             try {
-                FXMLLoader loader = new FXMLLoader(EnteremailpaneController.class.getResource("/enteremailpane.fxml"));
+                FXMLLoader loader = new FXMLLoader(EnteremailpaneController.class.getResource("/fxml/enteremailpane.fxml"));
                 EnteremailpaneController controller = new EnteremailpaneController(to, from, attachment);
                 loader.setController(controller);
                 Parent parent = loader.load();

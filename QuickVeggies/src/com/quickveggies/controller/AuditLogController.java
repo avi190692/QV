@@ -306,7 +306,7 @@ public class AuditLogController implements Initializable {
                                     if (oldLine.deserialize(log.getOldValues())) {
                                         pdfOldValues = prepareSalesDealPdf(oldLine);
                                     }
-                                    DashboardController.showPopup("/auditlogentrypopup.fxml", "Log Entry Preview",
+                                    DashboardController.showPopup("/fxml/auditlogentrypopup.fxml", "Log Entry Preview",
                                             new AuditLogEntryPopupController(pdf, pdfOldValues) {
                                                 {
                                                     setEventData(log.getDate().toInstant().atZone(
@@ -342,7 +342,7 @@ public class AuditLogController implements Initializable {
                                     if (oldLine.deserialize(log.getOldValues())) {
                                         pdfOldValues = prepareSupplierDealPdf(oldLine);
                                     }
-                                    DashboardController.showPopup("/auditlogentrypopup.fxml", "Log Entry Preview",
+                                    DashboardController.showPopup("/fxml/auditlogentrypopup.fxml", "Log Entry Preview",
                                             new AuditLogEntryPopupController(pdf, pdfOldValues) {
                                                 {
                                                     setEventData(log.getDate().toString());
@@ -353,7 +353,7 @@ public class AuditLogController implements Initializable {
                                 }
                                 case "expenditures": {
                                     String pdf = prepareExpenditurePdf((Expenditure) log.getEntryObject());
-                                    DashboardController.showPopup("/auditlogentrypopup.fxml", "Log Entry Preview",
+                                    DashboardController.showPopup("/fxml/auditlogentrypopup.fxml", "Log Entry Preview",
                                             new AuditLogEntryPopupController(pdf, null){{
                                                 setEventData(log.getDate().toString());
                                                 setDescription(log.getEventDetail());

@@ -12,6 +12,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 import com.ai.util.dates.DateUtil;
 import com.quickveggies.GeneralMethods;
@@ -179,11 +180,11 @@ public class MoneyPaidRecdController implements Initializable, DaoGeneratedKey {
             case BUYER:
             case LADAAN:
             case BIJAK:
-                txtParty.linkToWindow(this, "/buyeradd.fxml", "Add new Buyer",
+                txtParty.linkToWindow(this, "/fxml/buyeradd.fxml", "Add new Buyer",
                         STR_ADD_NEW, new AddBuyerController());
                 break;
             case SUPPLIER:
-                txtParty.linkToWindow(this, "/supplieradd.fxml", "Add new supplier",
+                txtParty.linkToWindow(this, "/fxml/supplieradd.fxml", "Add new supplier",
                         STR_ADD_NEW, new AddSupplierController());
         }
         txtParty.focusedProperty().addListener(new ChangeListener<Boolean>() {
@@ -385,26 +386,25 @@ public class MoneyPaidRecdController implements Initializable, DaoGeneratedKey {
 
     private java.util.TreeSet<String> updatePartyList(EntityType pType) {
         DatabaseClient dbclient = DatabaseClient.getInstance();
-        int rowsNum = dbclient.getRowsNum(pType.getTableName());
         java.util.TreeSet<String> result = new java.util.TreeSet<String>();
-        for (int partyId = 1; partyId <= rowsNum; partyId++) {
-            try {
-                String title = "";
-                switch (pType) {
+        try {
+        	switch (pType) {
                     case BIJAK:
                     case BUYER:
                     case LADAAN:
-                        title = dbclient.getBuyerById(partyId).getTitle();
+                    	result.addAll(dbclient.getBuyers().stream().map( buyer -> buyer.getTitle()).collect(Collectors.toList()));
                         break;
                     case SUPPLIER:
-                        title = dbclient.getSupplierById(partyId).getTitle();
-                }
-                result.add(title);
+                    	result.addAll(dbclient.getSuppliers().stream().map(suplier -> suplier.getTitle()).collect(Collectors.toList()));
+                    	break;
+                    default :
+                    	result.add(STR_ADD_NEW);
+        	}
+                
             } catch (java.sql.SQLException e) {
                 System.out.print("sqlexception in populating party list");
             }
-        }
-        result.add(STR_ADD_NEW);
+                
         return result;
     }
 
