@@ -13,16 +13,26 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import com.quickveggies.Main;
+import com.quickveggies.controller.dashboard.DBuyerController;
 import com.quickveggies.dao.DatabaseClient;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class AccountCodeImport implements Initializable{
 
@@ -35,6 +45,9 @@ public class AccountCodeImport implements Initializable{
 	 
 	 @FXML
 	 private Button uploadTemplate;
+	 
+	 @FXML
+	 private Button approveList;
 	 
 	 @FXML
 	 private TextField selectedTemplate;
@@ -83,7 +96,7 @@ public class AccountCodeImport implements Initializable{
 				 System.out.println("selected File :::"+selectedTemplate.getText());
 				 if(!selectedTemplate.getText().equalsIgnoreCase(""))
 				 {
-					  String currentWorkingDir = System.getProperty("user.dir");
+					  //String currentWorkingDir = System.getProperty("user.dir");
 				      //System.out.println("Current working directory in Java : " + currentWorkingDir);
 				      //System.out.println(currentWorkingDir+"\\UploadFiles")
 				    		   //## code for saving the directory.
@@ -145,6 +158,51 @@ public class AccountCodeImport implements Initializable{
 			
 				 }
 
+		});
+	    
+	    
+	    approveList.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				
+				final Stage accoutCodeApproval = new Stage();
+				accoutCodeApproval.centerOnScreen();
+				accoutCodeApproval.setTitle("Account Code Approval");
+				accoutCodeApproval.initModality(Modality.APPLICATION_MODAL);
+				accoutCodeApproval.setOnCloseRequest(new EventHandler<WindowEvent>() 
+		        {
+		            public void handle(WindowEvent event) 
+		            {
+		                Main.getStage().getScene().getRoot().setEffect(null);
+		            }
+		        });
+				
+				Parent parent;
+				try {
+					parent = FXMLLoader.load(DBuyerController.class.getResource("/fxml/accountlistapproval.fxml"));
+				
+	            Scene scene = new Scene(parent, 687, 400);
+	            scene.setOnKeyPressed(new EventHandler<KeyEvent>() 
+	            {
+	                public void handle(KeyEvent event)
+	                {                	
+	                    if (event.getCode() == KeyCode.ESCAPE) 
+	                    {
+	                        Main.getStage().getScene().getRoot().setEffect(null);
+	                        accoutCodeApproval.close();
+	                    }
+	                }
+	            });
+	            accoutCodeApproval.setScene(scene);
+	            accoutCodeApproval.show();
+				} 
+				catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+				
+			
 		});
 	    
 		
