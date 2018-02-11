@@ -23,5 +23,10 @@
          </font>
       </Button>
       <Button fx:id="browse" layoutX="512.0" layoutY="101.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="73.0" text="browse" />
+      <Button fx:id="approveList" layoutX="313.0" layoutY="20.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="131.0" text="Approve List" textFill="#b90808">
+         <font>
+            <Font name="System Bold Italic" size="12.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

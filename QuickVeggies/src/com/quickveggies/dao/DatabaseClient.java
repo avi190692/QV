@@ -100,6 +100,59 @@ public class DatabaseClient {
         
         return instance;
     }
+    // added by ss for account code list approval
+    public List<AccountMaster> accountCodeApprovalList()
+    {
+    	List<AccountMaster> acm = new ArrayList<AccountMaster>();
+    	String sql ="Select * from public.accountmaster_draftupload where status='"+false+"'";
+    	try 
+    	{
+
+			Statement smt = connection.createStatement();
+					 
+		    ResultSet rs = smt.executeQuery(sql);
+			while(rs.next())
+			{
+				AccountMaster am = new AccountMaster();
+							
+							  am.setAccountcode(rs.getString(2));
+							  am.setAccountname(rs.getString(3));
+							  am.setAmount(rs.getDouble(4));
+							  am.setReport_flag(rs.getString(5));
+							  am.setSubglLink(rs.getString(7));
+							  
+				acm.add(am);
+			} 
+			//System.out.println("upload list size:::"+acm.size());		  
+		  
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+    return acm;			 
+    }
+    public void approveUploadedList()
+    {
+    	
+    	
+    	String sql1 ="update public.accountmaster_draftupload set status='"+true+"'";
+    	String sql2 = "select 1 from public.accountapprovedlistimport('"+new CommonFunctions().currentMonth()+"')";
+    	try 
+    	{
+			PreparedStatement pst1 = connection.prepareStatement(sql1);
+			                  pst1.executeUpdate();  
+		    
+			PreparedStatement pst2 = connection.prepareStatement(sql2);
+			                  pst2.executeUpdate();                    
+			
+		} 
+    	catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+    
+    
     // added by ss for account code upload
     public void dataClean()
     {
