@@ -37,8 +37,8 @@ import javafx.stage.WindowEvent;
 public class AccountCodeImport implements Initializable{
 
 	
-	 @FXML
-	 private Button downloadTemplate;
+	 /*@FXML
+	 private Button downloadTemplate;*/
 	 
 	 @FXML
 	 private Button browse;
@@ -57,7 +57,7 @@ public class AccountCodeImport implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
-		downloadTemplate.setOnAction(new EventHandler<ActionEvent>() {
+		/*downloadTemplate.setOnAction(new EventHandler<ActionEvent>() {
 			
 			@Override
 			public void handle(ActionEvent event) 
@@ -66,7 +66,7 @@ public class AccountCodeImport implements Initializable{
 				
 			}
 		});
-	
+	*/
 		
 	    browse.setOnAction(new EventHandler<ActionEvent>(){
 
