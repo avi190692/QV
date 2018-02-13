@@ -212,7 +212,7 @@ public class DatabaseClient {
 							  psmt.setString(8,accountMaster.getAccountType());
 							  
 							  psmt.execute();
-				  
+			System.out.println("account_code_entry");	  
 		 } 
     	 catch (SQLException e) {
 			// TODO Auto-generated catch block
