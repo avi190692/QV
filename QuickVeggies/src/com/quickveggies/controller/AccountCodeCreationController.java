@@ -73,11 +73,13 @@ public class AccountCodeCreationController implements Initializable {
 	 @Override
 	 public void initialize(URL location, ResourceBundle resources) 
 	 {
+		 String btnAction = MyContext.getInstance().getButtonFlagIndicator().getButtonType();
+	   	 activestatus.setValue("Active"); 
 		 accounttype.setItems(accTypeList);
 		 accountcat.setItems(accountCategoryList);
 		 activestatus.setItems(accountActiveStatus);
 		 
-		
+		 
 		 accountcode.setText(MyContext.getInstance().getAccountMaster().getAccountcode());
 		 accountname.setText(MyContext.getInstance().getAccountMaster().getAccountname());
 		 
@@ -91,7 +93,7 @@ public class AccountCodeCreationController implements Initializable {
 		 }
 		 if(statusFlag.toString().equals("false"))
 		 {
-			 activestatus.setValue("Active"); 
+			 activestatus.setValue("InActive"); 
 		 }
 		 if(statusFlag.toString().equals(null))
 		 {
@@ -99,11 +101,30 @@ public class AccountCodeCreationController implements Initializable {
 		 }
 		 accountcat.setValue(MyContext.getInstance().getAccountMaster().getReport_flag());
 		 accounttype.setValue(MyContext.getInstance().getAccountMaster().getAccountType());
+		 
+		 System.out.println("show me this value:::"+MyContext.getInstance().getAccountMaster().getAccountType());
 		 financialyear.setText(MyContext.getInstance().getAccountMaster().getFin_year());
+		 
+		 if(MyContext.getInstance().getAccountMaster().getAccountType() == null)
+		 {
+			 accounttype.setValue("Gl");
+		 }
 		 
 		 if(MyContext.getInstance().getAccountMaster().getFin_year()==null)
 		 {
 			 financialyear.setText(new CommonFunctions().financialYear());
+		 }
+		 
+		 if(btnAction.equals("create"))
+		 {
+			 accountcode.setText("");
+    	   	 accountname.setText("");
+    	   	 amt.setText("");
+    	   	 subGlLink.setText("");
+    	   	 accounttype.setValue("Gl");
+    	   	 accountcat.setItems(accountCategoryList);
+    		 
+    	   	
 		 }
 		 
 		 //System.out.println("dashboard controller");
@@ -119,11 +140,12 @@ public class AccountCodeCreationController implements Initializable {
             	 String reportFlag = accountcat.getValue();
             	 //## by default it will be true.
             	 boolean active_flag = true;
-            	 String btnAction = MyContext.getInstance().getButtonFlagIndicator().getButtonType();
+            	// String btnAction = MyContext.getInstance().getButtonFlagIndicator().getButtonType();
             	 
             	 Alert alert = new Alert(Alert.AlertType.WARNING);
             	 if(btnAction.equals("create"))
             	 {
+            		 
             		 
                 	 //## defining rules for account codes
                 	 String accCodeExistChk = "no";

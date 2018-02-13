@@ -62,7 +62,7 @@ public class AccountCodeSearchController implements Initializable{
 	 @FXML
 	 private ComboBox<String> searchtype;
 	 
-	 ObservableList<String> searchcriteria = FXCollections.observableArrayList("Code","Name","Type","Balance");
+	 ObservableList<String> searchcriteria = FXCollections.observableArrayList("Code","Name","Type");//,"Balance");
 	   
 	 @FXML
 	 private TableView<AccountMaster> detailstable;
