@@ -22,6 +22,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -31,6 +32,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import javafx.util.Callback;
 
 /*
  * author : ss
@@ -40,9 +42,7 @@ public class AccountCodeSearchController implements Initializable{
 	
 	 @FXML
 	 private TextField searchstring;
-	 
-	 @FXML
-	 private TextField accountcodeedit;
+
 	  
 	 @FXML
 	 private Button searchbutton;
@@ -50,8 +50,6 @@ public class AccountCodeSearchController implements Initializable{
 	 @FXML
 	 private Button importbtn;
 	 
-	 @FXML
-	 private Button edit;
 	 
 	 @FXML
 	 private Button importcode;
@@ -79,10 +77,12 @@ public class AccountCodeSearchController implements Initializable{
 	 @FXML
 	 private TableColumn<AccountMaster,Double> balance;
 	 
+	 @FXML
+	 private TableColumn<AccountMaster, Void> action; // = new TableColumn("Action");
+	 
 	 ObservableList<AccountMaster> searchDetailsList;
 	 
 	 
-	
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources){
@@ -98,9 +98,10 @@ public class AccountCodeSearchController implements Initializable{
 				detailstable.refresh();
 				//## for refreshing the table view 
 				detailstable.getItems().clear();
+				
+			
 				String serachString = searchstring.getText();
-
-				String searchChoice = searchtype.getValue();;
+				String searchChoice = searchtype.getValue();
 				
 			
 				
@@ -110,6 +111,101 @@ public class AccountCodeSearchController implements Initializable{
 				name.setCellValueFactory(new PropertyValueFactory<AccountMaster,String>("accountname"));
 				type.setCellValueFactory(new PropertyValueFactory<AccountMaster,String>("report_flag"));
 				balance.setCellValueFactory(new PropertyValueFactory<AccountMaster,Double>("amount"));
+				
+				Callback<TableColumn<AccountMaster, Void>, TableCell<AccountMaster, Void>> cellFactory = new Callback<TableColumn<AccountMaster, Void>, TableCell<AccountMaster, Void>>() 
+				{
+		            @Override
+		            public TableCell<AccountMaster, Void> call(final TableColumn<AccountMaster, Void> param) {
+		                final TableCell<AccountMaster, Void> cell = new TableCell<AccountMaster, Void>() {
+		                	
+		                    private final Button btn = new Button("Edit Details");
+
+		                    {
+		                        btn.setOnAction((ActionEvent event) -> 
+		                        {
+		                        	AccountMaster data = getTableView().getItems().get(getIndex());
+		                            System.out.println("selectedData: " + data.getAccountcode());
+		                            
+		                            /* ## for editing the details of account code. */
+		                            
+		                            MyContext.getInstance().getButtonFlagIndicator().setButtonType("edit");
+		                            List<AccountMaster> acm = DatabaseClient.getInstance().accountCodeSearch(data.getAccountcode(),"accountCodeEdit");
+		            				
+		            				//## setting context for forwarding request to another controller
+		            				MyContext.getInstance().getAccountMaster().setAccountcode(acm.get(0).getAccountcode());
+		            				MyContext.getInstance().getAccountMaster().setAccountname(acm.get(0).getAccountname());
+		            				MyContext.getInstance().getAccountMaster().setAmount(acm.get(0).getAmount());
+		            				MyContext.getInstance().getAccountMaster().setReport_flag(acm.get(0).getReport_flag());
+		            				Boolean activeFlagStatus = true;
+		            				if(acm.get(0).getReport_flag().equals("false"))
+		            				{
+		            					activeFlagStatus=false;
+		            				}
+		            				MyContext.getInstance().getAccountMaster().setActive_flag(activeFlagStatus);
+		            				MyContext.getInstance().getAccountMaster().setFin_year(acm.get(0).getFin_year());
+		            				MyContext.getInstance().getAccountMaster().setAccountType(acm.get(0).getAccountType());
+		            				
+		            				final Stage accoutCodeCreation = new Stage();
+		            				accoutCodeCreation.centerOnScreen();
+		            				accoutCodeCreation.setTitle("Account Code Creation/Updation");
+		            				accoutCodeCreation.initModality(Modality.APPLICATION_MODAL);
+		            				accoutCodeCreation.setOnCloseRequest(new EventHandler<WindowEvent>() 
+		            		        {
+		            		            public void handle(WindowEvent event) 
+		            		            {
+		            		                Main.getStage().getScene().getRoot().setEffect(null);
+		            		            }
+		            		        });
+		            				
+		            				Parent parent;
+		            				try {
+		            					parent = FXMLLoader.load(DBuyerController.class.getResource("/fxml/accountCodeCreation.fxml"));
+		            				
+		            	            Scene scene = new Scene(parent,Main.DASHBOARD_WIDTH,Main.DASHBOARD_HEIGHT);
+		            	            scene.setOnKeyPressed(new EventHandler<KeyEvent>() 
+		            	            {
+		            	                public void handle(KeyEvent event)
+		            	                {                	
+		            	                    if (event.getCode() == KeyCode.ESCAPE) 
+		            	                    {
+		            	                        Main.getStage().getScene().getRoot().setEffect(null);
+		            	                        accoutCodeCreation.close();
+		            	                    }
+		            	                }
+		            	            });
+		            	            accoutCodeCreation.setScene(scene);
+		            	            accoutCodeCreation.show();
+		            				} 
+		            				catch (IOException e) {
+		            					e.printStackTrace();
+		            				}
+
+		                            /* ******** */
+		                            
+		                            
+		                        });
+		                    }
+
+		                    @Override
+		                    public void updateItem(Void item, boolean empty) {
+		                        super.updateItem(item, empty);
+		                        if (empty) 
+		                        {
+		                            setGraphic(null);
+		                        } 
+		                        else 
+		                        {
+		                            setGraphic(btn);
+		                        }
+		                    }
+		                };
+		                return cell;
+		            }
+		        };
+
+		        
+		        //## adding the action button on the table view.
+		        action.setCellFactory(cellFactory);
 				//## adding dynamic values to observable list
 				searchDetailsList = FXCollections.observableArrayList(acm); 
 				detailstable.getItems().addAll(searchDetailsList);
@@ -143,7 +239,7 @@ public class AccountCodeSearchController implements Initializable{
 				try {
 					parent = FXMLLoader.load(DBuyerController.class.getResource("/fxml/accountCodeCreation.fxml"));
 				
-	            Scene scene = new Scene(parent, 687, 400);
+	            Scene scene = new Scene(parent,Main.DASHBOARD_WIDTH,Main.DASHBOARD_HEIGHT);
 	            scene.setOnKeyPressed(new EventHandler<KeyEvent>() 
 	            {
 	                public void handle(KeyEvent event)
@@ -162,71 +258,6 @@ public class AccountCodeSearchController implements Initializable{
 					e.printStackTrace();
 				}
 			}
-		});
-		
-		//## for editing the details of account code.
-		edit.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent event) {
-				
-				MyContext.getInstance().getButtonFlagIndicator().setButtonType("edit");
-				
-				String accCode = accountcodeedit.getText();
-				List<AccountMaster> acm = DatabaseClient.getInstance().accountCodeSearch(accCode,"accountCodeEdit");
-				
-				//## setting context for forwarding request to another controller
-				MyContext.getInstance().getAccountMaster().setAccountcode(acm.get(0).getAccountcode());
-				MyContext.getInstance().getAccountMaster().setAccountname(acm.get(0).getAccountname());
-				MyContext.getInstance().getAccountMaster().setAmount(acm.get(0).getAmount());
-				MyContext.getInstance().getAccountMaster().setReport_flag(acm.get(0).getReport_flag());
-				Boolean activeFlagStatus = true;
-				if(acm.get(0).getReport_flag().equals("false"))
-				{
-					activeFlagStatus=false;
-				}
-				MyContext.getInstance().getAccountMaster().setActive_flag(activeFlagStatus);
-				MyContext.getInstance().getAccountMaster().setFin_year(acm.get(0).getFin_year());
-				MyContext.getInstance().getAccountMaster().setAccountType(acm.get(0).getAccountType());
-				
-				final Stage accoutCodeCreation = new Stage();
-				accoutCodeCreation.centerOnScreen();
-				accoutCodeCreation.setTitle("Account Code Creation");
-				accoutCodeCreation.initModality(Modality.APPLICATION_MODAL);
-				accoutCodeCreation.setOnCloseRequest(new EventHandler<WindowEvent>() 
-		        {
-		            public void handle(WindowEvent event) 
-		            {
-		                Main.getStage().getScene().getRoot().setEffect(null);
-		            }
-		        });
-				
-				Parent parent;
-				try {
-					parent = FXMLLoader.load(DBuyerController.class.getResource("/fxml/accountCodeCreation.fxml"));
-				
-	            Scene scene = new Scene(parent, 687, 400);
-	            scene.setOnKeyPressed(new EventHandler<KeyEvent>() 
-	            {
-	                public void handle(KeyEvent event)
-	                {                	
-	                    if (event.getCode() == KeyCode.ESCAPE) 
-	                    {
-	                        Main.getStage().getScene().getRoot().setEffect(null);
-	                        accoutCodeCreation.close();
-	                    }
-	                }
-	            });
-	            accoutCodeCreation.setScene(scene);
-	            accoutCodeCreation.show();
-				} 
-				catch (IOException e) {
-					e.printStackTrace();
-				}
-				
-			}
-			
-			
 		});
 		
 		importbtn.setOnAction(new EventHandler<ActionEvent>() {
@@ -250,7 +281,7 @@ public class AccountCodeSearchController implements Initializable{
 				try {
 					parent = FXMLLoader.load(DBuyerController.class.getResource("/fxml/accountCodeImport.fxml"));
 				
-	            Scene scene = new Scene(parent, 687, 400);
+	            Scene scene = new Scene(parent,Main.DASHBOARD_WIDTH,Main.DASHBOARD_HEIGHT);
 	            scene.setOnKeyPressed(new EventHandler<KeyEvent>() 
 	            {
 	                public void handle(KeyEvent event)
@@ -272,9 +303,11 @@ public class AccountCodeSearchController implements Initializable{
 				
 			
 		});
-		
-	}
 	
+	
+   
+
+   }
 	
 	
 }

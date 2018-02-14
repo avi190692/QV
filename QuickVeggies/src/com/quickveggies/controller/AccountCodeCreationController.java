@@ -83,7 +83,7 @@ public class AccountCodeCreationController implements Initializable {
 		 accountcode.setText(MyContext.getInstance().getAccountMaster().getAccountcode());
 		 accountname.setText(MyContext.getInstance().getAccountMaster().getAccountname());
 		 
-		 	Double amount = MyContext.getInstance().getAccountMaster().getAmount();		 
+		 Double amount = MyContext.getInstance().getAccountMaster().getAmount();		 
 		 amt.setText(amount.toString());
 		 
 		 Boolean statusFlag = MyContext.getInstance().getAccountMaster().isActive_flag();
@@ -102,7 +102,7 @@ public class AccountCodeCreationController implements Initializable {
 		 accountcat.setValue(MyContext.getInstance().getAccountMaster().getReport_flag());
 		 accounttype.setValue(MyContext.getInstance().getAccountMaster().getAccountType());
 		 
-		 System.out.println("show me this value:::"+MyContext.getInstance().getAccountMaster().getAccountType());
+		 //System.out.println("show me this value:::"+MyContext.getInstance().getAccountMaster().getAccountType());
 		 financialyear.setText(MyContext.getInstance().getAccountMaster().getFin_year());
 		 
 		 if(MyContext.getInstance().getAccountMaster().getAccountType() == null)
@@ -123,6 +123,7 @@ public class AccountCodeCreationController implements Initializable {
     	   	 subGlLink.setText("");
     	   	 accounttype.setValue("Gl");
     	   	 accountcat.setItems(accountCategoryList);
+    	   	 activestatus.setValue("Active"); 
     		 
     	   	
 		 }
@@ -135,12 +136,23 @@ public class AccountCodeCreationController implements Initializable {
             	 String currentUserType = SessionDataController.getInstance().getCurrentUser().getUsertype();
             	 String accCode = accountcode.getText();
             	 String accName = accountname.getText();
-            	 double amount = Double.parseDouble(amt.getText());
             	 String accType = accounttype.getValue();
             	 String reportFlag = accountcat.getValue();
             	 //## by default it will be true.
             	 boolean active_flag = true;
-            	// String btnAction = MyContext.getInstance().getButtonFlagIndicator().getButtonType();
+            	 if(!amt.getText().equals(""))
+            	 {
+            		 double amount = Double.parseDouble(amt.getText());
+            	 }
+            	 else
+            	 {
+            		 Alert alert = new Alert(Alert.AlertType.WARNING);
+            		 alert.setTitle("Warning!");
+ 		 	   		 alert.setHeaderText("Amount can't be empty.");
+ 		 	   		 alert.setContentText("please provide an amount and proceed...");
+ 		 	   		 alert.showAndWait();
+            	 }
+            	 
             	 
             	 Alert alert = new Alert(Alert.AlertType.WARNING);
             	 if(btnAction.equals("create"))
@@ -197,7 +209,15 @@ public class AccountCodeCreationController implements Initializable {
             	 }
             	 if(btnAction.equals("edit"))
             	 {
-            		 AccountMaster accountMaster = new AccountMaster(accCode, accName, amount,reportFlag,active_flag,accType,subGlLink.getText());
+            		 
+            		 boolean activeStatusFlag = true;
+            		 if(activestatus.getValue().equals("Inactive"))
+            		 {
+            			 activeStatusFlag = false;
+            		 }
+            		 
+            		 
+            		 AccountMaster accountMaster = new AccountMaster(accCode, accName,Double.parseDouble(amt.getText()),reportFlag,activeStatusFlag,accType,subGlLink.getText());
         			 DatabaseClient.getInstance().accountInfoUpdate(accountMaster);
         			 
         			 AuditLog auditlog = new AuditLog();

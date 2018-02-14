@@ -272,7 +272,7 @@ public class DashboardController extends AbstractFreshEntryController implements
         	{
 	        	final Stage accoutCodeCreation = new Stage();
 				accoutCodeCreation.centerOnScreen();
-				accoutCodeCreation.setTitle("Account Code Creation");
+				accoutCodeCreation.setTitle("Account Code Creation/Updation");
 				accoutCodeCreation.initModality(Modality.APPLICATION_MODAL);
 				accoutCodeCreation.setOnCloseRequest(new EventHandler<WindowEvent>() 
 		        {
@@ -285,7 +285,7 @@ public class DashboardController extends AbstractFreshEntryController implements
 				{
 			          //Parent parent = FXMLLoader.load(DBuyerController.class.getResource("/fxml/accountcode_creation.fxml"));
 					    Parent parent = FXMLLoader.load(DBuyerController.class.getResource("/fxml/accountCodeSearch.fxml"));
-			            Scene scene = new Scene(parent, 687, 400);
+			            Scene scene = new Scene(parent,Main.DASHBOARD_WIDTH,Main.DASHBOARD_HEIGHT);
 			            scene.setOnKeyPressed(new EventHandler<KeyEvent>() 
 			            {
 			                public void handle(KeyEvent event)
