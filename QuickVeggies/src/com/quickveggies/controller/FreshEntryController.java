@@ -1033,6 +1033,8 @@ public class FreshEntryController implements Initializable {
         catch (SQLException ex) {
             Logger.getLogger(FreshEntryController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        result.add(Buyer.COLD_STORE_BUYER_TITLE);
+        result.add(Buyer.GODOWN_BUYER_TITLE);
         return result;
     }
 
