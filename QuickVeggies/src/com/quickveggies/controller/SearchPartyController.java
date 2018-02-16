@@ -13,8 +13,8 @@ import com.quickveggies.GeneralMethods;
 import com.quickveggies.Main;
 import com.quickveggies.dao.DatabaseClient;
 import com.quickveggies.entities.Buyer;
-import com.quickveggies.entities.Supplier;
 import com.quickveggies.entities.PartyType;
+import com.quickveggies.entities.Supplier;
 import com.quickveggies.misc.AutoCompleteTextField;
 import com.quickveggies.model.EntityType;
 

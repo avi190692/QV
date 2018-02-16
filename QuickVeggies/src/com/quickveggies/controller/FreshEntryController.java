@@ -4,16 +4,18 @@ import static java.awt.event.KeyEvent.VK_CAPS_LOCK;
 
 import java.awt.Robot;
 import java.awt.Toolkit;
-import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.ResourceBundle;
 import java.util.TreeSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import com.quickveggies.GeneralMethods;
 import com.quickveggies.UserGlobalParameters;
@@ -24,9 +26,8 @@ import com.quickveggies.dao.DatabaseClient;
 import com.quickveggies.entities.BoxSize;
 import com.quickveggies.entities.Buyer;
 import com.quickveggies.entities.ExpenseInfo;
-import com.quickveggies.entities.QualityType;
-import com.quickveggies.entities.Supplier;
 import com.quickveggies.entities.PartyType;
+import com.quickveggies.entities.QualityType;
 import com.quickveggies.misc.AutoCompleteTableCell;
 import com.quickveggies.misc.AutoCompleteTextField;
 import com.quickveggies.misc.CustomComboboxTableCell;
@@ -34,10 +35,6 @@ import com.quickveggies.misc.PartySearchTableCell;
 import com.quickveggies.misc.SearchPartyButton;
 import com.quickveggies.misc.Utils;
 import com.quickveggies.model.LotTableColumnNameEnum;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -1035,6 +1032,7 @@ public class FreshEntryController implements Initializable {
         }
         result.add(Buyer.COLD_STORE_BUYER_TITLE);
         result.add(Buyer.GODOWN_BUYER_TITLE);
+        result.add(Buyer.CASH_SALE_TITLE);
         return result;
     }
 

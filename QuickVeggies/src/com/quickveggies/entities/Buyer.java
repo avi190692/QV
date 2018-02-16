@@ -24,6 +24,7 @@ public class Buyer{
 	private String type="Buyer";
 	public static final String GODOWN_BUYER_TITLE = "Godown";
 	public static final String COLD_STORE_BUYER_TITLE = "Cold Store";
+	public static final String CASH_SALE_TITLE = "Cash Sale";
     
 	public static  enum CreditPeriodSourceEnum {
 		DAY_1("1 day", 1), DAY_3("3 days", 3), DAY_7("7 days", 7), DAY_15("15 days", 15), DAY_30("30 days",
