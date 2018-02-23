@@ -1,11 +1,9 @@
 package com.quickveggies.controller;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
-import com.quickveggies.Main;
-import com.quickveggies.controller.dashboard.DBuyerController;
+
 import com.quickveggies.dao.DatabaseClient;
 import com.quickveggies.entities.AccountMaster;
 import com.quickveggies.entities.AuditLog;
@@ -17,19 +15,11 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 
 public class AccountCodeCreationController implements Initializable {
 
