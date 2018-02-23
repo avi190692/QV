@@ -370,6 +370,37 @@ public class DatabaseClient {
 	   return acm;		
     }
     
+    public List<AccountMaster> accountCodeSearch() {
+    	List<AccountMaster> acm = new ArrayList<AccountMaster>();
+    	
+			PreparedStatement psmt;
+			try 
+			{
+				psmt = connection.prepareStatement("select * from public.accountmaster");
+				ResultSet rs = psmt.executeQuery();
+					while(rs.next())
+					{
+						AccountMaster am = new AccountMaster();
+						
+						am.setAccountcode(rs.getString(2));
+						am.setAccountname(rs.getString(3));
+						am.setAmount(rs.getDouble(4));
+						am.setFin_year(rs.getString(5));
+						am.setReport_flag(rs.getString(7));		
+						am.setActive_flag(rs.getBoolean(8));
+						am.setAccountType(rs.getString(10));	
+						am.setSubglLink(rs.getString(11));
+						
+						acm.add(am);
+					} 
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+	   return acm;		
+    }
+    
+    
    //## audit log entry for account code creation
     private static final String audit_log_entry="insert into auditlog (userid,eventdetail,eventobject,eventobjectid,amount) values (?,?,?,?,?)";
     public void insertLog_Audit(AuditLog auditlog)

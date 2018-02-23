@@ -55,6 +55,8 @@ public class AccountCodeCreationController implements Initializable {
 	 @FXML
 	 private TextField financialyear;
 	 
+	 private final Runnable onCreationFinished;
+	 
 	 ObservableList<String> accTypeList = FXCollections.observableArrayList("Gl","SubGl");
 	 @FXML
 	 private ComboBox<String> accounttype;
@@ -69,8 +71,17 @@ public class AccountCodeCreationController implements Initializable {
 	 @FXML
 	 private ComboBox<String> activestatus;
 	 
-	
-	 @Override
+
+	 
+	 public AccountCodeCreationController(Runnable onCreationFinished) {
+		super();
+		this.onCreationFinished = onCreationFinished;
+		System.out.println("Inside AccountCodeCreationController.  We need to put runnable controller here");
+	}
+
+
+
+	@Override
 	 public void initialize(URL location, ResourceBundle resources) 
 	 {
 		 String btnAction = MyContext.getInstance().getButtonFlagIndicator().getButtonType();
@@ -197,7 +208,7 @@ public class AccountCodeCreationController implements Initializable {
 		 		 	   	     accounttype.setValue("");
 		 		 	   	     accountcat.setValue("");
 		 		 	   	     activestatus.setValue("Active"); 
-		 		 	   		 
+		 		 	   		 onCreationFinished.run();
                 	 }
                 	 else
                 	 {
@@ -242,7 +253,8 @@ public class AccountCodeCreationController implements Initializable {
  		 	   	     accounttype.setValue("");
  		 	   	     accountcat.setValue("");
  		 	   	     activestatus.setValue("Active"); 
- 		 	   		 
+ 		 	   	     onCreationFinished.run();
+ 		 	   	     
             	 }
             	 
             	 /*
