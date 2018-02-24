@@ -341,12 +341,9 @@ public class DSupplierController implements Initializable {
                             if (!event.getButton().equals(MouseButton.PRIMARY)) {
                                 return;
                             }
-                            DSupplierTableLine currDeal = supplierDealsTable.getItems().stream().filter(suppDeal -> {
-                                if (suppDeal.getSaleNo().equals(lineNum)) {
-                                    return true;
-                                }
-                                return false;
-                            }).collect(Collectors.toList()).get(0);
+                            
+                            DSupplierTableLine currDeal = supplierDealsTable.getItems().get(getIndex());
+                            
                             DashboardController.showPopup("/fxml/printpopup.fxml", "Print Preview",
                                     new PrintpopupController(new ArrayList<String>() {{
                                         this.add(prepareInvPdf(currDeal));
@@ -825,6 +822,7 @@ public class DSupplierController implements Initializable {
 
     private String prepareInvPdf(DSupplierTableLine currDeal) {
         String[][] dataArr = buildInvTabForEmail(currDeal);
+        Arrays.asList(dataArr).forEach(data -> {Arrays.asList(data).forEach(System.out::println);});
         Supplier supplier = getSupplierInfo(currDeal);
         String supplierName = currDeal.getSupplierTitle();
         if (supplier != null) {
