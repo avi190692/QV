@@ -27,8 +27,8 @@ public class AccountCodeCreationController implements Initializable {
 	 @FXML
 	 private Button savebtn;
 	 
-	 @FXML
-	 private Button importbtn;
+	 /*@FXML
+	 private Button importbtn;*/
 	 
 	 @FXML
 	 private TextField accountcode;
@@ -246,107 +246,10 @@ public class AccountCodeCreationController implements Initializable {
  		 	   	     onCreationFinished.run();
  		 	   	     
             	 }
-            	 
-            	 /*
-            	 String accCodeExistChk = "no";
-            	 List<String> acCode =  DatabaseClient.getInstance().accountCodeSearch(accCode);
-            	 System.out.println("size:::"+acCode.size());
-            	 if(acCode.size()>0)
-            	 {
-            	 	accCodeExistChk="yes";
-            	 }
-            	 AuditLog auditlog = new AuditLog();
-
-            	 if(accCodeExistChk.equals("no"))
-            	 {
-            		 if(!MyContext.getInstance().getAccountMaster().getAccountcode().equals(null))
-            		 {
-            			 if(activestatus.getValue().equals("Active"))
-            			 {
-            				 active_flag=true;
-            			 }
-            			 if(activestatus.getValue().equals("Inactive"))
-            			 {
-            				 active_flag=false;
-            			 }
-            			 AccountMaster accountMaster = new AccountMaster(accCode, accName, amount,reportFlag,active_flag,accType,subGlLink.getText());
-            			 DatabaseClient.getInstance().accountInfoUpdate(accountMaster);
-            		 }
-            		 else
-            		 {
-            		 
-	            		 AccountMaster acm = new AccountMaster(accCode, accName, amount,new CommonFunctions().financialYear(), new CommonFunctions().currentTime_withtimeZone(),reportFlag, active_flag, new CommonFunctions().currentMonth());
-	            		 DatabaseClient.getInstance().accountCodeEntry(acm);
-	            		 
-	            		 auditlog.setUserId(currentUserType);
-	            		 auditlog.setEventDetail("Account Code added :"+accCode);
-	            		 auditlog.setEventObject(accType);
-	            		 auditlog.setEventObjectId(0);
-	            		 auditlog.setAmount(amount);
-	            		           		 
-	            		 DatabaseClient.getInstance().insertLog_Audit(auditlog);
-	            		 
-	            		 
-	            		 Alert alert = new Alert(Alert.AlertType.WARNING);
-	 		 	   		       alert.setTitle("Success!");
-	 		 	   		       alert.setHeaderText("Successfully Saved!");
-	 		 	   		       alert.setContentText("please check the log for details.");
-	 		 	   		       alert.showAndWait();
-            		 }
-            	 }
-            	 */
-	
-            	 
-            	 
-            	
-             	 /*if(currentUserType.equals("Admin"))
-             	 {
-             		 System.out.println("here here");
-             		 new Main().newWindowSceneReplacementContecnt("/fxml/accountCodeCreation.fxml");
-             	 }
-             	 else
-             	 {
-             		 Alert alert1 = new Alert(Alert.AlertType.WARNING);
-             		 	   alert1.setTitle("Restricted!");
-             		 	   alert1.setHeaderText("Access Restricted!");
-             		 	   alert1.setContentText("login as admin user.");
-             		 	   alert1.showAndWait();
-             	 }*/
              }
          });
 		 
 		 
 		 
 	 }
-	 
-	
-	 
-	 //## checking account code length and gl-subgl check
-	 /*public String accountCodeLengthChk(String accountCode,String accountType)
-	 {
-		 String returnResult =null;
-		 int chkLength = accountCode.length();
-		 if(chkLength==7)
-		 {
-			 if(accountType.equalsIgnoreCase("Gl") && accountCode.substring(5,7).equals("00"))
-			 {
-				 returnResult="yes";
-			 }
-			 else if(accountType.equalsIgnoreCase("SubGL") && !accountCode.substring(5,7).equals("00"))
-			 {
-				 returnResult="yes";
-			 }
-			 else
-			 {
-				 returnResult="no";
-			 }
-			 
-		 }
-		 else
-		 {
-			 returnResult="no";
-		 }
-		 return returnResult;
-	 }*/
-
 }

@@ -1,24 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.quickveggies.controller.AccountCodeImport">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="544.0" prefWidth="779.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.quickveggies.controller.AccountCodeImport">
    <children>
-      <TextField fx:id="selectedTemplate" disable="true" layoutX="52.0" layoutY="102.0" opacity="0.72" prefHeight="39.0" prefWidth="432.0" style="-fx-background-color: #4682B4; -fx-font: #FFFFFF;">
+      <TextField fx:id="selectedTemplate" disable="true" layoutX="4.0" layoutY="14.0" opacity="0.72" prefHeight="39.0" prefWidth="457.0" style="-fx-background-color: #4682B4; -fx-font: #FFFFFF;">
          <font>
             <Font name="Arial" size="13.0" />
          </font>
       </TextField>
-      <Button fx:id="uploadTemplate" layoutX="247.0" layoutY="165.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="66.0" style="-fx-background-radius: 30%;" text="Save">
+      <Button fx:id="importlist" layoutX="578.0" layoutY="14.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="66.0" style="-fx-background-radius: 30%;" text="Import">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="browse" layoutX="512.0" layoutY="101.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="73.0" text="browse" />
-      <Button fx:id="approveList" layoutX="447.0" layoutY="20.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="131.0" text="Approve List" textFill="#b90808">
+      <Button fx:id="browse" layoutX="480.0" layoutY="14.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="73.0" text="browse" />
+      <Button fx:id="addall" layoutX="205.0" layoutY="384.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="131.0" text="Add All" textFill="#b90808">
+         <font>
+            <Font name="System Bold Italic" size="12.0" />
+         </font>
+      </Button>
+      <TableView fx:id="detailstable" layoutX="4.0" layoutY="58.0" prefHeight="312.0" prefWidth="770.0">
+        <columns>
+          <TableColumn fx:id="accountcode" prefWidth="136.0" text="Account Code" />
+          <TableColumn fx:id="accountname" prefWidth="221.0" text="Account Name" />
+            <TableColumn fx:id="amount" minWidth="0.0" prefWidth="100.0" text="Amount" />
+            <TableColumn fx:id="accountflag" prefWidth="112.0" text="Flag" />
+            <TableColumn fx:id="accountlink" prefWidth="121.0" text="Subgl Link" />
+            <TableColumn fx:id="action" prefWidth="75.0" text="Action" />
+        </columns>
+      </TableView>
+      <Button fx:id="cancel" layoutX="410.0" layoutY="384.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="131.0" text="Cancel" textFill="#b90808">
          <font>
             <Font name="System Bold Italic" size="12.0" />
          </font>

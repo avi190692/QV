@@ -76,7 +76,7 @@ public class AccountListApproval implements Initializable {
 
 				if(acm.size()>0)
 				{
-					DatabaseClient.getInstance().approveUploadedList();
+					DatabaseClient.getInstance().approveUploadedList("all");
 					Alert alert = new Alert(Alert.AlertType.WARNING);
    		          	      alert.setTitle("Success!");
    		          	      alert.setHeaderText("Approved");

@@ -134,25 +134,45 @@ public class DatabaseClient {
 		}
     return acm;			 
     }
-    public void approveUploadedList()
+    public void approveUploadedList(String accountDtls)
     {
-    	
-    	
-    	String sql1 ="update public.accountmaster_draftupload set status='"+true+"'";
-    	String sql2 = "select 1 from public.accountapprovedlistimport('"+new CommonFunctions().currentMonth()+"')";
-    	try 
+    	if(accountDtls.equals("all"))
     	{
-			PreparedStatement pst1 = connection.prepareStatement(sql1);
-			                  pst1.executeUpdate();  
-		    
-			PreparedStatement pst2 = connection.prepareStatement(sql2);
-			                  pst2.executeUpdate();                    
-			
-		} 
-    	catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		    	String sql1 ="update public.accountmaster_draftupload set status='"+true+"'";
+		    	String sql2 = "select 1 from public.accountapprovedlistimport('"+new CommonFunctions().currentMonth()+"','"+accountDtls+"')";
+		    	try 
+		    	{
+					PreparedStatement pst1 = connection.prepareStatement(sql1);
+					                  pst1.execute();  
+				    
+					PreparedStatement pst2 = connection.prepareStatement(sql2);
+					                  pst2.execute();                    
+					
+				} 
+		    	catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+    	}
+    	else
+    	{
+    		String sql1 ="update public.accountmaster_draftupload set status='"+true+"' where accountcode='"+accountDtls+"'";
+    		String sql2 = "select 1 from public.accountapprovedlistimport('"+new CommonFunctions().currentMonth()+"','"+accountDtls+"')";
+    		
+			try 
+			{
+				PreparedStatement pst1 = connection.prepareStatement(sql1);
+				                  pst1.execute(); 
+				                  
+				PreparedStatement pst2 = connection.prepareStatement(sql2);
+				                  pst2.execute();    
+			} 
+			catch (SQLException e){
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+            
+    	}
     }
 
     // added by ss for account code upload

@@ -286,7 +286,7 @@ public class AccountCodeSearchController implements Initializable{
 				
 				final Stage accoutCodeImport = new Stage();
 				accoutCodeImport.centerOnScreen();
-				accoutCodeImport.setTitle("Account Code Creation");
+				accoutCodeImport.setTitle("Account Code Import/Approval");
 				accoutCodeImport.initModality(Modality.APPLICATION_MODAL);
 				accoutCodeImport.setOnCloseRequest(new EventHandler<WindowEvent>() 
 		        {

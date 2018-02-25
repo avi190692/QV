@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DataFormatter;
@@ -15,8 +16,13 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.quickveggies.Main;
 import com.quickveggies.controller.dashboard.DBuyerController;
+import com.quickveggies.controller.dashboard.DashboardController;
 import com.quickveggies.dao.DatabaseClient;
+import com.quickveggies.entities.AccountMaster;
+import com.quickveggies.misc.MyContext;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -26,47 +32,130 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import javafx.util.Callback;
 
 public class AccountCodeImport implements Initializable{
 
-	
-	 /*@FXML
-	 private Button downloadTemplate;*/
 	 
 	 @FXML
 	 private Button browse;
 	 
 	 @FXML
-	 private Button uploadTemplate;
+	 private Button importlist;
 	 
 	 @FXML
 	 private Button approveList;
 	 
 	 @FXML
+	 private Button addall;
+	 
+	 @FXML
+	 private Button cancel;
+	 
+	 @FXML
 	 private TextField selectedTemplate;
 	 
+	 @FXML
+	 private TableView<AccountMaster> detailstable;
+	 
+	 @FXML
+	 private TableColumn<AccountMaster,String> accountcode;
+	 
+	 @FXML
+	 private TableColumn<AccountMaster,String> accountname;
+	 
+	 @FXML
+	 private TableColumn<AccountMaster,Double> amount;
+	 
+	 @FXML
+	 private TableColumn<AccountMaster,String> accountflag;
+	 
+	 @FXML
+	 private TableColumn<AccountMaster,String> accountlink;
+	 
+	 @FXML
+	 private TableColumn<AccountMaster, Void> action;
+	 
+	 ObservableList<AccountMaster> searchDetailsList;
+	 
+	 public AccountCodeImport controller;
+	 
+	 /*private final Runnable onCreationFinished;
+	 public AccountCodeImport(Runnable onCreationFinished) {
+			super();
+			this.onCreationFinished = onCreationFinished;
+			System.out.println("Inside AccountCodeCreationController.  We need to put runnable controller here");
+		}*/
 	 
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
-		/*downloadTemplate.setOnAction(new EventHandler<ActionEvent>() {
+		List<AccountMaster> acm = DatabaseClient.getInstance().accountCodeApprovalList();
+		System.out.println(acm.size());
 			
-			@Override
-			public void handle(ActionEvent event) 
-			{
-				
-				
-			}
-		});
-	*/
+		accountcode.setCellValueFactory(new PropertyValueFactory<AccountMaster,String>("accountcode"));
+		accountname.setCellValueFactory(new PropertyValueFactory<AccountMaster,String>("accountname"));
+		amount.setCellValueFactory(new PropertyValueFactory<AccountMaster,Double>("amount"));
+		accountflag.setCellValueFactory(new PropertyValueFactory<AccountMaster,String>("report_flag"));
+		accountlink.setCellValueFactory(new PropertyValueFactory<AccountMaster,String>("subglLink"));
+		Callback<TableColumn<AccountMaster, Void>, TableCell<AccountMaster, Void>> cellFactory = new Callback<TableColumn<AccountMaster, Void>, TableCell<AccountMaster, Void>>() 
+		{
+            @Override
+            public TableCell<AccountMaster, Void> call(final TableColumn<AccountMaster, Void> param) {
+                final TableCell<AccountMaster, Void> cell = new TableCell<AccountMaster, Void>() {
+                	
+                    private final Button btn = new Button("Add");
+
+                    {
+                        btn.setOnAction((ActionEvent event) -> 
+                        {
+                        	AccountMaster data = getTableView().getItems().get(getIndex());
+                            System.out.println("selectedData: " + data.getAccountcode());		                           
+                            
+                             //## approving selected account details. 		                           
+                             DatabaseClient.getInstance().approveUploadedList(data.getAccountcode());
+            							
+                        });
+                    }
+
+                    @Override
+                    public void updateItem(Void item, boolean empty) 
+                    {
+                        super.updateItem(item, empty);
+                        if (empty) 
+                        {
+                            setGraphic(null);
+                        } 
+                        else 
+                        {
+                            setGraphic(btn);
+                        }
+                    }
+                };
+                return cell;
+            }
+        };
+        //## adding the action button on the table view.
+        action.setCellFactory(cellFactory);
+		//## adding dynamic values to observable list
+		searchDetailsList = FXCollections.observableArrayList(acm); 
+		detailstable.getItems().addAll(searchDetailsList);
+		//onCreationFinished.run();
+		
+		
+	
 		
 	    browse.setOnAction(new EventHandler<ActionEvent>(){
 
@@ -88,7 +177,7 @@ public class AccountCodeImport implements Initializable{
 		   }
 	   });
 	   
-	    uploadTemplate.setOnAction(new EventHandler<ActionEvent>(){
+	    importlist.setOnAction(new EventHandler<ActionEvent>(){
 
 			@Override
 			public void handle(ActionEvent event) {
@@ -96,9 +185,6 @@ public class AccountCodeImport implements Initializable{
 				 System.out.println("selected File :::"+selectedTemplate.getText());
 				 if(!selectedTemplate.getText().equalsIgnoreCase(""))
 				 {
-					  //String currentWorkingDir = System.getProperty("user.dir");
-				      //System.out.println("Current working directory in Java : " + currentWorkingDir);
-				      //System.out.println(currentWorkingDir+"\\UploadFiles")
 				    		   //## code for saving the directory.
 					  		  DatabaseClient.getInstance().dataClean();
 				    		   try 
@@ -155,56 +241,84 @@ public class AccountCodeImport implements Initializable{
 	 		 	   		          	  alert.showAndWait();
 					 
 				        }
+				 
+				 
+				// ## for displaying the list in the table view
+				List<AccountMaster> acm = DatabaseClient.getInstance().accountCodeApprovalList();
+				System.out.println(acm.size());
+					
+				accountcode.setCellValueFactory(new PropertyValueFactory<AccountMaster,String>("accountcode"));
+				accountname.setCellValueFactory(new PropertyValueFactory<AccountMaster,String>("accountname"));
+				amount.setCellValueFactory(new PropertyValueFactory<AccountMaster,Double>("amount"));
+				accountflag.setCellValueFactory(new PropertyValueFactory<AccountMaster,String>("report_flag"));
+				accountlink.setCellValueFactory(new PropertyValueFactory<AccountMaster,String>("subglLink"));
+				
+				
+				Callback<TableColumn<AccountMaster, Void>, TableCell<AccountMaster, Void>> cellFactory = new Callback<TableColumn<AccountMaster, Void>, TableCell<AccountMaster, Void>>() 
+				{
+		            @Override
+		            public TableCell<AccountMaster, Void> call(final TableColumn<AccountMaster, Void> param) {
+		                final TableCell<AccountMaster, Void> cell = new TableCell<AccountMaster, Void>() {
+		                	
+		                    private final Button btn = new Button("Add");
+
+		                    {
+		                        btn.setOnAction((ActionEvent event) -> 
+		                        {
+		                        	AccountMaster data = getTableView().getItems().get(getIndex());
+		                            System.out.println("selectedData: " + data.getAccountcode());		                           
+		                            
+		                             //## approving selected account details. 		                           
+		                             DatabaseClient.getInstance().approveUploadedList(data.getAccountcode());
+		                        });
+		                    }
+
+		                    @Override
+		                    public void updateItem(Void item, boolean empty) 
+		                    {
+		                        super.updateItem(item, empty);
+		                        if (empty) 
+		                        {
+		                            setGraphic(null);
+		                        } 
+		                        else 
+		                        {
+		                            setGraphic(btn);
+		                        }
+		                    }
+		                };
+		                return cell;
+		            }
+		        };
+		        //## adding the action button on the table view.
+		        action.setCellFactory(cellFactory);
+				//## adding dynamic values to observable list
+				searchDetailsList = FXCollections.observableArrayList(acm); 
+				detailstable.getItems().addAll(searchDetailsList);
+				//onCreationFinished.run();
 			
-				 }
+			}
 
 		});
+	     
+	    addall.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {
+				
+				//## approving all the imported list.
+				//default value = all
+				DatabaseClient.getInstance().approveUploadedList("all");	
+			}
+		});
 	    
-	    
-	    approveList.setOnAction(new EventHandler<ActionEvent>() {
+	    cancel.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
-			public void handle(ActionEvent event) {
-				
-				final Stage accoutCodeApproval = new Stage();
-				accoutCodeApproval.centerOnScreen();
-				accoutCodeApproval.setTitle("Account Code Approval");
-				accoutCodeApproval.initModality(Modality.APPLICATION_MODAL);
-				accoutCodeApproval.setOnCloseRequest(new EventHandler<WindowEvent>() 
-		        {
-		            public void handle(WindowEvent event) 
-		            {
-		                Main.getStage().getScene().getRoot().setEffect(null);
-		            }
-		        });
-				
-				Parent parent;
-				try {
-					parent = FXMLLoader.load(DBuyerController.class.getResource("/fxml/accountlistapproval.fxml"));
-				
-	            Scene scene = new Scene(parent, 687, 400);
-	            scene.setOnKeyPressed(new EventHandler<KeyEvent>() 
-	            {
-	                public void handle(KeyEvent event)
-	                {                	
-	                    if (event.getCode() == KeyCode.ESCAPE) 
-	                    {
-	                        Main.getStage().getScene().getRoot().setEffect(null);
-	                        accoutCodeApproval.close();
-	                    }
-	                }
-	            });
-	            accoutCodeApproval.setScene(scene);
-	            accoutCodeApproval.show();
-				} 
-				catch (IOException e) {
-					e.printStackTrace();
-				}
+			public void handle(ActionEvent arg0) 
+			{
+				DatabaseClient.getInstance().dataClean();	
 			}
-				
-			
 		});
-	    
 		
 	}
 
