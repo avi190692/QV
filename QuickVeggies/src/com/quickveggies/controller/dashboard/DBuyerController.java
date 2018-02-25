@@ -688,8 +688,12 @@ public class DBuyerController implements Initializable {
                     new String[] { COLD_STORE_BUYER_TITLE, GODOWN_BUYER_TITLE });
             for (DBuyerTableLine line : lines2) {
                 line.setAmountedTotal(line.getAggregatedAmount());
-                String buyerType = dbclient.getBuyerByName(line.getBuyerTitle()).getBuyerType();
-                
+               String buyerType="";
+                try{
+                	 buyerType = dbclient.getBuyerByName(line.getBuyerTitle()).getBuyerType();
+                } catch (Exception e) {
+                	System.out.println("Not able to fetch data for title =" + line.getBuyerTitle() );
+                }
                 if ((tableMode == REGULAR && buyerType.equalsIgnoreCase("regular"))
                         || (tableMode == LADAAN_BIJAK && (!buyerType.equalsIgnoreCase("regular")))) {
                     timelineViewBuyDeals.add(line);
