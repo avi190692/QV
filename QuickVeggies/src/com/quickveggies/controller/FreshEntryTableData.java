@@ -1,9 +1,10 @@
 package com.quickveggies.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.quickveggies.GeneralMethods;
 import com.quickveggies.model.LotTableColumnNameEnum;
-
-import java.util.ArrayList;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -106,9 +107,12 @@ public class FreshEntryTableData {
 		}
 
 	}
+	
+	
 
 	// grower entry
 	public class GrowerEntryTableLine extends FreshEntryTableLineDataReference {
+		private String lot; 
 		private final String defaultGrowerQty = "0";
 		private String boxSize;
 		private String growerQty = "0";
@@ -116,6 +120,70 @@ public class FreshEntryTableData {
 		private String quality;
 		private final BooleanProperty newRecord;
 		private boolean isNewRecord = true;
+		private String quantity0;
+		private String quantity1;
+		private String quantity2;
+		private String quantity3;
+		private String quantity4;
+		private String quantity5;
+		private String quantity6;
+
+		public String getQuantity0() {
+			return quantity0;
+		}
+
+		public void setQuantity0(String quantity0) {
+			this.quantity0 = quantity0;
+		}
+		
+		public String getQuantity1() {
+			return quantity1;
+		}
+
+		public void setQuantity1(String quantity1) {
+			this.quantity1 = quantity1;
+		}
+
+		public String getQuantity2() {
+			return quantity2;
+		}
+
+		public void setQuantity2(String quantity2) {
+			this.quantity2 = quantity2;
+		}
+
+		public String getQuantity3() {
+			return quantity3;
+		}
+
+		public void setQuantity3(String quantity3) {
+			this.quantity3 = quantity3;
+		}
+
+		public String getQuantity4() {
+			return quantity4;
+		}
+
+		public void setQuantity4(String quantity4) {
+			this.quantity4 = quantity4;
+		}
+
+		public String getQuantity5() {
+			return quantity5;
+		}
+
+		public void setQuantity5(String quantity5) {
+			this.quantity5 = quantity5;
+		}
+
+		public String getQuantity6() {
+			return quantity6;
+		}
+
+		public void setQuantity6(String quantity6) {
+			this.quantity6 = quantity6;
+		}
+
 
 		public int getGrossIncome() {
 			return Integer.parseInt(growerQty) * Integer.parseInt(growerRate);
@@ -143,14 +211,19 @@ public class FreshEntryTableData {
 			case "quality":
 				setQuality(val);
 				break;
+			case "lot":
+				setQuality(val);
+				break;
 			}
 		}
 
-		public GrowerEntryTableLine(String boxSize, String growerQty, String growerRate, String quality) {
+		public GrowerEntryTableLine(String lot,String boxSize, String growerQty, String growerRate, String quality) {
+			this.lot = lot;
 			this.boxSize = boxSize;
 			this.growerQty = growerQty;
 			this.growerRate = growerRate;
 			this.quality = quality;
+			
 			newRecord = new SimpleBooleanProperty(true);
 		}
 
@@ -160,6 +233,14 @@ public class FreshEntryTableData {
 
 		public void setBoxSize(String boxSize) {
 			this.boxSize = boxSize;
+		}
+
+		public String getLot() {
+			return lot;
+		}
+
+		public void setLot(String lot) {
+			this.lot = lot;
 		}
 
 		public String getGrowerQty() {
@@ -229,6 +310,71 @@ public class FreshEntryTableData {
 		private boolean active = true;
 		private String boxSize;
 		private String fruitQuality;
+		private String quantity0;
+		private String quantity1;
+		private String quantity2;
+		private String quantity3;
+		private String quantity4;
+		private String quantity5;
+		private String quantity6;
+
+		public String getQuantity0() {
+			return quantity0;
+		}
+
+		public void setQuantity0(String quantity0) {
+			this.quantity0 = quantity0;
+		}
+		
+		public String getQuantity1() {
+			return quantity1;
+		}
+
+		public void setQuantity1(String quantity1) {
+			this.quantity1 = quantity1;
+		}
+
+		public String getQuantity2() {
+			return quantity2;
+		}
+
+		public void setQuantity2(String quantity2) {
+			this.quantity2 = quantity2;
+		}
+
+		public String getQuantity3() {
+			return quantity3;
+		}
+
+		public void setQuantity3(String quantity3) {
+			this.quantity3 = quantity3;
+		}
+
+		public String getQuantity4() {
+			return quantity4;
+		}
+
+		public void setQuantity4(String quantity4) {
+			this.quantity4 = quantity4;
+		}
+
+		public String getQuantity5() {
+			return quantity5;
+		}
+
+		public void setQuantity5(String quantity5) {
+			this.quantity5 = quantity5;
+		}
+
+		public String getQuantity6() {
+			return quantity6;
+		}
+
+		public void setQuantity6(String quantity6) {
+			this.quantity6 = quantity6;
+		}
+
+		
 
 		public void set(String type, String val) {
 			if (!active) {
@@ -265,6 +411,7 @@ public class FreshEntryTableData {
 			this.setBuyerRate(buyerRate);
 			this.setBoxSize(boxSize);
 		}
+
 
 		public String getBuyerSelect() {
 			return buyerSelect;
@@ -330,10 +477,10 @@ public class FreshEntryTableData {
 		return new AddLotTableLine(qualityType, qty, fruit);
 	}
 
-	public GrowerEntryTableLine getGrowerEntryTableLine(String boxSize, String growerQty, String growerRate,
+	public GrowerEntryTableLine getGrowerEntryTableLine(String lot, String boxSize, String growerQty, String growerRate,
 			String quality) {
 		System.out.println("Quality is:" + quality);
-		return new GrowerEntryTableLine(boxSize, growerQty, growerRate, quality);
+		return new GrowerEntryTableLine(lot,boxSize, growerQty, growerRate, quality);
 	}
 
 	@SuppressWarnings("rawtypes")

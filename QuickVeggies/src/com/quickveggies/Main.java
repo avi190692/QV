@@ -23,7 +23,7 @@ import javafx.stage.WindowEvent;
 
 public class Main extends Application {
 
-    private static final boolean DEBUG_MODE = false; //Todo: =false
+    private static final boolean DEBUG_MODE = true; //Todo: =false
     public static final int DASHBOARD_WIDTH = 792;
     public static final int DASHBOARD_HEIGHT = 660;
     private static File file = new File("output.txt");
